@@ -1,11 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-const Test1 = () => (
-  <div>
-    Test1
-  </div>
-);
+import Home from '../pages/Home';
 
 const Test2 = () => (
   <div>
@@ -15,7 +11,7 @@ const Test2 = () => (
 
 export default () => (
   <div>
-    <Route exact path="/" component={Test1} />
+    <Route exact path="/" component={Home} />
     <Route path="/test" component={Test2} />
   </div>
 );
