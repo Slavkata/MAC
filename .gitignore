@@ -72,4 +72,8 @@ _[Ss]cripts
 *.dll
 *.nupkg
 *.ncrunchsolution
+<<<<<<< HEAD
 *.dot[Cc]over
+=======
+*.dot[Cc]over
+>>>>>>> Adding initial API set up
