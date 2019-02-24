@@ -1,5 +1,6 @@
 # MAC-website
 The web application for our Cars exhibition event.
+![Project logo](https://i.imgur.com/tsE5hd7.png)
 
 # Important links
 - [Project plan](https://docs.google.com/document/d/1XhjYBlt6JnqJdXRzrma25c7pxNJoXv2DMj1eFfG6P38/edit#)
