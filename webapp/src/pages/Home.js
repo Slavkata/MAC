@@ -61,6 +61,7 @@ export default class Home extends Component {
                         background="info.jpg"
                         text="INFORMATION"
                         height={1}
+                        clicked={() => this.redirectTo('info')}
                       />
                     </Grid>
                     <Grid item sm={6}>
@@ -68,6 +69,7 @@ export default class Home extends Component {
                         background="tickets.jpg"
                         text="TICKETS"
                         height={1}
+                        clicked={() => this.redirectTo('tickets')}
                       />
                     </Grid>
                   </Grid>
@@ -78,6 +80,7 @@ export default class Home extends Component {
                     background="camping.jpg"
                     text="CAMPING"
                     height={2.09}
+                    clicked={() => this.redirectTo('camping')}
                   />
                 </Grid>
 

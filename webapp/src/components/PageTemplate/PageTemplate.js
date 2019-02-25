@@ -21,7 +21,7 @@ export default class PageTemplate extends Component {
           <Grid item sm={9}>
             <div className="page-title">{this.props.title}</div>
             <div className="page-content page-content-top">
-              Here come some content
+              {this.props.children}
             </div>
           </Grid>
         </Grid>
