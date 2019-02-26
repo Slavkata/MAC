@@ -9,8 +9,17 @@ import NrPeopleSelect from '../TicketFormSteps/NrPeopleSelect';
 class TicketForm extends React.Component {
   state = {
     nrOfPeople: 1,
+    peopleInfo: [],
     activeStep: 0,
   };
+
+  handlePeopleInfo = index => event => {
+    const peopleInfoUpdated = this.state.peopleInfo.slice();
+    peopleInfoUpdated[index][event.target.name] = event.target.value;
+    this.setState({
+      peopleInfo: peopleInfoUpdated,
+    });
+  }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
@@ -19,7 +28,7 @@ class TicketForm extends React.Component {
   handleNext = () => {
     this.setState(state => ({
       activeStep: state.activeStep + 1,
-    }));
+    }), this.afterStateChange);
   };
 
   handleBack = () => {
@@ -28,11 +37,29 @@ class TicketForm extends React.Component {
     }));
   };
 
-  handleReset = () => {
-    this.setState({
-      activeStep: 0,
+  afterStateChange = () => {
+    let { activeStep } = this.state;
+    let people = [];
+    [...Array(this.state.nrOfPeople)].forEach(e => {
+      people.push({
+        firstName: '',
+        lastName: '',
+        age: 0,
+      })
     });
-  };
+    switch (activeStep) {
+      case 1:
+        this.setState({
+          peopleInfo: people,
+        });
+        break;
+      case 2:
+        console.log(this.state.peopleInfo);
+        break;
+      default:
+        break;
+    }
+  }
 
   render() {
     const { activeStep } = this.state;
@@ -49,7 +76,7 @@ class TicketForm extends React.Component {
               nrOfPeople={this.state.nrOfPeople}
             />
           ) : activeStep === 1 ? (
-            <PersonalDataForm people={this.state.nrOfPeople} />
+            <PersonalDataForm people={this.state.nrOfPeople} onInput={this.handlePeopleInfo} />
           ) : (
                 <p>payment</p>
               )
