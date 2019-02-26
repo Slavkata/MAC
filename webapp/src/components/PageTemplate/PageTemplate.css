@@ -11,6 +11,7 @@
   opacity: 1;
   height: 435px;
   padding: 10px;
+  overflow: auto;
 }
 
 .page-content-bottom {

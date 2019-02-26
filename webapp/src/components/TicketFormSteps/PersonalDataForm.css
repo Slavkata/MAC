@@ -1,3 +1,13 @@
 .text-field {
   width: 100%;
 }
+h3 {
+  font-size: 20pt;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+.person-grid {
+  border-right: 1px dashed #ccc;
+}

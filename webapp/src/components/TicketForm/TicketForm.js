@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { TextField, Button, MenuItem, Grid } from '@material-ui/core';
 import TicketFormStepper from './TicketFormStepper';
-import PersonalDataForm from '../PersonalDataForm/PersonalDataForm';
+import PersonalDataForm from '../TicketFormSteps/PersonalDataForm';
 import NrPeopleSelect from '../TicketFormSteps/NrPeopleSelect';
 
 
@@ -49,7 +49,7 @@ class TicketForm extends React.Component {
               nrOfPeople={this.state.nrOfPeople}
             />
           ) : activeStep === 1 ? (
-            <PersonalDataForm />
+            <PersonalDataForm people={this.state.nrOfPeople} />
           ) : (
                 <p>payment</p>
               )
