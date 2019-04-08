@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'Avenir';
+  src: url("/fonts/Avenir-Light.woff");
+}
+
+@font-face {
+  font-family: 'Avenir';
+  font-weight: 500;
+  src: url("/fonts/Avenir-Heavy.woff");
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Avenir", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ffffff;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.left-col {
+  background: #3C195B;
+  height: 100%;
+  position: relative;
+}
+
+.logo {
+  width: 40%;
+}
+
+.round-image {
+  background-image: url('/images/tickets.jpg');
+  background-size: cover;
+  border-radius: 100%;
+  width: 400px;
+  height: 400px;
+  transform: translate(-200px, -50%);
+  border: 5px solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: white;
+  text-shadow: 2px 2px 0px #000000;
+  font-size: 50pt;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+}
+
+.car-vector {
+  position: absolute;
+  bottom: 0;
+  left: -20%;
+  z-index: -200;
+  background: url('/images/car-vector.png');
+  width: 100%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media only screen and (max-width: 1000px) {
+  .left-col {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .round-image {
+    width: 200px;
+    height: 200px;
+    transform: translate(-100px, -50%);
+  }
+}
+
+@media only screen and (max-width: 1920px) {
+  .round-image {
+    width: 350px;
+    height: 350px;
+    transform: translate(-175px, -50%);
+  }
+}
+
+@media only screen and (min-width: 768px) {}

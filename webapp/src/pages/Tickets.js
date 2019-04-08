@@ -6,7 +6,7 @@ export default class Tickets extends Component {
   render() {
     return (
       <div>
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="container">
           <TicketPurchase />
         </div>

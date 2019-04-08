@@ -71,7 +71,7 @@ export default class Camping extends Component {
   render() {
     return (
       <div>
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="container">
           <MapSelect selected={this.state.region} onRegionChange={this.selectRegion} />
           <TentSelect campingTypes={this.campingTypes} onTypeChange={this.changeType} />

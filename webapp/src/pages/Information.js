@@ -5,7 +5,7 @@ export default class Information extends Component {
   render() {
     return (
       <div>
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="container">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non orci arcu. Vivamus pellentesque euismod magna vitae ullamcorper. Aenean in scelerisque nisi, non pulvinar mi. Nam vulputate porta ligula at tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non vehicula risus, quis finibus orci. Fusce sit amet rutrum turpis. Cras tempus leo ac ex tincidunt facilisis. Nunc a pulvinar massa. Sed cursus lacus in ipsum tristique, in cursus justo porttitor. Aliquam fermentum dui ac accumsan malesuada. Ut auctor, augue ac semper dignissim, tortor magna euismod ipsum, ut auctor urna augue eget mi. Duis vehicula facilisis purus, vel placerat neque tincidunt ut.
 
