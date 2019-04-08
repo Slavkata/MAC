@@ -12,7 +12,7 @@ import Navigation from '../components/Navigation';
 
 export default () => (
   <Grid container spacing={0} style={{ height: '100%' }}>
-    <Grid item sm={9}>
+    <Grid item sm={9} style={{ position: 'relative' }}>
       <Navigation />
       <Route path="/registration" component={Registration} />
       <Route path="/tickets" component={Tickets} />

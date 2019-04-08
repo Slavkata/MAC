@@ -42,12 +42,12 @@ class Navigation extends Component {
   handleExitHover = () => {
     const { activePage } = this.state;
     const activeNavEl = this.links[activePage].current;
-    this.setState({ lineWidth: activeNavEl.offsetWidth, lineOffset: activeNavEl.getBoundingClientRect().x })
+    this.setState({ lineWidth: activeNavEl.offsetWidth, lineOffset: activeNavEl.getBoundingClientRect().x - 20 })
   }
 
   handleHover = (linkIndex) => (event) => {
     let offsets = event.target.getBoundingClientRect();
-    this.setState({ lineWidth: this.links[linkIndex].current.offsetWidth, lineOffset: offsets.x });
+    this.setState({ lineWidth: this.links[linkIndex].current.offsetWidth, lineOffset: offsets.x - 20 });
   }
 
   setActivePage = (index) => {

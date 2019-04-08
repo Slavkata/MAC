@@ -3,6 +3,7 @@ import PersonInput from './PersonInput';
 
 export default class TicketPurchase extends Component {
   state = {
+    focused: 0,
     uniqueIndex: 1,
     people: []
   }
@@ -11,7 +12,7 @@ export default class TicketPurchase extends Component {
     this.addPerson();
   }
 
-  addPerson = () => {
+  addPerson = (data) => {
     let { people } = this.state;
     people.push({
       id: this.state.uniqueIndex,
@@ -21,13 +22,18 @@ export default class TicketPurchase extends Component {
       age: 0,
     });
     console.log(people);
-    this.setState({ uniqueIndex: this.state.uniqueIndex + 1, people: people });
+    this.setState({ uniqueIndex: this.state.uniqueIndex + 1, people: people, focused: people[people.length - 1].id });
   }
 
   removePerson = (person) => {
     let { people } = this.state;
     people.splice(people.indexOf(person), 1);
-    this.setState({ people: people });
+    this.setState({ people: people, focused: people[people.length - 1].id });
+  }
+
+  focusPerson = (person) => {
+    console.log('person :', person);
+    this.setState({ focused: this.state.people.indexOf(person) + 1 });
   }
 
   render() {
@@ -38,13 +44,15 @@ export default class TicketPurchase extends Component {
             this.state.people.map(p => (
               <PersonInput
                 allowRemove={p.id === 1}
+                onAdd={this.addPerson}
                 onRemove={() => this.removePerson(p)}
+                onEdit={() => this.focusPerson(p)}
                 key={p.id}
+                focused={this.state.focused === p.id}
               />
             ))
           }
         </div>
-        <button onClick={this.addPerson}> Add </button>
       </Fragment>
     )
   }

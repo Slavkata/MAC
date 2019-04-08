@@ -1,6 +1,7 @@
 nav.desktop-nav {
   display: flex;
   flex-direction: column;
+  margin: 20px;
 }
 
 .slider {

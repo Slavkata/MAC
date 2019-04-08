@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import './styles/nav.css';
+import './styles/input-groups.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
