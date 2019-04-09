@@ -13,7 +13,6 @@ export default class PersonInput extends Component {
 
   state = {
     errors: [],
-    added: false,
     firstName: 'Person',
     lastName: 'Name',
     email: 'blank@gmail.com',
@@ -24,7 +23,7 @@ export default class PersonInput extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  addPerson = () => {
+  updatePerson = () => {
     let { errors, ...data } = this.state;
     errors = [];
     if (this.state.firstName === this.defaultState.firstName) {
@@ -40,7 +39,7 @@ export default class PersonInput extends Component {
       errors.push('Please enter your age')
     }
     if (errors.length === 0) {
-      this.props.onAdd(data);
+      this.props.onUpdate(data);
       this.setState({ errors: [], added: true });
     } else {
       this.setState({ errors: errors });
@@ -50,12 +49,12 @@ export default class PersonInput extends Component {
 
   render() {
     return (
-      <div className={`input-box col ${this.props.focused ? 'focused' : 'minimised'}`}>
+      <div className={`input-box slide-down col ${this.props.focused ? 'focused' : 'minimised'}`}>
         <div className="control-buttons">
           <div className="title">{`${this.state.firstName} ${this.state.lastName}`}</div>
           <div>
             <button className="round-but edit-but" onClick={this.props.onEdit} disabled={this.props.focused}> ✎ </button>
-            <CloseButton onRemove={this.props.onRemove} allowRemove={this.props.allowRemove} />
+            <CloseButton onRemove={this.props.onRemove} allowRemove={true} />
           </div>
         </div>
         <div className="input-fields">
@@ -66,9 +65,9 @@ export default class PersonInput extends Component {
           {
             this.state.errors.map((err, i) => (<span className="error-msg" key={i}> {err} </span>))
           }
-          {!this.state.added && <div className="button-group-right">
-            <button className="btn" onClick={this.addPerson}> Add </button>
-          </div>}
+          <div className="button-group-right">
+            <button className="btn" onClick={this.updatePerson}> Update </button>
+          </div>
         </div>
       </div>
     )
@@ -77,7 +76,6 @@ export default class PersonInput extends Component {
 
 PersonInput.propTypes = {
   onRemove: PropTypes.func,
-  allowRemove: PropTypes.bool,
   onEdit: PropTypes.func,
   focused: PropTypes.bool,
 }

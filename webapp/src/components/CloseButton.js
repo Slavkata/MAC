@@ -6,7 +6,7 @@ const CloseButton = (props) =>
   <button
     className="round-but remove-but"
     onClick={props.onRemove}
-    disabled={props.allowRemove || false}
+    disabled={!props.allowRemove || false}
   >
     &#10007;
   </button >
