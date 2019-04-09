@@ -1,18 +1,32 @@
 import React, { Component } from 'react'
-import Navigation from '../components/Navigation';
+import { Redirect } from 'react-router';
 
 export default class Information extends Component {
+  state = {
+    redirect: 0,
+  }
+
+  redirect = () => {
+    this.setState({ redirect: 1 });
+  }
+
   render() {
+    if (this.state.redirect === 1) {
+      return <Redirect push to="/tickets" />;
+    }
+
     return (
-      <div>
-        {/* <Navigation /> */}
-        <div className="container">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non orci arcu. Vivamus pellentesque euismod magna vitae ullamcorper. Aenean in scelerisque nisi, non pulvinar mi. Nam vulputate porta ligula at tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non vehicula risus, quis finibus orci. Fusce sit amet rutrum turpis. Cras tempus leo ac ex tincidunt facilisis. Nunc a pulvinar massa. Sed cursus lacus in ipsum tristique, in cursus justo porttitor. Aliquam fermentum dui ac accumsan malesuada. Ut auctor, augue ac semper dignissim, tortor magna euismod ipsum, ut auctor urna augue eget mi. Duis vehicula facilisis purus, vel placerat neque tincidunt ut.
-
-        Mauris ac cursus est. Sed et maximus leo. Sed aliquet purus vel ante molestie, sit amet aliquam ligula varius. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla commodo turpis at ligula porttitor, sed lacinia ligula pharetra. Phasellus non pellentesque leo, ac feugiat sem. Nulla tristique felis vitae quam fringilla, non finibus lorem luctus. Integer blandit lacinia mi, et interdum arcu venenatis non. Etiam a lobortis elit. Suspendisse ut hendrerit mi, semper sodales tortor. Sed congue nisl ut erat ultricies laoreet. Mauris ut convallis ligula. Curabitur varius malesuada mauris, sed feugiat sapien facilisis nec. Nulla at libero leo.
-
+      <div className="container">
+        <h1>Are you a car maniac?</h1>
+        <h3>because if you are, we have prepared the most special event for you</h3>
+        <div className="home-text">
+          We will host an amazing car exhibition show on the <strong>weekend of 25 June to 27 June</strong> at West Park Philadelphia. We are waiting for you!
+            </div>
+        <div className="content-center">
+          <button className="btn" onClick={this.redirect}>Buy tickets</button>
+          <h6>or you can read more <a href="#">here</a></h6>
         </div>
-      </div>
+      </div >
     )
   }
 }

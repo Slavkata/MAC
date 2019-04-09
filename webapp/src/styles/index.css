@@ -64,7 +64,6 @@ code {
 .car-vector {
   position: absolute;
   bottom: 0;
-  left: -20%;
   z-index: -200;
   background: url('/images/car-vector.png');
   width: 100%;
@@ -80,6 +79,60 @@ code {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   width: 50%;
+}
+
+h1 {
+  font-size: 25pt;
+  color: #792FBA;
+  font-weight: 500;
+  margin: 0;
+}
+
+h3 {
+  font-size: 15pt;
+  color: #381B52;
+  font-weight: 500;
+  margin: 0;
+}
+
+h6 {
+  color: #6F6F6F;
+  font-weight: 100;
+  font-size: 10pt;
+  margin: 5px;
+}
+
+h6 a {
+  color: #5F2E8B;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+h6 a:hover {
+  color: rgb(152, 69, 224);
+  text-decoration: underline;
+}
+
+.home-text {
+  color: #6F6F6F;
+  font-size: 12pt;
+}
+
+.home-text strong {
+  color: #792FBA;
+  font-weight: 500;
+}
+
+.content-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.mr-1 {
+  margin-right: 10px;
 }
 
 @media only screen and (max-width: 1000px) {

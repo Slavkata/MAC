@@ -156,6 +156,7 @@ class Camping extends Component {
             ))}
           </div>
           <div className="button-group-right">
+            <span className="text-purple mr-1"> whenever you are ready, you may click here</span>
             <button className="btn" onClick={this.submit}>Reserve spots</button>
           </div>
         </div>
