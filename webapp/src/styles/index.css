@@ -41,8 +41,24 @@ code {
   width: 40%;
 }
 
-.round-image {
+.ticketsbg {
   background-image: url('/images/tickets.jpg');
+}
+
+.bg {
+  background-image: url('/images/info.jpg');
+}
+
+.registrationbg {
+  background-image: url('/images/registration.jpg');
+  font-size: 30pt !important;
+}
+
+.campingbg {
+  background-image: url('/images/camping.jpg');
+}
+
+.round-image {
   background-size: cover;
   border-radius: 100%;
   width: 400px;

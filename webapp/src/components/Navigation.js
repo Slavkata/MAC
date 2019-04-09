@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { Link, withRouter } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 
 class Navigation extends Component {
 
