@@ -35,8 +35,7 @@ class Navigation extends Component {
       default:
         break;
     }
-    this.setState({ activePage: activePage });
-    this.handleExitHover();
+    this.setState({ activePage: activePage }, this.handleExitHover);
   }
 
   handleExitHover = () => {
