@@ -6,14 +6,12 @@ export default class TentSelect extends Component {
     return (
       <div className="tent-type-box">
         {this.props.campingTypes.map(t => (
-          <div key={t.name}>
-            <input
-              type="radio"
-              name="tentType"
-              value={t.name}
-              onClick={() => this.props.onTypeChange(t.id)}
-            />
-            {t.name}
+          <div key={t.name} onClick={() => this.props.onTypeChange(t.id)} className="tent-select">
+            <div className={`selected-line ${this.props.selected !== t.id ? 'hidden' : ''}`}></div>
+            <img src={t.image} alt={`${t.name} img`} className="tent-image" />
+            <div className="text">
+              {t.name}
+            </div>
           </div>
         ))}
       </div>
@@ -24,4 +22,5 @@ export default class TentSelect extends Component {
 TentSelect.propTypes = {
   name: PropTypes.string,
   onTypeChange: PropTypes.func,
+  selected: PropTypes.number,
 };

@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation';
 import TentSelect from '../components/TentSelect';
 import TicketNumberInput from '../components/TicketNumberInput';
 import MapSelect from '../components/MapSelect';
+import TicketNumberInfo from '../components/TicketNumberInfo';
 
 export default class Camping extends Component {
 
@@ -11,61 +12,76 @@ export default class Camping extends Component {
       id: 0,
       name: 'Small tent',
       maxPeople: 3,
+      image: '/images/small_tent.png',
       description: "A small red tent, placed near a toilet that will provide housing for 3 adult people."
     },
     {
       id: 1,
       name: 'Big tent',
       maxPeople: 6,
+      image: '/images/big_tent.png',
       description: "A bigger tent that has double the space and therefore double the number of beds. Can accomodate up to 6 people."
     }
   ]
 
   state = {
-    uniqueIndex: 1,
     tentType: 0,
     region: 0,
     people: [],
+    errors: [],
   }
 
-  componentDidMount() {
-    this.addPerson();
-  }
-
-  addPerson = () => {
-    let { people } = this.state;
-    people.push({
-      id: this.state.uniqueIndex,
-      personTicketNr: 0,
+  displayErrors = (errors) => {
+    let all = [];
+    errors.forEach(err => {
+      all.push(err);
     });
-    this.setState({ uniqueIndex: this.state.uniqueIndex + 1, people: people });
+    this.setState({ errors: all });
+  }
+
+  addPerson = (ticketNr) => {
+    let { people } = this.state;
+    if (!this.isThereRoom()) {
+      this.displayErrors(['You already filled up the available space in tent']);
+    } else if (people.indexOf(ticketNr) !== -1) {
+      this.displayErrors(['This person was already added']);
+    } else {
+      people.push(ticketNr);
+      this.setState({ people: people, errors: [] });
+    }
   }
 
   removePerson = (person) => {
-    console.log('remove :', person);
     let { people } = this.state;
-    people.splice(people.indexOf(person), 1);
-    console.log('people :', people);
-    this.setState({ people: people });
+    let index = people.indexOf(person);
+    people.splice(index, 1);
+    this.setState({ people: people, errors: [] });
   }
 
   changeType = (id) => {
     if (this.campingTypes.find(t => t.id === id)) {
-      this.setState({ tentType: id }, this.validateNumberOfPeople);
+      this.setState({ tentType: id, errors: [] }, this.validateNumberOfPeople);
     }
-  }
-
-  selectRegion = (region) => {
-    this.setState({ region: region });
   }
 
   validateNumberOfPeople = () => {
     const tentMaxPeople = this.campingTypes[this.state.tentType].maxPeople;
     if (this.state.people.length > tentMaxPeople) {
       let { people } = this.state;
-      people.splice(tentMaxPeople - 1, people.length - tentMaxPeople - 1);
+      people.splice(tentMaxPeople - 1, people.length - tentMaxPeople);
       this.setState({ people: people });
     }
+  }
+
+  selectRegion = (region) => {
+    console.log(`change region to ${region}`)
+    this.setState({ region: region, errors: [] });
+  }
+
+  isThereRoom = () => {
+    let { maxPeople } = this.campingTypes[this.state.tentType];
+    let currentPeople = this.state.people.length;
+    return currentPeople < maxPeople;
   }
 
   render() {
@@ -74,21 +90,31 @@ export default class Camping extends Component {
         {/* <Navigation /> */}
         <div className="container">
           <MapSelect selected={this.state.region} onRegionChange={this.selectRegion} />
-          <TentSelect campingTypes={this.campingTypes} onTypeChange={this.changeType} />
+          <TentSelect campingTypes={this.campingTypes} selected={this.state.tentType} onTypeChange={this.changeType} />
           <div className="tent-info-box">
+            <div className="info">i</div>
             {this.campingTypes[this.state.tentType].description}
           </div>
-          <div className="flex-boxes center-box">
-            {this.state.people.map(p =>
-              (
-                <TicketNumberInput
-                  onRemove={() => this.removePerson(p)}
-                  key={p.id}
-                  disabled={p.id === 1}
-                />
-              ))}
+          <TicketNumberInput
+            onAdd={this.addPerson}
+          />
+
+          <div className="errors">
+            {
+              this.state.errors.map(e => (
+                <span className="error-msg" key={e}>{e}</span>
+              ))
+            }
           </div>
-          <button onClick={this.addPerson}> Add person </button>
+          <div className="text-purple">
+            People added ({`${this.state.people.length}/${this.campingTypes[this.state.tentType].maxPeople}`})
+          </div>
+          <div className="flex-row">
+            {this.state.people.map((p, i) => (
+              <TicketNumberInfo key={i} number={p} onRemove={this.removePerson} />
+            ))}
+          </div>
+
         </div>
       </div>
     )

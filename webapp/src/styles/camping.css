@@ -1,0 +1,133 @@
+.map {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.map-entry {
+  width: 32.5%;
+  height: 70px;
+  background: url('/images/white_bg_map@2x.png');
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.11);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+  background-size: cover;
+  transition: 0.3s;
+}
+
+.map-entry:hover {
+  background: url('/images/purple_bg_map@2x.png');
+  background-size: cover;
+  color: white;
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+.map-entry.selected {
+  background: url('/images/purple_bg_map@2x.png');
+  color: white;
+  font-weight: 500;
+  transition: 1s;
+}
+
+.tent-type-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.tent-select {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-image: url('/images/white_bg_map@2x.png');
+  background-color: #FFFFFF;
+  background-size: cover;
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.11);
+  margin-left: 10px;
+  height: 50px;
+  transition: 0.5s;
+}
+
+.tent-select:hover {
+  cursor: pointer;
+  background-image: none;
+  transform: scale(1.05);
+}
+
+.tent-image {
+  width: 40px;
+  height: 40px;
+  margin: 0px 5px;
+}
+
+.selected-line {
+  background: linear-gradient(to bottom, #5F2E8B, #792FBA);
+  width: 6px;
+  height: 90%;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.tent-info-box {
+  background: #FFFCED;
+  color: #5F2E8B;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.tent-info-box .info {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background: #FFFFFF;
+  font-weight: 500;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.ticket-number {
+  background: url('/images/white_bg_map@2x.png');
+  background-size: cover;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.11);
+  padding: 7px 5px 7px 5px;
+  color: #5F2E8B;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 15%;
+  flex-wrap: wrap;
+}
+
+.text-purple {
+  color: #5F2E8B;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.errors {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

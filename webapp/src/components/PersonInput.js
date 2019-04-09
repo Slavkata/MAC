@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types';
+import CloseButton from './CloseButton';
 
 export default class PersonInput extends Component {
 
@@ -54,7 +55,7 @@ export default class PersonInput extends Component {
           <div className="title">{`${this.state.firstName} ${this.state.lastName}`}</div>
           <div>
             <button className="round-but edit-but" onClick={this.props.onEdit} disabled={this.props.focused}> ✎ </button>
-            <button className="round-but remove-but" onClick={this.props.onRemove} disabled={this.props.allowRemove}> &#10007;</button>
+            <CloseButton onRemove={this.props.onRemove} allowRemove={this.props.allowRemove} />
           </div>
         </div>
         <div className="input-fields">

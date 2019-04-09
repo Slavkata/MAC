@@ -29,6 +29,13 @@
   flex-direction: column;
 }
 
+.input-box-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .control-buttons {
   display: flex;
   flex-direction: row;
@@ -68,6 +75,7 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
   align-items: center;
   box-shadow: 0px 1px 2px #999;
   margin-left: 2px;
+  outline: none;
 }
 
 .round-but:hover:enabled {
@@ -106,6 +114,12 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
   outline: none;
 }
 
+.btn.small {
+  padding: 5px 20px;
+  font-size: 8pt;
+  height: 35px;
+}
+
 .btn:hover {
   background-position: 200px;
   transition: 0.5s;
@@ -132,4 +146,8 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
 .error-msg {
   color: #c40000;
   text-align: center;
+}
+
+.width-80 {
+  width: 80% !important;
 }
