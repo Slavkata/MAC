@@ -13,13 +13,23 @@ class Navigation extends Component {
   }
 
   state = {
+    lastLocation: '',
     opened: false,
     activePage: 0,
     lineOffset: 0,
     lineWidth: 100,
   }
 
+  componentDidUpdate() {
+    if (this.state.lastLocation !== this.props.location.pathname)
+      this.updateLinePosition();
+  }
+
   componentDidMount() {
+    this.updateLinePosition();
+  }
+
+  updateLinePosition = () => {
     let activePage = 0;
     switch (this.props.location.pathname) {
       case '/tickets':
@@ -34,7 +44,7 @@ class Navigation extends Component {
       default:
         break;
     }
-    this.setState({ activePage: activePage }, this.handleExitHover);
+    this.setState({ activePage: activePage, lastLocation: this.props.location.pathname }, this.handleExitHover);
   }
 
   handleExitHover = () => {
