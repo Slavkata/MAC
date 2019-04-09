@@ -151,3 +151,12 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
 .width-80 {
   width: 80% !important;
 }
+
+.dialog-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-list span::before {
+  content: '#'
+}

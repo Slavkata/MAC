@@ -4,8 +4,12 @@ import TentSelect from '../components/TentSelect';
 import TicketNumberInput from '../components/TicketNumberInput';
 import MapSelect from '../components/MapSelect';
 import TicketNumberInfo from '../components/TicketNumberInfo';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
-export default class Camping extends Component {
+const MySwal = withReactContent(Swal);
+
+class Camping extends Component {
 
   campingTypes = [
     {
@@ -84,6 +88,43 @@ export default class Camping extends Component {
     return currentPeople < maxPeople;
   }
 
+  submit = () => {
+    if (this.state.people.length === 0) {
+      MySwal.fire({
+        type: 'error',
+        title: 'No people added',
+        text: 'Please add people who will use the spot before reserving',
+        heightAuto: false,
+      });
+      return;
+    }
+    let peopleAsList = '';
+    this.state.people.forEach(p => { peopleAsList += '<span>' + p + '</span>' });
+    console.log(peopleAsList);
+    let text = 'You will reserve spots for the following <strong>' + this.state.people.length + '</strong> people <div class="dialog-list">' + peopleAsList + '</div>';
+    MySwal.fire({
+      title: 'Are you ready?',
+      html: text,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#792FBA',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Comfirm',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.value) {
+        MySwal.fire(
+          {
+            title: 'Your reservation has been made!',
+            text: 'Expect detailed information and your camping tickets delivered to your mail.',
+            type: 'success',
+            heightAuto: false,
+          }
+        )
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -114,9 +155,13 @@ export default class Camping extends Component {
               <TicketNumberInfo key={i} number={p} onRemove={this.removePerson} />
             ))}
           </div>
-
+          <div className="button-group-right">
+            <button className="btn" onClick={this.submit}>Reserve spots</button>
+          </div>
         </div>
       </div>
     )
   }
 }
+
+export default Camping;
