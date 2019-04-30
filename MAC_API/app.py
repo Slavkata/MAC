@@ -1,15 +1,3 @@
-
-from	flask import Flask
-from	flask_restful import Api
-from	flask_jwt import JWT
-from  flask_sqlalchemy import SQLAlchemy
-
-from	security.security import authenticate,identity
-
-from	resources.ticket import TicketResource
-from	resources.user import UserResource
-
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
@@ -19,6 +7,7 @@ from resources.user import UserResource
 from security.security import authenticate,identity
 from resources.rating import RatingResource, RatingResourceGet
 from resources.camping import CampingResource, CampingResourceGet
+from resources.topup import TopupResource
 
 import  os
 
@@ -38,11 +27,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mac.db'
 
 
 api.add_resource(TicketResource,'/ticket')
-
-
-api.add_resource(TicketResource,'/ticket/<string:ticket_number>')
-
 api.add_resource(UserResource,'/user/register')
+
+#topup resources
+api.add_resource(TopupResource,'/account/topup')
 
 #adding the rating 
 api.add_resource(RatingResource,'/rating/create')
