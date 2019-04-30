@@ -1,5 +1,5 @@
 from flask_restful import Resource,reqparse
-from models.camping import CampingSpots
+from models.camping import CampingSpot
 from db import db
 from flask import jsonify
 
@@ -31,7 +31,7 @@ class CampingResource(Resource):
                         )
     def post(self):
         data = self.parser.parse_args()
-        camping = CampingSpots(data.name, data.location, data.capacity, data.price)
+        camping = CampingSpot(data.name, data.location, data.capacity, data.price)
         
         try:
             db.session.add(camping)
@@ -45,7 +45,7 @@ class CampingResource(Resource):
 class CampingResourceGet(Resource):
     def get(self):
         try:
-            return {'campings':[camping.serialize() for camping in CampingSpots.query.all()]},200
+            return {'campings':[camping.serialize() for camping in CampingSpot.query.all()]},200
         except:
           
             return {'message':'error'},404
