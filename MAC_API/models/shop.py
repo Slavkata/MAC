@@ -1,7 +1,7 @@
 from db import db 
 from models.user import User
 class Shop(db.Model):
-   # __tablename__ = "Shops"
+    __tablename__ = "shops"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

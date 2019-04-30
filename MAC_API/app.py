@@ -19,7 +19,7 @@ from resources.rating import RatingResource, RatingListResource
 from resources.camping import CampingResource, CampingListResource
 
 from resources.shop import ShopResource, ShopListResource
-
+from resources.shopItem import ItemResource, ItemListResource
 import  os
 
 
@@ -53,6 +53,10 @@ api.add_resource(CampingListResource,'/campings/get')
 #shop
 api.add_resource(ShopResource,'/shop/create')
 api.add_resource(ShopListResource,'/shops/get')
+
+#item 
+api.add_resource(ItemResource,'/item/create')
+api.add_resource(ItemListResource,'/items/get')
 
 if __name__ == '__main__':
     from manage import  db

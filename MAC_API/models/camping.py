@@ -3,7 +3,7 @@ from db import db
 
 class CampingSpot(db.Model):
 
-    __tablename__ = "campingspot"
+    __tablename__ = "camping_spots"
 
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(100), nullable=False)
