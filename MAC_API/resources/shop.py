@@ -19,8 +19,6 @@ class ShopResource(Resource):
                         )
     def post(self):
         data = self.parser.parse_args()
-
-        print(data.serialize())
-        #user_id_pass = User.query.filter_by(id=id)
+        print(data)
         
         
