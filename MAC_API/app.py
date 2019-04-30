@@ -4,6 +4,7 @@ from models.db_init import db
 from resources.ticket import TicketResource
 from resources.rating import RatingResource, RatingResourceGet
 from resources.camping import CampingResource, CampingResourceGet
+from resources.topup import TopupResource
 
 
 app = Flask(__name__)
@@ -18,7 +19,9 @@ app.config[
 
 api.add_resource(TicketResource,'/ticket')
 
-api.add_resource(UserResource,'/user/register')
+#adding the rating
+#topup resources
+api.add_resource(TopupResource,'/account/topup')
 
 #adding the rating
 api.add_resource(RatingResource,'/rating/create')
