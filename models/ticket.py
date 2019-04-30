@@ -6,7 +6,6 @@ class Ticket(db.Model):
     #
     #Make sure to provide a default value when changing from nullable=False to nullable=True
     #
-
     __tablename__ = 'tickets'
     __table_args__ = {'extend_existing': True}
     ticket_number = db.Column(db.Integer, primary_key=True,nullable=False)
