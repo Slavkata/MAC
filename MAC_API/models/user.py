@@ -5,6 +5,7 @@ class User(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(80))
     password = db.Column(db.String(100))
+    
     def __init__(self, username, password):
         #self.id = _id
         self.username = username

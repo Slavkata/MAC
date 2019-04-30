@@ -9,6 +9,10 @@ from models.user import User
 
 
 
+from app import app
+from db import db
+
+
 migrate = Migrate(app, db)
 manager = Manager(app)
 

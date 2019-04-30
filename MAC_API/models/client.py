@@ -1,6 +1,5 @@
 from db import db
 
-
 class Client(db.Model):
     __tablename__ = 'clients'
     ticket_number = db.Column(db.ForeignKey('Ticket.ticket_number'), primary_key=True)
