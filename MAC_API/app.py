@@ -1,18 +1,35 @@
-from flask import Flask, request
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
+from flask_restful import Api
+from  flask_jwt import JWT
+from resources.ticket import TicketResource
+from resources.user import UserResource
+from security.security import authenticate,identity
+
+import  os
+
 
 app = Flask(__name__)
+api = Api(app)
 
-app.config.from_object(os.environ['APP_SETTINGS'])
+app.secret_key = 'blablaabla'
+
+jwt = JWT(app,authenticate,identity)
+
+
+#app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mac.db'
 
-from models import Ticket
-from models import AccountDeposit
-from models import PaymentAccount
-from models import Client
 
-@app.route("/")
-def hello():
-    return "Hello World!"
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+api.add_resource(TicketResource,'/ticket/<string:ticket_number>')
+api.add_resource(UserResource,'/user/register')
+
+if __name__ == '__main__':
+    from db import db
+    db.init_app(app)
+    app.run(port=5000,debug=True)

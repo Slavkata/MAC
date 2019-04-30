@@ -2,8 +2,10 @@ import sqlite3
 
 import click
 from flask import current_app, g
+from flask_sqlalchemy import SQLAlchemy
 from flask.cli import with_appcontext
 
+db = SQLAlchemy()
 
 def get_db():
     if 'db' not in g:
@@ -18,6 +20,5 @@ def get_db():
 
 def close_db(e=None):
     db = g.pop('db', None)
-
     if db is not None:
         db.close()
