@@ -8,6 +8,7 @@ from security.security import authenticate,identity
 from resources.rating import RatingResource, RatingResourceGet
 from resources.camping import CampingResource, CampingResourceGet
 from resources.topup import TopupResource
+from resources.status import StatusChangeResource
 
 import  os
 
@@ -31,6 +32,9 @@ api.add_resource(UserResource,'/user/register')
 
 #topup resources
 api.add_resource(TopupResource,'/account/topup')
+
+#status change resources
+api.add_resource(StatusChangeResource,'/status/<string:ticket_number>/check')
 
 #adding the rating 
 api.add_resource(RatingResource,'/rating/create')
