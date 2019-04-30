@@ -5,6 +5,7 @@ from flask import current_app, g
 from flask_sqlalchemy import SQLAlchemy
 from flask.cli import with_appcontext
 
+
 db = SQLAlchemy()
 
 def get_db():
