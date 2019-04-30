@@ -19,11 +19,10 @@ app.config[
 
 api.add_resource(TicketResource,'/ticket')
 
-#adding the rating
 #topup resources
 api.add_resource(TopupResource,'/account/topup')
 
-#adding the rating
+#adding the rating 
 api.add_resource(RatingResource,'/rating/create')
 api.add_resource(RatingResourceGet,'/ratings/get')
 
