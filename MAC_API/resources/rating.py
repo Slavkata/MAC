@@ -19,7 +19,7 @@ class RatingResource(Resource):
     def post(self):
         data = self.parser.parse_args()
         user = Ratings(data.score, data.description)
-        
+      
         try:
             db.session.add(user)
             db.session.commit()

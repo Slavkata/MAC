@@ -7,6 +7,7 @@ from resources.user import UserResource
 from security.security import authenticate,identity
 from resources.rating import RatingResource, RatingResourceGet
 from resources.camping import CampingResource, CampingResourceGet
+from resources.shop import ShopResource
 import  os
 
 
@@ -35,7 +36,8 @@ api.add_resource(RatingResourceGet,'/ratings/get')
 api.add_resource(CampingResource,'/camping/create')
 api.add_resource(CampingResourceGet,'/campings/get')
 
-
+#shop
+api.add_resource(ShopResource,'/shop/create')
 
 
 if __name__ == '__main__':

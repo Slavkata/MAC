@@ -1,5 +1,5 @@
 from flask_restful import Resource,reqparse
-from models.camping import CampingSpots
+from models.camping import CampingSpot
 from db import db
 from flask import jsonify
 
@@ -44,6 +44,7 @@ class CampingResource(Resource):
 
 class CampingResourceGet(Resource):
     def get(self):
+        
         try:
             return {'campings':[camping.serialize() for camping in CampingSpots.query.all()]},200
         except:
