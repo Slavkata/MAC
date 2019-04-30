@@ -1,7 +1,13 @@
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
+from flask_sqlalchemy  import SQLAlchemy
+from app import app
+from db import  db
 
-from app import app, db
+from models.ticket import Ticket
+from models.user import User
+
+
 
 migrate = Migrate(app, db)
 manager = Manager(app)
