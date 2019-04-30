@@ -1,7 +1,7 @@
 from db import db
 
 
-class CampingSpots(db.Model):
+class CampingSpot(db.Model):
 
     __tablename__ = "campingspot"
 
