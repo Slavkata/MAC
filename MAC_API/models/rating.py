@@ -1,6 +1,6 @@
 from db import db
 
-class Ratings(db.Model):
+class Rating(db.Model):
     __tablename__ = 'ratings'
     id = db.Column(db.Integer,primary_key=True)
     score = db.Column(db.String(80))

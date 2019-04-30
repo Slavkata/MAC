@@ -27,3 +27,11 @@ class CampingSpot(db.Model):
             'capacity': self.capacity,
             'price':self.price
         }
+    
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def find_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()

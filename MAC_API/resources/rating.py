@@ -1,5 +1,5 @@
 from flask_restful import Resource,reqparse
-from models.ratings import Ratings
+from models.rating import Rating
 from db import db
 from flask import jsonify
 
@@ -18,7 +18,7 @@ class RatingResource(Resource):
                         )
     def post(self):
         data = self.parser.parse_args()
-        user = Ratings(data.score, data.description)
+        user = Rating(data.score, data.description)
       
         try:
             db.session.add(user)
@@ -29,10 +29,10 @@ class RatingResource(Resource):
 
 
 
-class RatingResourceGet(Resource):
+class RatingListResource(Resource):
     def get(self):
         try:
-            return {'ratings':[rating.serialize() for rating in Ratings.query.all()]},200
+            return {'ratings':[rating.serialize() for rating in Rating.query.all()]},200
         except:
-            return {'message':'error'},404
+            return {'message':'cant find ratings'},404
         
