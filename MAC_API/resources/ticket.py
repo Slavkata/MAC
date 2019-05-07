@@ -4,12 +4,16 @@ from models.ticket import Ticket
 
 class TicketResource(Resource):
     parser = reqparse.RequestParser()
+    parser.add_argument('ticket_number',
+                        type=int,
+                        required=True,
+                        help="specify a ticket number")
 
-    def get(self,ticket_number):
+    def get(self):
         data = self.parser.parse_args()
         return  Ticket.find_by_ticket_number(data['ticket_number']).serialize()
-    def post(self):
 
+    def post(self):
         self.parser.add_argument('ticket_number', type=str, required=True, help="ticket_number can't be left blank")
         self.parser.add_argument('firstname',type=str,required=True,help="firstname can't be left blank")
         self.parser.add_argument('lastname',type=str,required=True,help="lastname can't be left blank")
