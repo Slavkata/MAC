@@ -16,7 +16,8 @@ class Admin extends React.Component {
   render() {
     return (
       <Fragment>
-        <div className="input-box input-box-short">
+        <div className="input-fields input-box-short">
+          <h1 style={{ textAlign: 'center' }}>Admin Panel Login</h1>
           <input type="text" name="username" placeholder="Username" onChange={this.handleInput} />
           <input type="password" name="password" placeholder="Password" onChange={this.handleInput} />
           <div className="button-group-right" style={{ marginRight: '5%' }}>
