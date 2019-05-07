@@ -42,7 +42,7 @@
   justify-content: space-between;
 }
 
-input[type=text], input[type=number], input[type=email] {
+input[type=text], input[type=number], input[type=email], input[type=password] {
   width: 90%;
   margin: 10px auto;
   padding: 10px;
@@ -52,11 +52,11 @@ input[type=text], input[type=number], input[type=email] {
   outline: none;
 }
 
-input[type=text]:hover, input[type=number]:hover, input[type=email]:hover {
+input[type=text]:hover, input[type=number]:hover, input[type=email]:hover, , input[type=password]:hover {
   border-image: linear-gradient(to right bottom, #5F2E8B 0%, #FFFFFF 40%, #FFFFFF 50%, #792FBA 100%);
 }
 
-input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus {
   border-width: 2px;
   padding: 11px;
   box-shadow: 0px 0px 6px #792FBA;
@@ -140,6 +140,11 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
   flex-direction: column;
 }
 
+.input-box-short {
+  width: 50% !important;
+  margin: 0 auto;
+}
+
 .minimised .input-fields {
   display: none;
 }
@@ -160,4 +165,8 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
 
 .dialog-list span::before {
   content: '#'
+}
+
+.btn-small-width {
+  width: 200px;
 }
