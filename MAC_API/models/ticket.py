@@ -1,13 +1,14 @@
 from datetime import datetime
-from db import db
-from json import dumps
+from models.db_init import db
 
+db.metadata.clear()
 
 class Ticket(db.Model):
 
     #
     #Make sure to provide a default value when changing from nullable=False to nullable=True
     #
+
     __tablename__ = 'tickets'
     ticket_number = db.Column(db.Integer, primary_key=True,nullable=False)
     firstname = db.Column(db.String(30),nullable=False)
