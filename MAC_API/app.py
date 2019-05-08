@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-
+from models.db_init import db
 from resources.ticket import TicketResource
 
 app = Flask(__name__)
@@ -15,7 +15,4 @@ app.config[
 
 api.add_resource(TicketResource,'/ticket')
 
-if __name__ == '__main__':
-    from manage import  db
-    db.init_app(app)
-    app.run(port=5000,debug=True)
+db.init_app(app)

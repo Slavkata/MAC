@@ -1,16 +1,12 @@
-from flask_restful import Resource,reqparse
+from flask_restful import Resource,reqparse, request
 from models.ticket import Ticket
 
 
 class TicketResource(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('ticket_number',
-                        type=int,
-                        required=True,
-                        help="specify a ticket number")
 
     def get(self):
-        data = self.parser.parse_args()
+        data = request.args
         return  Ticket.find_by_ticket_number(data['ticket_number']).serialize()
 
     def post(self):
