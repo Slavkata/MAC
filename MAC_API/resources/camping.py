@@ -1,51 +1,29 @@
-from flask_restful import Resource,reqparse
-from models.camping import CampingSpots
-from db import db
+from json import dumps
+
 from flask import jsonify
+from flask_restful import Resource, request
+
+from models.camping import CampingSpots
 
 
 class CampingResource(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('name',
-                        type=str,
-                        required=True,
-                        help="please enter name"
-                        )
-
-    parser.add_argument('location',
-                        type=str,
-                        required=True,
-                        help="please enter location"
-                        )
-
-    parser.add_argument('capacity',
-                        type=int,
-                        required=True,
-                        help="please enter capacity"
-                        )
-
-    parser.add_argument('price',
-                        type=float,
-                        required=True,
-                        help="please enter price"
-                        )
     def post(self):
-        data = self.parser.parse_args()
-        camping = CampingSpots(data.name, data.location, data.capacity, data.price)
+        data = request.get_json()['id']
         
         try:
-            db.session.add(camping)
-            db.session.commit()
-            return {'message': 'success user register '},201
+            return {'message': 'success'}, 201
         except:
             return {'message': 'success error register '},500
 
-
-
-class CampingResourceGet(Resource):
     def get(self):
         try:
-            return {'campings':[camping.serialize() for camping in CampingSpots.query.all()]},200
+            return dumps(CampingSpots.get_free_spots(self)), 201
         except:
-          
-            return {'message':'error'},404
+            return {"message": "error"}, 404
+
+
+class CampingSpotResource(Resource):
+    def post(self):
+        data = request.get_json()
+        spot = CampingSpots(data['name'], data['location'], data['capacity'], data['price'])
+        return jsonify(spot.create())
