@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from models.db_init import db
+from models.payment_account import PaymentAccount
 
 db.metadata.clear()
 
@@ -29,6 +31,8 @@ class Ticket(db.Model):
         self.price = price
 
     def save_to_db(self):
+        pa = PaymentAccount(self.ticket_number)
+        pa.create()
         db.session.add(self)
         db.session.commit()
 
