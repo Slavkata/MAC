@@ -131,11 +131,11 @@ class Camping extends Component {
         {/* <Navigation /> */}
         <div className="container">
           <MapSelect selected={this.state.region} onRegionChange={this.selectRegion} />
-          <TentSelect campingTypes={this.campingTypes} selected={this.state.tentType} onTypeChange={this.changeType} />
+          {/* <TentSelect campingTypes={this.campingTypes} selected={this.state.tentType} onTypeChange={this.changeType} />
           <div className="tent-info-box">
             <div className="info">i</div>
             {this.campingTypes[this.state.tentType].description}
-          </div>
+          </div> */}
           <TicketNumberInput
             onAdd={this.addPerson}
           />

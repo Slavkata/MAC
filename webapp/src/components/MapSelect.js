@@ -1,18 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export default class MapSelect extends Component {
   regions = [
-    'North-West (NW)',
-    'North (N)',
-    'North-East (NE)',
-    'West (W)',
-    'Center (CEN)',
-    'East (E)',
-    'South-West (SW)',
-    'South (S)',
-    'South-East (SE)',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
+    'A1',
   ]
+
+  // componentWillMount() {
+  //   axios.get('https://mac-cars.herokuapp.com/camping/')
+  //   .then( ({data}) => {this.regions = data})
+  //   .catch( error => console.log(error));
+  // }
 
   render() {
     return (
