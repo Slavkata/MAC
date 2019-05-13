@@ -14,9 +14,9 @@ class TopupResource(Resource):
         account = PaymentAccount.find_by_ticket_number(data.ticket_number)
         if  account:
             deposit = AccountDeposit(data.ticket_number, data.amount)
-             deposit.save_to_db()
-             account.balance += data.amount
-             account.save_to_db()
+            deposit.save_to_db()
+            account.balance += data.amount
+            account.save_to_db()
             return account.serialize()
         else:
             return {'message':'payment account not found'},404
