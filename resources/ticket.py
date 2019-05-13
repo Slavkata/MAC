@@ -22,11 +22,11 @@ class TicketResource(Resource):
         self.parser.add_argument('price',type=float,required=True,help="email can't be left blank")
         data = self.parser.parse_args()
 
-        try:
-            ticket = Ticket(data.ticket_number, data.firstname, data.lastname, data.email, data.age, data.price)
-            ticket.save_to_db()
-            payment_account = PaymentAccount(data.ticket_number, 0)
-            payment_account.save_to_db()
-            return ticket.serialize(),201
-        except:
-            return {'message':"can't create ticket"},500
+        # try:
+        ticket = Ticket(data.ticket_number, data.firstname, data.lastname, data.email, data.age, data.price)
+        ticket.save_to_db()
+        payment_account = PaymentAccount(data.ticket_number, 0)
+        payment_account.save_to_db()
+        return ticket.serialize()
+        # except:
+        #     return {'message':"can't create ticket"},500

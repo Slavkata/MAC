@@ -6,9 +6,12 @@ from resources.camping import CampingResource, CampingSpotResource
 from resources.reviews import ReviewsResource
 from resources.ticket import TicketResource
 from resources.topup import TopupResource
+from flask_cors import CORS
+from cors_resources import cors_resources
 
 app = Flask(__name__)
 api = Api(app)
+cors = CORS(app, methods=['POST'], resources=cors_resources)
 
 app.secret_key = 'blablaabla'
 
