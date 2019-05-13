@@ -3,7 +3,7 @@ from models.db_init import db
 class CampingSpots(db.Model):
 
     __tablename__ = "campingspot"
-    id = db.Column(db.Integer,primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     ticket_number = db.Column(db.ForeignKey('tickets.ticket_number'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     location = db.Column(db.String(100), nullable=False)
@@ -11,12 +11,13 @@ class CampingSpots(db.Model):
     price = db.Column(db.Float, nullable=False)
     reserved = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, name, location, capacity, price):
+    def __init__(self, ticket_nubmer, name, location, capacity, price):
         self.name = name
         self.location = location
         self.capacity = capacity
         self.price = price
         self.reserved = False
+        self.ticket_number = ticket_nubmer
 
     def get_free_spots(self):
         list = []
