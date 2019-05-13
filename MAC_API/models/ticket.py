@@ -2,6 +2,7 @@ from datetime import datetime
 
 from models.db_init import db
 
+db.metadata.clear()
 
 class Ticket(db.Model):
 

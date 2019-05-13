@@ -30,6 +30,7 @@ class CampingSpots(db.Model):
         spot = CampingSpots.query.get(id)
         spot.reserved = True
         db.session.commit()
+        return spot
 
     def create(self):
         db.session.add(self)

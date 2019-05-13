@@ -11,12 +11,12 @@ class TopupResource(Resource):
 
     def post(self):
         data = self.parser.parse_args()
-        account  = PaymentAccount.find_by_ticket_number(data.ticket_number)
+        account = PaymentAccount.find_by_ticket_number(data.ticket_number)
         if  account:
-             deposit = AccountDeposit(data.ticket_number,data.amount)
+            deposit = AccountDeposit(data.ticket_number, data.amount)
              deposit.save_to_db()
              account.balance += data.amount
              account.save_to_db()
-             return {'message': 'success topup'}, 200
+            return account.serialize()
         else:
             return {'message':'payment account not found'},404

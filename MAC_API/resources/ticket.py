@@ -1,16 +1,21 @@
-from flask_restful import Resource,reqparse
-from models.ticket import Ticket
+from flask_restful import Resource, reqparse
+
 from models.account import PaymentAccount
+from models.ticket import Ticket
+
 
 class TicketResource(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('ticket_number', type=str, required=True, help="ticket_number can't be left blank")
 
     def get(self):
+        self.parser.add_argument('ticket_number', type=str, location='args', required=True,
+                                 help="ticket_number can't be left blank")
         data = self.parser.parse_args()
+        print(data.ticket_number)
         return  Ticket.find_by_ticket_number(data.ticket_number).serialize()
 
     def post(self):
+        self.parser.add_argument('ticket_number', type=str, required=True, help="ticket_number can't be left blank")
         self.parser.add_argument('firstname',type=str,required=True,help="firstname can't be left blank")
         self.parser.add_argument('lastname',type=str,required=True,help="lastname can't be left blank")
         self.parser.add_argument('email',type=str,required=True,help="email can't be left blank")

@@ -1,5 +1,3 @@
-from json import dumps
-
 from flask import jsonify
 from flask_restful import Resource, reqparse
 
@@ -14,14 +12,14 @@ class CampingResource(Resource):
         data = self.parser.parse_args()
 
         try:
-            spot = CampingSpots.reserve(data.id)
+            spot = CampingSpots.reserve(self, data.id)
             return spot.serialize()
         except:
-            return {'message': 'success error register '},500
+            return {'message': 'error register '}, 500
 
     def get(self):
         try:
-            return dumps(CampingSpots.get_free_spots(self)), 201
+            return jsonify(CampingSpots.get_free_spots(self))
         except:
             return {"message": "error"}, 404
 
