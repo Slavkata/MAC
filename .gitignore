@@ -96,7 +96,6 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
-*.dot[Cc]over
 ﻿.DS_Store
 .env
 .flaskenv
