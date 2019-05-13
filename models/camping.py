@@ -3,13 +3,13 @@ from models.db_init import db
 class CampingSpots(db.Model):
 
     __tablename__ = "campingspot"
-
     id = db.Column(db.Integer,primary_key=True)
+    ticket_number = db.Column(db.ForeignKey('tickets.ticket_number'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     location = db.Column(db.String(100), nullable=False)
-    capacity = db.Column(db.Integer)
-    price = db.Column(db.Float)
-    reserved = db.Column(db.Boolean)
+    capacity = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    reserved = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name, location, capacity, price):
         self.name = name

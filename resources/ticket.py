@@ -11,8 +11,7 @@ class TicketResource(Resource):
         self.parser.add_argument('ticket_number', type=str, location='args', required=True,
                                  help="ticket_number can't be left blank")
         data = self.parser.parse_args()
-        print(data.ticket_number)
-        return  Ticket.find_by_ticket_number(data.ticket_number).serialize()
+        return Ticket.find_by_ticket_number(data.ticket_number).serialize()
 
     def post(self):
         self.parser.add_argument('ticket_number', type=str, required=True, help="ticket_number can't be left blank")
