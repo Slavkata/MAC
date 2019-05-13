@@ -32,3 +32,7 @@ api.add_resource(CampingResource,'/camping/create')
 api.add_resource(CampingResourceGet,'/campings/get')
 
 db.init_app(app)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
