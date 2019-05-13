@@ -1,17 +1,21 @@
 from json import dumps
 
 from flask import jsonify
-from flask_restful import Resource, request
+from flask_restful import Resource, reqparse
 
 from models.camping import CampingSpots
 
 
 class CampingResource(Resource):
+    parser = reqparse.RequestParser()
+
     def post(self):
-        data = request.get_json()['id']
-        
+        self.parser.add_argument('id', type=int, required=True, help='camping spot id cannot be blank')
+        data = self.parser.parse_args()
+
         try:
-            return {'message': 'success'}, 201
+            spot = CampingSpots.reserve(data.id)
+            return spot.serialize()
         except:
             return {'message': 'success error register '},500
 
@@ -23,7 +27,15 @@ class CampingResource(Resource):
 
 
 class CampingSpotResource(Resource):
+    parser = reqparse.RequestParser()
+
     def post(self):
-        data = request.get_json()
-        spot = CampingSpots(data['name'], data['location'], data['capacity'], data['price'])
+        self.parser.add_argument('name', type=str, required=True, help='name cannot be blank')
+        self.parser.add_argument('location', type=str, required=True, help='location cannot be blank')
+        self.parser.add_argument('capacity', type=int, required=True, help='capacity cannot be blank')
+        self.parser.add_argument('price', type=float, required=True, help='price cannot be blank')
+
+        data = self.parser.parse_args()
+
+        spot = CampingSpots(data.name, data.location, data.capacity, data.price)
         return jsonify(spot.create())
