@@ -1,5 +1,7 @@
-from db import db
 from datetime import datetime
+
+from models.db_init import db
+
 
 class AccountDeposit(db.Model):
     __tablename__ = 'account_deposists'
