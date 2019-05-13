@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from models.db_init import db
 
 class Ticket(db.Model):
@@ -10,7 +9,7 @@ class Ticket(db.Model):
 
     __tablename__ = 'tickets'
     __table_args__ = {'extend_existing': True}
-    ticket_number = db.Column(db.String(8), primary_key=True,nullable=False)
+    ticket_number = db.Column(db.Integer, primary_key=True,nullable=False)
     firstname = db.Column(db.String(30),nullable=False)
     lastname  = db.Column(db.String(30),nullable=False)
     email = db.Column(db.String(30),nullable=False)
@@ -27,6 +26,7 @@ class Ticket(db.Model):
         self.email = email
         self.age = age
         self.price = price
+        self.created_at = datetime.now()
 
     def save_to_db(self):
         db.session.add(self)

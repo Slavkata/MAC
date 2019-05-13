@@ -29,7 +29,7 @@ class TicketResource(Resource):
         try:
             ticket = Ticket(ticket_number, data.firstname, data.lastname, data.email, data.age, data.price)
             ticket.save_to_db()
-            payment_account = PaymentAccount(data.ticket_number, 0)
+            payment_account = PaymentAccount(ticket_number, 0)
             payment_account.save_to_db()
             return ticket.serialize()
         except:
