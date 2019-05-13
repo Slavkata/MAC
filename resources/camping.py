@@ -1,8 +1,6 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
-
 from models.camping import CampingSpots
-
 
 class CampingResource(Resource):
     parser = reqparse.RequestParser()
