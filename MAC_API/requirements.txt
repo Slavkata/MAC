@@ -11,10 +11,11 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 Mako==1.0.9
 MarkupSafe==1.1.1
-
 PyJWT==1.4.2
 python-dateutil==2.8.0
 python-editor==1.0.4
+itsdangerous==1.1.0
+Jinja2==2.10.1
 pytz==2019.1
 six==1.12.0
 SQLAlchemy==1.3.3
