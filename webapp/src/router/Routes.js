@@ -9,6 +9,7 @@ import Camping from '../pages/Camping';
 import Information from '../pages/Information';
 import Navigation from '../components/Navigation';
 import Admin from '../pages/Admin';
+import Reviews from '../pages/Reviews';
 
 
 const Routes = (props) => {
@@ -26,6 +27,7 @@ const Routes = (props) => {
           <Route path="/registration" component={Registration} />
           <Route path="/tickets" component={Tickets} />
           <Route path="/camping" component={Camping} />
+          <Route path="/reviews" component={Reviews} />
           <Route exact path="/" component={Information} />
           <div className="car-vector"></div>
         </Grid>

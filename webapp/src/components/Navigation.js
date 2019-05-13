@@ -10,6 +10,7 @@ class Navigation extends Component {
     this.links[1] = React.createRef()
     this.links[2] = React.createRef()
     this.links[3] = React.createRef()
+    this.links[4] = React.createRef()
   }
 
   state = {
@@ -41,6 +42,9 @@ class Navigation extends Component {
       case '/registration':
         activePage = 3;
         break;
+      case '/reviews':
+        activePage = 4;
+        break;
       default:
         break;
     }
@@ -60,7 +64,6 @@ class Navigation extends Component {
 
   setActivePage = (index) => {
     this.setState({ activePage: index });
-    console.log(this.state.currPage);
   }
 
   openMobileNav = () => {
@@ -119,6 +122,15 @@ class Navigation extends Component {
                 My registration
             </Link>
             </div>
+            <div ref={this.links[4]}>
+              <Link to="/reviews"
+                onMouseEnter={this.handleHover(4)}
+                onMouseLeave={this.handleExitHover}
+                onClick={() => this.setActivePage(4)}
+              >
+                Reviews
+            </Link>
+            </div>
           </div>
         </nav>
         <div className="hamburger-nav" onClick={this.openMobileNav}></div>
@@ -128,6 +140,7 @@ class Navigation extends Component {
           <Link to="/tickets">Tickets</Link>
           <Link to="/camping">Camping</Link>
           <Link to="/registration">My registration</Link>
+          <Link to="/reviews">Reviews</Link>
         </nav>
       </Fragment>
     )

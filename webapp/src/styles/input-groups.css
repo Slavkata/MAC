@@ -43,8 +43,6 @@
 }
 
 input[type=text], input[type=number], input[type=email], input[type=password] {
-  width: 90%;
-  margin: 10px auto;
   padding: 10px;
   border-image: linear-gradient(to right bottom, #5F2E8B 0%, #FFFFFF 20%, #FFFFFF 60%, #792FBA 100%);
   border-image-slice: 1;
