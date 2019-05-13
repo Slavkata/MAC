@@ -1,4 +1,4 @@
-from db import db
+from models.db_init import db
 
 class PaymentAccount(db.Model):
     __tablename__ = 'payment_accounts'
