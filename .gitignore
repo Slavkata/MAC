@@ -1,3 +1,26 @@
+﻿.DS_Store
+.env
+.flaskenv
+*.pyc
+*.pyo
+env/
+env*
+dist/
+build/
+*.egg
+*.egg-info/
+_mailinglist
+.tox/
+.cache/
+.pytest_cache/
+.idea/
+docs/_build/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+*,cover
 ###################
 # compiled source #
 ###################
@@ -72,30 +95,6 @@ _[Ss]cripts
 *.dll
 *.nupkg
 *.ncrunchsolution
-*.dot[Cc]over
-﻿.DS_Store
-.env
-.flaskenv
-*.pyc
-*.pyo
-env/
-env*
-dist/
-build/
-*.egg
-*.egg-info/
-_mailinglist
-.tox/
-.cache/
-.pytest_cache/
-.idea/
-docs/_build/
-
-# Coverage reports
-htmlcov/
-.coverage
-.coverage.*
-*,cover
 *.dot[Cc]over
 ﻿.DS_Store
 .env
