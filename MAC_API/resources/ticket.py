@@ -1,6 +1,6 @@
 from flask_restful import Resource,reqparse
-from models.ticket import Ticket
 from models.account import  PaymentAccount
+from models.ticket import Ticket,TicketCheckInHistory
 
 class TicketResource(Resource):
     parser = reqparse.RequestParser()
@@ -24,7 +24,7 @@ class TicketResource(Resource):
         if (data.payment_account == True):
             payment_account = PaymentAccount(data.ticket_number, 0)
             payment_account.save_to_db()
-        return ticket.serialize(), 201
+
         try:
             ticket = Ticket(data.ticket_number, data.firstname, data.lastname, data.email, data.age, data.price)
             ticket.save_to_db()
@@ -35,3 +35,20 @@ class TicketResource(Resource):
         except:
             return {'message':"can't create ticket"},500
 
+
+class StatusChangeResource(Resource):
+    def get(self,ticket_number):
+        ticket  =Ticket.find_by_ticket_number(ticket_number)
+        if  ticket:
+             if ticket.status == True:
+                 history = TicketCheckInHistory(ticket_number, True, False)
+                 history.save_to_db()
+                 ticket.status = False
+             elif ticket.status == False:
+                 history = TicketCheckInHistory(ticket_number,False, True)
+                 history.save_to_db()
+                 ticket.status = True
+             ticket.save_to_db()
+             return {'message': 'success status change'}, 200
+        else:
+            return {'message':'ticket not found'},404
