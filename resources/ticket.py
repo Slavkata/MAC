@@ -1,7 +1,12 @@
+import random
+
 from flask_restful import Resource, reqparse
+
+from Email.email_service import ticket_message
+from Generators import QR, Tickets
 from models.account import PaymentAccount
 from models.ticket import Ticket
-import random
+
 
 class TicketResource(Resource):
     parser = reqparse.RequestParser()
@@ -31,6 +36,9 @@ class TicketResource(Resource):
             ticket.save_to_db()
             payment_account = PaymentAccount(ticket_number, 0)
             payment_account.save_to_db()
+            QR.generator.generate(ticket_number)
+            Tickets.pdf_generator.generate_tickets([ticket_number], [data.firstname + ' ' + data.lastname])
+            ticket_message(data.email, ticket_number)
             return ticket.serialize()
         except:
             return {'message':"can't create ticket"},500
