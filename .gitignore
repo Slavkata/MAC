@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿.DS_Store
 .env
 .flaskenv
@@ -98,4 +97,4 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
->>>>>>> origin/API
+
