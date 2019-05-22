@@ -23,9 +23,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mac.db'
 api.add_resource(StatusChangeResource,'/status/<string:ticket_number>/check')
 
 
-
+'''
 if __name__ == '__main__':
     from manage import  db
     db.init_app(app)
     app.run(port=5000,debug=True)
+'''
+
 
