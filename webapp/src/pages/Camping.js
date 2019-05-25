@@ -49,6 +49,10 @@ class Camping extends Component {
       this.displayErrors(['You already filled up the available space in tent']);
     } else if (people.indexOf(ticketNr) !== -1) {
       this.displayErrors(['This person was already added']);
+    } else if (ticketNr === '') {
+      this.displayErrors(['Please add ticket number']);
+    } else if (ticketNr.length !== 6) {
+      this.displayErrors(['Your ticket number has to be 6 digits long']);
     } else {
       people.push(ticketNr);
       this.setState({ people: people, errors: [] });

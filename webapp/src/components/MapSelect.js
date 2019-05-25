@@ -116,7 +116,7 @@ export default class MapSelect extends Component {
   getMapEntries = () => {
     return [...new Set(this.regionsV2.map(r => r.region))].map(region => {
       return (
-        <div className={`map-region-${region.toLowerCase()}`}>
+        <div className={`map-region-${region.toLowerCase()}`} key={region}>
           {
             this.regionsV2.filter(r => r.region == region).map((plot, i) => {
               return this.mapEntry(plot, i, region);
