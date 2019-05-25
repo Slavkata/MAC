@@ -1,12 +1,12 @@
 {
-    "name": "webapp",
-    "version": "0.1.0",
-    "private": true,
-    "engines": {
-      "npm": "6.8.0",
-      "node": "8.11.2"
-    },
-    "scripts": {
-        "start": "npm start --prefix webapp/"
-    }
+  "name": "webapp",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "npm": "6.8.0",
+    "node": "8.11.2"
+  },
+  "scripts": {
+    "start": "npm install && npm start --prefix webapp/"
+  }
 }
