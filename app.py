@@ -7,6 +7,7 @@ from cors_resources import cors_resources
 from models.db_init import db
 from resources.camping import CampingResource, CampingSpotResource
 from resources.reviews import ReviewsResource
+from resources.shop import ShopResource
 from resources.ticket import TicketResource
 from resources.topup import TopupResource
 
@@ -39,6 +40,8 @@ api.add_resource(CampingResource, '/camping/')
 api.add_resource(CampingSpotResource, '/camping/create/')
 
 api.add_resource(ReviewsResource, '/review/')
+
+api.add_resource(ShopResource, '/shop')
 
 db.init_app(app)
 mail.init_app(app)
