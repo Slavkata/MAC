@@ -3,10 +3,12 @@ import PersonInput from './PersonInput';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom'
 
 const MySwal = withReactContent(Swal);
+const ticketPrice = 50;
 
-export default class TicketPurchase extends Component {
+class TicketPurchase extends Component {
   state = {
     focused: 0,
     people: [],
@@ -16,20 +18,20 @@ export default class TicketPurchase extends Component {
   addPerson = () => {
     let { people } = this.state;
     people.push({
-      firstName: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       email: '',
       age: 0,
     });
     console.log(people);
-    this.setState({ people: people, focused: people.length - 1 });
+    this.setState({ people: people, focused: people.length - 1 }, () => console.log(this.state));
   }
 
   updatePerson = (data, i) => {
     let { people } = this.state;
     people[i] = {
-      firstName: data.firstName,
-      lastName: data.lastName,
+      firstname: data.firstname,
+      lastname: data.lastname,
       email: data.email,
       age: data.age,
     }
@@ -47,47 +49,99 @@ export default class TicketPurchase extends Component {
     this.setState({ focused: person });
   }
 
+  getRequestObject = () => {
+    return this.state.people.reduce((req, current) => {
+      for (let prop in current) {
+        req[prop].push(current[prop]);
+      }
+      req.price.push(ticketPrice);
+      return req;
+    },
+      {
+        firstname: [],
+        lastname: [],
+        email: [],
+        age: [],
+        price: [],
+      });
+  }
+
+  fireSuccessMessage = (data) => {
+    MySwal.fire({
+      title: "Tickets bought successfully!",
+      type: "success",
+      html: `You have successfully purchased tickets for <b>${data.length}</b> people! Your ticket numbers:
+      <ul>
+        ${data.map(p => `<li>${p.firstname} ${p.lastname} #${p.ticket_number}</li>`)}
+      </ul>`,
+    })
+      .then(() => {
+        this.fireCampingSpotsMessage(data);
+      })
+  }
+
+  fireCampingSpotsMessage = (data) => {
+    MySwal.fire({
+      title: 'Would you like to reserve camping spot for the event?',
+      html: 'Having a camping spot will let you spend the night with us and skip all the check in and travelling to your place.',
+      confirmButtonText: 'Yes, I want a camping spot',
+      cancelButtonText: 'No, thanks',
+      cancelButtonColor: '#a50d0d',
+      confirmButtonColor: '#659b26',
+      showCancelButton: true,
+    })
+      .then(campRes => {
+        if (campRes.value) {
+          this.props.history.push(`/camping/${data[0].ticket_number}`);
+        } else {
+          this.fireDepositMessage(data);
+        }
+      })
+  }
+
+  fireDepositMessage = (data) => {
+    MySwal.fire({
+      title: 'Would you like to deposit money to your account?',
+      html: 'We don\'t use cash on the event. If you want to purchase something you have to have it in your cashless balance. Deposit now?',
+      confirmButtonText: 'Yes, deposit',
+      cancelButtonText: 'No, thanks',
+      cancelButtonColor: '#a50d0d',
+      confirmButtonColor: '#659b26',
+      showCancelButton: true,
+    }).then(depRes => {
+      if (depRes.value) {
+        this.props.history.push(`/deposit/${data[0].ticket_number}`);
+      }
+    })
+  }
+
   submit = () => {
     let peopleAsList = '';
-    this.state.people.forEach(p => { peopleAsList += '<span>' + p.firstName + ' ' + p.lastName + '</span>' });
+    this.state.people.forEach(p => { peopleAsList += '<span>' + p.firstname + ' ' + p.lastname + '</span>' });
     let text = 'You will reserve tickets for the following <strong>' + this.state.people.length + '</strong> people <div class="dialog-list">' + peopleAsList + '</div>';
+
     MySwal.fire({
-      title: 'Are you ready?',
+      title: 'Confirm purchase?',
       html: text,
-      type: 'warning',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
       showCancelButton: true,
-      confirmButtonColor: '#792FBA',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Comfirm',
-      heightAuto: false,
+      confirmButtonText: 'Confirm',
+      showLoaderOnConfirm: true,
+      preConfirm: (login) => {
+        return Axios.post('https://mac-cars.herokuapp.com/ticket/', this.getRequestObject())
+          .then(response => {
+            console.log('response', response);
+            return response
+          });
+      },
+      allowOutsideClick: () => !MySwal.isLoading()
     }).then((result) => {
-
       if (result.value) {
-        let requests = [];
-
-
-        this.state.people.forEach(person => {
-          const data = {
-            firstname: person.firstName,
-            lastname: person.lastName,
-            age: parseInt(person.age),
-            email: person.email,
-            price: 20,
-          };
-          const prom = Axios.post('https://mac-cars.herokuapp.com/ticket/', data).catch(error => console.log(error));
-          requests.push(prom);
-        });
-        Promise.all(requests).then((values) => {
-          console.log(values);
-          MySwal.fire(
-            {
-              title: 'Your reservation has been made!',
-              text: 'Expect detailed information and your tickets delivered to your mail shortly.',
-              type: 'success',
-              heightAuto: false,
-            }
-          )
-        })
+        let { data } = result.value;
+        console.log('value', result.value);
+        this.fireSuccessMessage(data);
       }
     })
   }
@@ -120,3 +174,5 @@ export default class TicketPurchase extends Component {
     )
   }
 }
+
+export default withRouter(TicketPurchase);

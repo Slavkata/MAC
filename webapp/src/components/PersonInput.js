@@ -5,16 +5,16 @@ import CloseButton from './CloseButton';
 export default class PersonInput extends Component {
 
   defaultState = {
-    firstName: 'Person',
-    lastName: 'Name',
+    firstname: 'Person',
+    lastname: 'Name',
     email: 'blank@gmail.com',
     age: 18,
   }
 
   state = {
     errors: [],
-    firstName: 'Person',
-    lastName: 'Name',
+    firstname: 'Person',
+    lastname: 'Name',
     email: 'blank@gmail.com',
     age: 18,
   }
@@ -26,10 +26,10 @@ export default class PersonInput extends Component {
   updatePerson = () => {
     let { errors, ...data } = this.state;
     errors = [];
-    if (this.state.firstName === this.defaultState.firstName) {
+    if (this.state.firstname === this.defaultState.firstname) {
       errors.push('Please enter your first name')
     }
-    if (this.state.lastName === this.defaultState.lastName) {
+    if (this.state.lastname === this.defaultState.lastname) {
       errors.push('Please enter your last name')
     }
     if (this.state.email === this.defaultState.email) {
@@ -51,15 +51,15 @@ export default class PersonInput extends Component {
     return (
       <div className={`input-box slide-down col ${this.props.focused ? 'focused' : 'minimised'}`}>
         <div className="control-buttons">
-          <div className="title">{`${this.state.firstName} ${this.state.lastName}`}</div>
+          <div className="title">{`${this.state.firstname} ${this.state.lastname}`}</div>
           <div>
             <button className="round-but edit-but" onClick={this.props.onEdit} disabled={this.props.focused}> ✎ </button>
             <CloseButton onRemove={this.props.onRemove} allowRemove={true} />
           </div>
         </div>
         <div className="input-fields">
-          <input type="text" placeholder="First name" name="firstName" onChange={this.handleChange} />
-          <input type="text" placeholder="Last name" name="lastName" onChange={this.handleChange} />
+          <input type="text" placeholder="First name" name="firstname" onChange={this.handleChange} />
+          <input type="text" placeholder="Last name" name="lastname" onChange={this.handleChange} />
           <input type="email" placeholder="Email" name="email" onChange={this.handleChange} />
           <input type="number" placeholder="Age" name="age" onChange={this.handleChange} />
           {

@@ -24,9 +24,9 @@ const Routes = (props) => {
       <Grid container spacing={0} style={{ height: '100%' }}>
         <Grid item sm={9} style={{ position: 'relative' }}>
           <Navigation />
-          <Route path="/registration" component={Registration} />
+          <Route path="/registration/:ticketNr?" component={Registration} />
           <Route path="/tickets" component={Tickets} />
-          <Route path="/camping" component={Camping} />
+          <Route path="/camping/:ticketNr?" component={Camping} />
           <Route path="/reviews" component={Reviews} />
           <Route exact path="/" component={Information} />
           <div className="car-vector"></div>

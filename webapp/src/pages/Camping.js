@@ -33,6 +33,19 @@ class Camping extends Component {
     errors: [],
   }
 
+  componentDidMount() {
+    const ticketNr = this.props.match.params.ticketNr;
+    console.log(ticketNr);
+    if (ticketNr !== undefined &&
+      ticketNr !== null &&
+      !isNaN(ticketNr) &&
+      ticketNr.length === 6) {
+      let { people } = this.state;
+      people.push(ticketNr);
+      this.setState({ people, ...this.state });
+    }
+  }
+
   displayErrors = (errors) => {
     let all = [];
     errors.forEach(err => {
