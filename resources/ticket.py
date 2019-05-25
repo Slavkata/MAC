@@ -1,11 +1,10 @@
 import random
-
 from flask_restful import Resource, reqparse
-
 from Email.email_service import ticket_message
 from Generators import QR, Tickets
 from models.account import PaymentAccount
 from models.ticket import Ticket
+from flask import jsonify
 
 
 class TicketResource(Resource):
@@ -18,27 +17,29 @@ class TicketResource(Resource):
         return Ticket.find_by_ticket_number(data.ticket_number).serialize()
 
     def post(self):
-        self.parser.add_argument('firstname',type=str,required=True,help="firstname can't be left blank")
-        self.parser.add_argument('lastname',type=str,required=True,help="lastname can't be left blank")
-        self.parser.add_argument('email',type=str,required=True,help="email can't be left blank")
-        self.parser.add_argument('age',type=int,required=True,help="email can't be left blank")
-        self.parser.add_argument('price',type=float,required=True,help="email can't be left blank")
+        self.parser.add_argument('firstname', type=str, required=True, action='append')
+        self.parser.add_argument('lastname', type=str, required=True, action='append')
+        self.parser.add_argument('email', type=str, required=True, action='append')
+        self.parser.add_argument('age', type=int, required=True, action='append')
+        self.parser.add_argument('price', type=float, required=True, action='append')
         data = self.parser.parse_args()
+        print(data)
 
-        #worst id generator
-        while True:
-            ticket_number = random.randint(100000, 999999)
-            if Ticket.find_by_ticket_number(ticket_number) is None:
-                break
+        result = []
+        for i in range(len(data.firstname)):
+            #worst id generator
+            while True:
+                ticket_number = random.randint(100000, 999999)
+                if Ticket.find_by_ticket_number(ticket_number) is None:
+                    break
 
-        try:
-            ticket = Ticket(ticket_number, data.firstname, data.lastname, data.email, data.age, data.price)
+            ticket = Ticket(ticket_number, data.firstname[i], data.lastname[i], data.email[i], data.age[i], data.price[i])
             ticket.save_to_db()
             payment_account = PaymentAccount(ticket_number, 0)
             payment_account.save_to_db()
             QR.generator.generate(ticket_number)
-            Tickets.pdf_generator.generate_tickets([ticket_number], [data.firstname + ' ' + data.lastname])
-            ticket_message(data.email, ticket_number)
-            return ticket.serialize()
-        except:
-            return {'message':"can't create ticket"},500
+            Tickets.pdf_generator.generate_tickets([ticket_number], [data.firstname[i] + ' ' + data.lastname[i]])
+            ticket_message(data.email[i], ticket_number)
+            result.append(ticket.serialize())
+
+        return result
