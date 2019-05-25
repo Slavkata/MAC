@@ -42,23 +42,27 @@
   justify-content: space-between;
 }
 
-input[type=text], input[type=number], input[type=email], input[type=password] {
+input[type=text], input[type=number], input[type=email], input[type=password], textarea, select {
   padding: 10px;
-  border-image: linear-gradient(to right bottom, #5F2E8B 0%, #FFFFFF 20%, #FFFFFF 60%, #792FBA 100%);
-  border-image-slice: 1;
-  border-width: 1px;
-  outline: none;
-}
-
-input[type=text]:hover, input[type=number]:hover, input[type=email]:hover, , input[type=password]:hover {
-  border-image: linear-gradient(to right bottom, #5F2E8B 0%, #FFFFFF 40%, #FFFFFF 50%, #792FBA 100%);
-}
-
-input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus {
-  border-width: 2px;
-  padding: 11px;
-  box-shadow: 0px 0px 6px #792FBA;
   border: none;
+  outline: none;
+  box-shadow: 0px 2px 4px #ccc;
+  border-radius: 10px;
+  position: relative;
+  top: 0;
+  transition: 0.3s;
+  margin-top: 1rem;
+}
+
+input[type=text]:hover, input[type=number]:hover, input[type=email]:hover, input[type=password]:hover, textarea:hover, select:hover {
+  box-shadow: 0px 3px 5px #ccc;
+  top: -4px;
+}
+
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus, textarea:focus, select:focus {
+  box-shadow: 0px 0px 3px #792FBA;
+  border: none;
+  padding: 12px;
 }
 
 .round-but {

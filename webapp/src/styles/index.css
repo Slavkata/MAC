@@ -45,6 +45,10 @@ code {
   background-image: url('/images/tickets.jpg');
 }
 
+.reviewsbg {
+  background-image: url('/images/reviews.jpg');
+}
+
 .bg {
   background-image: url('/images/info.jpg');
 }
@@ -192,6 +196,17 @@ h6 a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+cite {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+cite .rating-stars {
+  margin-left: 20px;
 }
 
 @keyframes slide-down {

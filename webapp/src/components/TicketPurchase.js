@@ -64,10 +64,10 @@ export default class TicketPurchase extends Component {
 
       if (result.value) {
         let requests = [];
-        
+
 
         this.state.people.forEach(person => {
-          const data = { 
+          const data = {
             firstname: person.firstName,
             lastname: person.lastName,
             age: parseInt(person.age),
@@ -77,7 +77,7 @@ export default class TicketPurchase extends Component {
           const prom = Axios.post('https://mac-cars.herokuapp.com/ticket/', data).catch(error => console.log(error));
           requests.push(prom);
         });
-        Promise.all(requests).then( (values) => {
+        Promise.all(requests).then((values) => {
           console.log(values);
           MySwal.fire(
             {
@@ -96,8 +96,8 @@ export default class TicketPurchase extends Component {
     return (
       <Fragment>
         <div className="button-group-right">
-          <span className="text-purple mr-1">People added: {this.state.people.length}</span>
-          <button className="btn" onClick={this.addPerson} style={{transform: 'scale(0.5)', padding: '20px', 'fontSize': '20pt'}}> + </button>
+          <span className="text-purple mr-1">Tickets: {this.state.people.length}</span>
+          <button className="btn" onClick={this.addPerson} style={{ transform: 'scale(0.5)', padding: '20px', 'fontSize': '20pt' }}> + </button>
         </div>
         <div className="flex-boxes">
           {
@@ -113,8 +113,8 @@ export default class TicketPurchase extends Component {
           }
         </div>
         <div className="button-group-right">
-          <span className="text-purple mr-1">whenever you are ready you may confirm your </span>
-          <button className="btn" onClick={this.submit}>Purchase</button>
+          <span className="text-purple mr-1">when all the ticket info is done... </span>
+          <button className="btn" onClick={this.submit}>Confirm Purchase</button>
         </div>
       </Fragment>
     )

@@ -66,7 +66,7 @@ export default class PersonInput extends Component {
             this.state.errors.map((err, i) => (<span className="error-msg" key={i}> {err} </span>))
           }
           <div className="button-group-right">
-            <button className="btn" onClick={this.updatePerson}> Update </button>
+            <button className="btn" onClick={this.updatePerson}> SET </button>
           </div>
         </div>
       </div>
