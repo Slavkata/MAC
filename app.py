@@ -20,10 +20,10 @@ app.secret_key = 'blablaabla'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-
+# app.config['MAIL_USE_TLS'] = True
 # this email address does not yet exist
-app.config['MAIL_USERNAME'] = 'mac_email@gmail.com'
-app.config['MAIL_PASSWORD'] = r'bestpassword'
+app.config['MAIL_USERNAME'] = 'mcheesecars@gmail.com'
+app.config['MAIL_PASSWORD'] = r'mac&cheese'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config[
