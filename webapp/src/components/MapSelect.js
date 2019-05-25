@@ -3,84 +3,97 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 export default class MapSelect extends Component {
-  regions = {
-    A: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-      { loc: 4, taken: false },
-      { loc: 5, taken: false },
-    ],
-    B: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-      { loc: 4, taken: false },
-      { loc: 5, taken: false },
-    ],
-    C: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-      { loc: 4, taken: false },
-      { loc: 5, taken: false },
-    ],
-    D: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-      { loc: 4, taken: false },
-      { loc: 5, taken: false },
-    ],
-    E: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-      { loc: 4, taken: false },
-      { loc: 5, taken: false },
-      { loc: 6, taken: false },
-      { loc: 7, taken: false },
-    ],
-    F: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-      { loc: 4, taken: false },
-      { loc: 5, taken: false },
-      { loc: 6, taken: false },
-      { loc: 7, taken: false },
-    ],
-    G: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-      { loc: 4, taken: false },
-      { loc: 5, taken: false },
-      { loc: 6, taken: false },
-      { loc: 7, taken: false },
-    ],
-    H: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-    ],
-    I: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-    ],
-    J: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-    ],
-    K: [
-      { loc: 1, taken: false },
-      { loc: 2, taken: false },
-      { loc: 3, taken: false },
-    ],
-    L: [
-      { loc: 1, taken: false },
-    ],
-  }
+
+  regionsV2 = [
+    { id: 1, region: 'A', number: '1', reserved: false },
+    { id: 2, region: 'A', number: '2', reserved: false },
+    { id: 3, region: 'A', number: '3', reserved: false },
+    { id: 4, region: 'A', number: '4', reserved: false },
+    { id: 5, region: 'A', number: '5', reserved: false },
+    { id: 6, region: 'B', number: '1', reserved: false },
+    { id: 7, region: 'B', number: '2', reserved: false },
+    { id: 8, region: 'B', number: '3', reserved: false },
+    { id: 9, region: 'B', number: '4', reserved: false },
+    { id: 10, region: 'B', number: '5', reserved: false },
+  ]
+  // regions = {
+  //   A: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //     { loc: 4, taken: false },
+  //     { loc: 5, taken: false },
+  //   ],
+  //   B: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //     { loc: 4, taken: false },
+  //     { loc: 5, taken: false },
+  //   ],
+  //   C: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //     { loc: 4, taken: false },
+  //     { loc: 5, taken: false },
+  //   ],
+  //   D: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //     { loc: 4, taken: false },
+  //     { loc: 5, taken: false },
+  //   ],
+  //   E: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //     { loc: 4, taken: false },
+  //     { loc: 5, taken: false },
+  //     { loc: 6, taken: false },
+  //     { loc: 7, taken: false },
+  //   ],
+  //   F: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //     { loc: 4, taken: false },
+  //     { loc: 5, taken: false },
+  //     { loc: 6, taken: false },
+  //     { loc: 7, taken: false },
+  //   ],
+  //   G: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //     { loc: 4, taken: false },
+  //     { loc: 5, taken: false },
+  //     { loc: 6, taken: false },
+  //     { loc: 7, taken: false },
+  //   ],
+  //   H: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //   ],
+  //   I: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //   ],
+  //   J: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //   ],
+  //   K: [
+  //     { loc: 1, taken: false },
+  //     { loc: 2, taken: false },
+  //     { loc: 3, taken: false },
+  //   ],
+  //   L: [
+  //     { loc: 1, taken: false },
+  //   ],
+  // }
 
   // componentWillMount() {
   //   axios.get('https://mac-cars.herokuapp.com/camping/')
@@ -88,114 +101,42 @@ export default class MapSelect extends Component {
   //   .catch( error => console.log(error));
   // }
 
-  mapEntry = (plot, i, region) => {
+  mapEntry = (plot, i) => {
     return (
       <div
-        className={"map-entry" + (this.props.selected === `${plot}${i}` ? " selected" : "")}
-        onClick={() => this.props.onRegionChange(i)}
+        className={"map-entry" + (this.props.selected === `${plot.region}${plot.number}` ? " selected" : "")}
+        onClick={() => this.props.onRegionChange(`${plot.region}${plot.number}`)}
         key={i}
       >
-        {region}{plot.loc}
+        {plot.region}{plot.number}
       </div>
     )
+  }
+
+  getMapEntries = () => {
+    return [...new Set(this.regionsV2.map(r => r.region))].map(region => {
+      return (
+        <div className={`map-region-${region.toLowerCase()}`}>
+          {
+            this.regionsV2.filter(r => r.region == region).map((plot, i) => {
+              return this.mapEntry(plot, i, region);
+            })
+          }
+        </div>
+      )
+    })
   }
 
   render() {
     return (
       <div className="map">
-        {
-
-        }
-        <div className="map-region-a">
-          {
-            this.regions.A.map((plot, i) => {
-              return this.mapEntry(plot, i, 'A');
-            })
-          }
-        </div>
-        <div className="map-region-b">
-          {
-            this.regions.B.map((plot, i) => {
-              return this.mapEntry(plot, i, 'B');
-            })
-          }
-        </div>
-        <div className="map-region-c">
-          {
-            this.regions.C.map((plot, i) => {
-              return this.mapEntry(plot, i, 'C');
-            })
-          }
-        </div>
-        <div className="map-region-d">
-          {
-            this.regions.D.map((plot, i) => {
-              return this.mapEntry(plot, i, 'D');
-            })
-          }
-        </div>
-        <div className="map-region-e">
-          {
-            this.regions.E.map((plot, i) => {
-              return this.mapEntry(plot, i, 'E');
-            })
-          }
-        </div>
-        <div className="map-region-f">
-          {
-            this.regions.F.map((plot, i) => {
-              return this.mapEntry(plot, i, 'F');
-            })
-          }
-        </div>
-        <div className="map-region-g">
-          {
-            this.regions.G.map((plot, i) => {
-              return this.mapEntry(plot, i, 'G');
-            })
-          }
-        </div>
-        <div className="map-region-h">
-          {
-            this.regions.H.map((plot, i) => {
-              return this.mapEntry(plot, i, 'H');
-            })
-          }
-        </div>
-        <div className="map-region-i">
-          {
-            this.regions.I.map((plot, i) => {
-              return this.mapEntry(plot, i, 'I');
-            })
-          }
-        </div>
-        <div className="map-region-j">
-          {
-            this.regions.J.map((plot, i) => {
-              return this.mapEntry(plot, i, 'J');
-            })
-          }
-        </div>
-        <div className="map-region-k">
-          {
-            this.regions.K.map((plot, i) => {
-              return this.mapEntry(plot, i, 'K');
-            })
-          }
-        </div>
-        <div className="map-region-l">
-          {
-            this.regions.L.map((plot, i) => {
-              return this.mapEntry(plot, i, 'L');
-            })
-          }
-        </div>
+        {this.getMapEntries()}
       </div>
     )
   }
 }
 
 MapSelect.propTypes = {
-  selected: PropTypes.number,
+  selected: PropTypes.string,
   onRegionChange: PropTypes.func,
 };
