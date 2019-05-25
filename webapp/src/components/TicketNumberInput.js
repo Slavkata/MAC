@@ -9,9 +9,9 @@ export default class TicketNumberInput extends Component {
 
   render() {
     return (
-      <div className="input-box-row">
+      <div className="camping-spots-input">
         <input type="text" placeholder="Ticket number" className="width-80" onChange={(e) => this.setState({ ticketNr: e.target.value })} />
-        <button onClick={() => this.props.onAdd(this.state.ticketNr)} className="btn small"> Add </button>
+        <button onClick={() => this.props.onAdd(this.state.ticketNr)} className="btn small"> + </button>
       </div>
     )
   }
