@@ -8,6 +8,5 @@
   },
   "scripts": {
     "start": "npm start --prefix webapp/",
-    "heroku-postbuild": "npm run build --prefix webapp/"
   }
 }
