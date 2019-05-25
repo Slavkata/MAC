@@ -7,11 +7,7 @@
     "node": "8.11.2"
   },
   "scripts": {
-    "dev": "react-scripts start --prefix webapp/",
-    "start": "serve -s build --prefix webapp/",
-    "build": "react-scripts build --prefix webapp/",
-    "test": "react-scripts test --env=jsdom --prefix webapp/",
-    "eject": "react-scripts eject --prefix webapp/",
+    "start": "npm start --prefix webapp/",
     "heroku-postbuild": "npm run build --prefix webapp/"
   }
 }
