@@ -7,6 +7,6 @@
     "node": "8.11.2"
   },
   "scripts": {
-    "start": "npm start --prefix webapp/",
+    "start": "npm start --prefix webapp/"
   }
 }
