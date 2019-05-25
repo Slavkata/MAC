@@ -118,7 +118,7 @@ export default class MapSelect extends Component {
       return (
         <div className={`map-region-${region.toLowerCase()}`} key={region}>
           {
-            this.regionsV2.filter(r => r.region == region).map((plot, i) => {
+            this.regionsV2.filter(r => r.region === region).map((plot, i) => {
               return this.mapEntry(plot, i, region);
             })
           }

@@ -119,7 +119,7 @@ class Navigation extends Component {
                 onMouseLeave={this.handleExitHover}
                 onClick={() => this.setActivePage(3)}
               >
-                My registration
+                Deposit
             </Link>
             </div>
             <div ref={this.links[4]}>

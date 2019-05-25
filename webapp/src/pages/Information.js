@@ -24,7 +24,6 @@ export default class Information extends Component {
             </div>
         <div className="content-center">
           <button className="btn" onClick={this.redirect}>Buy tickets</button>
-          <h6>or you can read more <a href="#">here</a></h6>
         </div>
       </div >
     )

@@ -21,7 +21,6 @@ export default class Reviews extends Component {
     fetchReviews = () => {
         axios.get('https://mac-cars.herokuapp.com/review/')
             .then(response => {
-                console.log(response.data);
                 this.setState({ reviews: response.data })
             })
             .catch(error => { console.log(error) });
@@ -72,7 +71,7 @@ export default class Reviews extends Component {
     }
 
     submitReview = () => {
-        if (this.state.name == '' || this.state.rating == 0 || this.state.text == '') {
+        if (this.state.name === '' || this.state.rating === 0 || this.state.text === '') {
             console.log('error');
             console.warn('PUT FEEDBACK HERE');
         }
@@ -122,7 +121,7 @@ export default class Reviews extends Component {
                         </tr>
                         <tr>
                             <td>Review text</td>
-                            <td><textarea name="review" style={{ width: '80%' }} name="text" onChange={this.handleChange}></textarea></td>
+                            <td><textarea name="review" style={{ width: '80%' }} onChange={this.handleChange}></textarea></td>
                         </tr>
                         <tr>
                             <td>let us know...</td>

@@ -33,8 +33,8 @@ const Routes = (props) => {
         </Grid>
         <Grid item sm={3} style={{ height: '100%' }}>
           <div className="left-col">
-            <img src={`/images/logo.png`} className="logo" />
-            <div className={`round-image ${route}bg`}>{route != '' ? route.toUpperCase() : 'INFO'}</div>
+            <img src={`/images/logo.png`} className="logo" alt="logo" />
+            <div className={`round-image ${route}bg`}>{route !== '' ? route.toUpperCase() : 'INFO'}</div>
           </div>
         </Grid>
       </Grid>

@@ -16,7 +16,7 @@ export default class Registration extends Component {
             </tr>
             <tr>
               <td></td>
-              <td><input type="submit" class="btn" value=" DEPOSIT " /></td>
+              <td><input type="submit" className="btn" value=" DEPOSIT " /></td>
             </tr>
           </tbody>
         </table>

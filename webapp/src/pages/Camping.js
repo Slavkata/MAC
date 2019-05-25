@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Navigation from '../components/Navigation';
-import TentSelect from '../components/TentSelect';
 import TicketNumberInput from '../components/TicketNumberInput';
 import MapSelect from '../components/MapSelect';
 import TicketNumberInfo from '../components/TicketNumberInfo';
