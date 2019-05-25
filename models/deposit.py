@@ -11,7 +11,8 @@ class AccountDeposit(db.Model):
     amount = db.Column(db.Float)
     created_at = db.Column(db.DateTime,default=datetime.utcnow())
 
-    def __init__(self, ticket_number, amount):
+    def __init__(self, deposit_number, ticket_number, amount):
+        self.deposit_number = deposit_number
         self.ticket_number = ticket_number
         self.amount = amount
 
