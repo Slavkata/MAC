@@ -15,6 +15,7 @@ class CampingResource(Resource):
 
         try:
             spot = CampingSpots.reserve(self, data.id)
+            # change campin_spot on ticket
             return spot.serialize()
         except:
             return {'message': 'error register '}, 500

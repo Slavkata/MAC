@@ -5,13 +5,14 @@ from flask_restful import Api
 from Email.email_service import mail
 from cors_resources import cors_resources
 from models.db_init import db
+from resources.account import AccountResource
 from resources.camping import CampingResource, CampingSpotResource
+from resources.loan_item import LoanItemsResource
 from resources.reviews import ReviewsResource
 from resources.shop import ShopResource
+from resources.shop_items import ShopItemsResource
 from resources.ticket import TicketResource
 from resources.topup import TopupResource
-from resources.shop_items import ShopItemsResource
-from resources.account import AccountResource
 
 app = Flask(__name__)
 api = Api(app)
@@ -47,6 +48,8 @@ api.add_resource(ShopResource, '/shop/')
 api.add_resource(ShopItemsResource, '/shop-item/')
 
 api.add_resource(AccountResource, '/account/')
+
+api.add_resource(LoanItemsResource, '/loan/')
 
 db.init_app(app)
 mail.init_app(app)

@@ -26,3 +26,6 @@ class AccountDeposit(db.Model):
             'ticket_number': self.ticket_number,
             'amount': self.amount
         }
+
+    def Atm_deposit(self):
+        pass

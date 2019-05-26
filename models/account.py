@@ -25,6 +25,10 @@ class PaymentAccount(db.Model):
         self.balance -= amount
         db.session.commit()
 
+    def return_money(self, amount):
+        self.balance += amount
+        db.session.commit()
+
     @classmethod
     def find_by_ticket_number(cls, ticket_number):
         return cls.query.filter_by(ticket_number=ticket_number).first()
