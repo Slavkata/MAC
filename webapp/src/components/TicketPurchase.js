@@ -84,12 +84,11 @@ class TicketPurchase extends Component {
 
   fireCampingSpotsMessage = (data) => {
     MySwal.fire({
-      title: 'Would you like to reserve camping spot for the event?',
+      title: 'Reserve camping spot?',
       html: 'Having a camping spot will let you spend the night with us and skip all the check in and travelling to your place.',
       type: 'question',
       confirmButtonText: 'Yes, I want a camping spot',
       cancelButtonText: 'No, thanks',
-      cancelButtonColor: '#a50d0d',
       confirmButtonColor: '#659b26',
       showCancelButton: true,
       heightAuto: false,
@@ -106,12 +105,11 @@ class TicketPurchase extends Component {
 
   fireDepositMessage = (data) => {
     MySwal.fire({
-      title: 'Would you like to deposit money to your account?',
+      title: 'Deposit money into your account?',
       html: 'We don\'t use cash on the event. If you want to purchase something you have to have it in your cashless balance. Deposit now?',
       type: 'question',
       confirmButtonText: 'Yes, deposit',
       cancelButtonText: 'No, thanks',
-      cancelButtonColor: '#a50d0d',
       confirmButtonColor: '#659b26',
       showCancelButton: true,
       heightAuto: false,
@@ -121,6 +119,62 @@ class TicketPurchase extends Component {
         this.props.history.push(`/registration/${data[0].ticket_number}`);
       }
     })
+  }
+
+  showPaymentMessage = () => {
+    MySwal.fire({
+      title: 'Your payment info',
+      html: `
+      <h1> Price: ${this.state.people.length * ticketPrice}€</h1>
+      <div class="input-box">
+        <input type="text" placeholder="Card number">
+        <input type="text" placeholder="Card Holder Name">
+        <div class="input-box-row" style="align-items: center">
+          <input type="text" placeholder="MM" style="width: 25%">
+          <input type="text" placeholder="YY" style="width: 25%">
+          <input type="text" placeholder="CVC" style="width: 25%">
+        </div>
+      </div>
+      `,
+      type: 'info',
+      heightAuto: false,
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        console.log(this.getRequestObject());
+        return Axios.post('https://mac-cars.herokuapp.com/ticket/', this.getRequestObject())
+          .then(response => {
+            console.log('response', response);
+            return response
+          });
+      },
+      allowOutsideClick: () => !MySwal.isLoading()
+    })
+      .then(result => {
+        if (result.value) {
+          let { data } = result.value;
+          console.log('value', result.value);
+          this.fireSuccessMessage(data);
+        }
+      })
+  }
+
+  confirmPurchaseMessage = () => {
+    let peopleAsList = '';
+    this.state.people.forEach(p => { peopleAsList += '<span>' + p.firstname + ' ' + p.lastname + '</span>' });
+    let text = 'You will reserve tickets for the following <strong>' + this.state.people.length + '</strong> people <div class="dialog-list">' + peopleAsList + '</div>';
+
+    MySwal.fire({
+      title: 'Confirm purchase?',
+      html: text,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      heightAuto: false,
+
+    }).then(() => {
+      this.showPaymentMessage();
+    });
   }
 
   submit = () => {
@@ -134,36 +188,7 @@ class TicketPurchase extends Component {
       });
       return;
     }
-    let peopleAsList = '';
-    this.state.people.forEach(p => { peopleAsList += '<span>' + p.firstname + ' ' + p.lastname + '</span>' });
-    let text = 'You will reserve tickets for the following <strong>' + this.state.people.length + '</strong> people <div class="dialog-list">' + peopleAsList + '</div>';
-
-    MySwal.fire({
-      title: 'Confirm purchase?',
-      html: text,
-      inputAttributes: {
-        autocapitalize: 'off'
-      },
-      type: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Confirm',
-      showLoaderOnConfirm: true,
-      heightAuto: false,
-      preConfirm: (login) => {
-        return Axios.post('https://mac-cars.herokuapp.com/ticket/', this.getRequestObject())
-          .then(response => {
-            console.log('response', response);
-            return response
-          });
-      },
-      allowOutsideClick: () => !MySwal.isLoading()
-    }).then((result) => {
-      if (result.value) {
-        let { data } = result.value;
-        console.log('value', result.value);
-        this.fireSuccessMessage(data);
-      }
-    })
+    this.confirmPurchaseMessage();
   }
 
   render() {
