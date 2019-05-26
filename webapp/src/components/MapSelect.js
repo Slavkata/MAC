@@ -4,19 +4,18 @@ import axios from 'axios';
 
 export default class MapSelect extends Component {
 
-  regionsV2 = [
-    { id: 1, region: 'A', number: '1', reserved: false },
-    { id: 2, region: 'A', number: '2', reserved: false },
-    { id: 3, region: 'A', number: '3', reserved: false },
-    { id: 4, region: 'A', number: '4', reserved: false },
-    { id: 5, region: 'A', number: '5', reserved: true },
-    { id: 6, region: 'B', number: '1', reserved: false },
-    { id: 7, region: 'B', number: '2', reserved: false },
-    { id: 8, region: 'B', number: '3', reserved: false },
-    { id: 9, region: 'B', number: '4', reserved: false },
-    { id: 10, region: 'B', number: '5', reserved: false },
-  ]
+  state = {
+    regionsV2: []
+  }
 
+  componentDidMount() {
+    axios.get('https://mac-cars.herokuapp.com/camping/')
+      .then(result => {
+        console.log(result);
+        console.log(result.data);
+        this.setState({ regionsV2: result.data });
+      })
+  }
   mapEntry = (plot, i) => {
     let classList = ["map-entry"]
     if (this.props.selected === `${plot.region}${plot.number}`) classList.push('selected');
@@ -34,11 +33,11 @@ export default class MapSelect extends Component {
   }
 
   getMapEntries = () => {
-    return [...new Set(this.regionsV2.map(r => r.region))].map(region => {
+    return [...new Set(this.state.regionsV2.map(r => r.region))].map(region => {
       return (
         <div className={`map-region-${region.toLowerCase()}`} key={region}>
           {
-            this.regionsV2.filter(r => r.region === region).map((plot, i) => {
+            this.state.regionsV2.filter(r => r.region === region).map((plot, i) => {
               return this.mapEntry(plot, i, region);
             })
           }

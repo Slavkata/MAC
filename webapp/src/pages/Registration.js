@@ -33,9 +33,17 @@ export default class Registration extends Component {
   }
 
   submit = () => {
-    let { ticket_number: ticketNr, amount } = this.state;
-    if (!isNaN(ticketNr) && ticketNr.length === 6 && !isNaN(amount)) {
-      Axios.post('https://mac-cars.herokuapp.com/account/topup', this.state)
+    let { ticket_number, amount } = this.state;
+    let data = { ticket_number, amount };
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '* / *',
+      }
+    }
+    if (!isNaN(ticket_number) && ticket_number.length === 6 && !isNaN(amount)) {
+      Axios.post('https://mac-cars.herokuapp.com/topup', data, config)
         .then(result => {
           console.log(result);
         })

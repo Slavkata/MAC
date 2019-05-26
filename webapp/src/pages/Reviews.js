@@ -9,7 +9,7 @@ export default class Reviews extends Component {
 
     state = {
         name: '',
-        rating: 0,
+        rating: 5,
         text: '',
         reviews: [],
     }
@@ -72,6 +72,7 @@ export default class Reviews extends Component {
 
     submitReview = () => {
         if (this.state.name === '' || this.state.rating === 0 || this.state.text === '') {
+            console.log(this.state)
             console.log('error');
             console.warn('PUT FEEDBACK HERE');
         }
@@ -111,7 +112,7 @@ export default class Reviews extends Component {
                         </tr>
                         <tr>
                             <td>Rating</td>
-                            <td><select name="rating" style={{ width: '80%' }} onChange={this.handleChange}>
+                            <td><select name="rating" style={{ width: '80%' }} onChange={this.handleChange} defaultValue="5">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -121,7 +122,7 @@ export default class Reviews extends Component {
                         </tr>
                         <tr>
                             <td>Review text</td>
-                            <td><textarea name="review" style={{ width: '80%' }} onChange={this.handleChange}></textarea></td>
+                            <td><textarea name="text" style={{ width: '80%' }} onChange={this.handleChange}></textarea></td>
                         </tr>
                         <tr>
                             <td>let us know...</td>
