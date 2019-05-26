@@ -4,6 +4,7 @@ import MapSelect from '../components/MapSelect';
 import TicketNumberInfo from '../components/TicketNumberInfo';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { withRouter } from 'react-router-dom'
 
 const MySwal = withReactContent(Swal);
 
@@ -17,13 +18,6 @@ class Camping extends Component {
       image: '/images/small_tent.png',
       description: "A small red tent, placed near a toilet that will provide housing for 3 adult people."
     },
-    {
-      id: 1,
-      name: 'Big tent',
-      maxPeople: 6,
-      image: '/images/big_tent.png',
-      description: "A bigger tent that has double the space and therefore double the number of beds. Can accomodate up to 6 people."
-    }
   ]
 
   state = {
@@ -33,13 +27,23 @@ class Camping extends Component {
     errors: [],
   }
 
-  componentDidMount() {
+  getTicketNr = () => {
     const ticketNr = this.props.match.params.ticketNr;
-    console.log(ticketNr);
-    if (ticketNr !== undefined &&
+    if (
+      ticketNr !== undefined &&
       ticketNr !== null &&
       !isNaN(ticketNr) &&
-      ticketNr.length === 6) {
+      ticketNr.length === 6
+    )
+      return ticketNr;
+    else
+      return false;
+  }
+
+  componentDidMount() {
+    const ticketNr = this.getTicketNr();
+    console.log(ticketNr);
+    if (ticketNr) {
       let { people } = this.state;
       people.push(ticketNr);
       this.setState({ people, ...this.state });
@@ -135,7 +139,28 @@ class Camping extends Component {
             type: 'success',
             heightAuto: false,
           }
-        )
+        ).then(() => {
+          let ticketNr = this.getTicketNr();
+          if (ticketNr) {
+            MySwal.fire(
+              {
+                title: 'Would you like to deposit money to your account?',
+                text: 'We do not use cash at the event, so if you need to purchase anything you will need to have money deposited in your account. Do that now?',
+                type: 'question',
+                heightAuto: false,
+                confirmButtonText: 'Yes, deposit',
+                cancelButtonText: 'No, thanks',
+                cancelButtonColor: '#a50d0d',
+                confirmButtonColor: '#659b26',
+                showCancelButton: true,
+                heightAuto: false,
+              }).then(depRes => {
+                if (depRes.value) {
+                  this.props.history.push(`/deposit/${ticketNr}`);
+                }
+              });
+          }
+        });
       }
     })
   }
@@ -177,4 +202,4 @@ class Camping extends Component {
   }
 }
 
-export default Camping;
+export default withRouter(Camping);
