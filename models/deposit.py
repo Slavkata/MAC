@@ -28,5 +28,4 @@ class AccountDeposit(db.Model):
         }
 
     def Atm_deposit(self):
-        path =
         pass
