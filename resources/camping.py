@@ -45,13 +45,12 @@ class CampingSpotResource(Resource):
     parser = reqparse.RequestParser()
 
     def post(self):
-        self.parser.add_argument('ticket_number', type=int, required=True, help='ticket_number needed')
         self.parser.add_argument('name', type=str, required=True, help='name cannot be blank')
-        self.parser.add_argument('location', type=str, required=True, help='location cannot be blank')
-        self.parser.add_argument('capacity', type=int, required=True, help='capacity cannot be blank')
+        self.parser.add_argument('region', type=str, required=True, help='location cannot be blank')
+        self.parser.add_argument('number', type=int, required=True, help='capacity cannot be blank')
         self.parser.add_argument('price', type=float, required=True, help='price cannot be blank')
 
         data = self.parser.parse_args()
 
-        spot = CampingSpots(data.ticket_number, data.name, data.location, data.capacity, data.price)
+        spot = CampingSpots(data.name, data.region, data.number, data.price)
         return jsonify(spot.create())
