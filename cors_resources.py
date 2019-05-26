@@ -3,5 +3,5 @@ cors_resources = {
     r'/camping/' : {"origins": "*"},
     r'/review/' : {"origins": "*"},
     r'/account/' : {"origins": "*"},
-    r'/account/topup/' : {"origins": "*"}
+    r'/topup/' : {"origins": "*"}
 }
