@@ -36,7 +36,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = \
 api.add_resource(TicketResource, '/ticket/')
 
 #topup resources
-api.add_resource(TopupResource, '/account/')
+api.add_resource(TopupResource, '/account/topup/')
 
 #adding camping
 api.add_resource(CampingResource, '/camping/')
