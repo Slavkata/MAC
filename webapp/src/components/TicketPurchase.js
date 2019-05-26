@@ -118,7 +118,7 @@ class TicketPurchase extends Component {
 
     }).then(depRes => {
       if (depRes.value) {
-        this.props.history.push(`/deposit/${data[0].ticket_number}`);
+        this.props.history.push(`/registration/${data[0].ticket_number}`);
       }
     })
   }

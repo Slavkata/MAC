@@ -1,6 +1,50 @@
 import React, { Component } from 'react'
+import Axios from 'axios';
 
 export default class Registration extends Component {
+
+  state = {
+    ticket_number: '',
+    amount: 0,
+  }
+
+  componentDidMount() {
+    const ticketNr = this.getTicketNr();
+    if (ticketNr) {
+      this.setState({ ticket_number: ticketNr });
+    }
+  }
+
+  getTicketNr = () => {
+    const ticketNr = this.props.match.params.ticketNr;
+    if (
+      ticketNr !== undefined &&
+      ticketNr !== null &&
+      !isNaN(ticketNr) &&
+      ticketNr.length === 6
+    )
+      return ticketNr;
+    else
+      return false;
+  }
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  submit = () => {
+    let { ticket_number: ticketNr, amount } = this.state;
+    if (!isNaN(ticketNr) && ticketNr.length === 6 && !isNaN(amount)) {
+      Axios.post('https://mac-cars.herokuapp.com/account/topup', this.state)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(e => {
+          console.log('error', e);
+        })
+    }
+  }
+
   render() {
     return (
       <div>
@@ -9,15 +53,15 @@ export default class Registration extends Component {
           <tbody>
             <tr>
               <td>Ticket Number</td>
-              <td><input type="number" name="ticket-number" /></td>
+              <td><input type="number" name="ticket_number" onChange={this.handleChange} value={this.state.ticket_number} disabled={this.getTicketNr()} /></td>
             </tr>
             <tr>
               <td>Deposit Amount</td>
-              <td><input type="number" name="deposit-amount" />$</td>
+              <td><input type="number" name="amount" onChange={this.handleChange} />$</td>
             </tr>
             <tr>
               <td></td>
-              <td><input type="submit" className="btn" value=" DEPOSIT " /></td>
+              <td><input type="submit" className="btn" value=" DEPOSIT " onClick={this.submit} /></td>
             </tr>
           </tbody>
         </table>
