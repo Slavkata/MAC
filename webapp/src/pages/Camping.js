@@ -5,6 +5,7 @@ import TicketNumberInfo from '../components/TicketNumberInfo';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { withRouter } from 'react-router-dom'
+import Axios from 'axios'
 
 const MySwal = withReactContent(Swal);
 
@@ -21,6 +22,7 @@ class Camping extends Component {
   ]
 
   state = {
+    id: 1,
     tentType: 0,
     region: 'A1',
     people: [],
@@ -96,9 +98,9 @@ class Camping extends Component {
     }
   }
 
-  selectRegion = (region) => {
-    console.log(`change region to ${region}`)
-    this.setState({ region: region, errors: [] });
+  selectRegion = (region, id) => {
+    console.log(`change region to ${region} - id ${id}`)
+    this.setState({ region: region, id, errors: [] });
   }
 
   isThereRoom = () => {
@@ -107,62 +109,107 @@ class Camping extends Component {
     return currentPeople < maxPeople;
   }
 
-  submit = () => {
-    if (this.state.people.length === 0) {
-      MySwal.fire({
-        type: 'error',
-        title: 'No people added',
-        text: 'Please add people who will use the spot before reserving',
+  showSuccessMessage = () => {
+    MySwal.fire(
+      {
+        title: 'Your reservation has been made!',
+        text: 'Expect detailed information and your camping tickets delivered to your mail.',
+        type: 'success',
         heightAuto: false,
-      });
-      return;
-    }
+      }
+    ).then(() => {
+      let ticketNr = this.getTicketNr();
+      if (ticketNr) {
+        MySwal.fire(
+          {
+            title: 'Deposit money into your account?',
+            text: 'We don\'t use cash on the event. If you want to purchase something you have to have it in your cashless balance. Deposit now?',
+            type: 'question',
+            type: 'question',
+            confirmButtonText: 'Yes, deposit',
+            cancelButtonText: 'No, thanks',
+            confirmButtonColor: '#792FBA',
+            showCancelButton: true,
+            heightAuto: false,
+          }).then(depRes => {
+            if (depRes.value) {
+              this.props.history.push(`/registration/${ticketNr}`);
+            }
+          });
+      }
+    });
+  }
+
+  showNoPeopleMessage = () => {
+    MySwal.fire({
+      type: 'error',
+      title: 'No people added',
+      text: 'Please add people who will use the spot before reserving',
+      heightAuto: false,
+    });
+  }
+
+  showPaymentMessage = () => {
+    MySwal.fire({
+      title: 'Your payment info',
+      html: `
+      <h1> Price: 75€</h1>
+      <div class="input-box">
+        <input type="text" placeholder="Card number">
+        <input type="text" placeholder="Card Holder Name">
+        <div class="input-box-row" style="align-items: center">
+          <input type="text" placeholder="MM" style="width: 25%">
+          <input type="text" placeholder="YY" style="width: 25%">
+          <input type="text" placeholder="CVC" style="width: 25%">
+        </div>
+      </div>
+      `,
+      type: 'info',
+      heightAuto: false,
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonColor: '#792FBA',
+      preConfirm: () => {
+        return Axios.post('https://mac-cars.herokuapp.com/camping/', { id: this.state.id })
+          .then(response => {
+            console.log('response', response);
+            return response
+          });
+      },
+      allowOutsideClick: () => !MySwal.isLoading()
+    })
+      .then(result => {
+        if (result.value) {
+          this.showSuccessMessage();
+        }
+      })
+  }
+
+  showConfirmMessage = () => {
     let peopleAsList = '';
     this.state.people.forEach(p => { peopleAsList += '<span>' + p + '</span>' });
-    console.log(peopleAsList);
     let text = 'You will reserve spots for the following <strong>' + this.state.people.length + '</strong> people <div class="dialog-list">' + peopleAsList + '</div>';
     MySwal.fire({
-      title: 'Are you ready?',
+      title: 'Confirm reservation?',
       html: text,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#792FBA',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Comfirm',
+      confirmButtonText: 'Confirm',
       heightAuto: false,
     }).then((result) => {
       if (result.value) {
-        MySwal.fire(
-          {
-            title: 'Your reservation has been made!',
-            text: 'Expect detailed information and your camping tickets delivered to your mail.',
-            type: 'success',
-            heightAuto: false,
-          }
-        ).then(() => {
-          let ticketNr = this.getTicketNr();
-          if (ticketNr) {
-            MySwal.fire(
-              {
-                title: 'Would you like to deposit money to your account?',
-                text: 'We do not use cash at the event, so if you need to purchase anything you will need to have money deposited in your account. Do that now?',
-                type: 'question',
-                heightAuto: false,
-                confirmButtonText: 'Yes, deposit',
-                cancelButtonText: 'No, thanks',
-                cancelButtonColor: '#a50d0d',
-                confirmButtonColor: '#659b26',
-                showCancelButton: true,
-                heightAuto: false,
-              }).then(depRes => {
-                if (depRes.value) {
-                  this.props.history.push(`/deposit/${ticketNr}`);
-                }
-              });
-          }
-        });
+        this.showPaymentMessage();
       }
     })
+  }
+
+  submit = () => {
+    if (this.state.people.length === 0) {
+      this.showNoPeopleMessage();
+      return;
+    }
+    this.showConfirmMessage();
   }
 
   render() {

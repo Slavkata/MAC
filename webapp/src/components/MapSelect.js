@@ -24,7 +24,7 @@ export default class MapSelect extends Component {
     return (
       <div
         className={classListString}
-        onClick={() => this.props.onRegionChange(`${plot.region}${plot.number}`)}
+        onClick={() => this.props.onRegionChange(`${plot.region}${plot.number}`, plot.id)}
         key={i}
       >
         {plot.region}{plot.number}

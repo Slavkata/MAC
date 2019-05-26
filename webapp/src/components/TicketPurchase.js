@@ -75,7 +75,7 @@ class TicketPurchase extends Component {
         ${data.map(p => `<li>${p.firstname} ${p.lastname} #${p.ticket_number}</li>`)}
       </ul>`,
       heightAuto: false,
-
+      confirmButtonColor: '#792FBA',
     })
       .then(() => {
         this.fireCampingSpotsMessage(data);
@@ -89,7 +89,7 @@ class TicketPurchase extends Component {
       type: 'question',
       confirmButtonText: 'Yes, I want a camping spot',
       cancelButtonText: 'No, thanks',
-      confirmButtonColor: '#659b26',
+      confirmButtonColor: '#792FBA',
       showCancelButton: true,
       heightAuto: false,
 
@@ -110,7 +110,7 @@ class TicketPurchase extends Component {
       type: 'question',
       confirmButtonText: 'Yes, deposit',
       cancelButtonText: 'No, thanks',
-      confirmButtonColor: '#659b26',
+      confirmButtonColor: '#792FBA',
       showCancelButton: true,
       heightAuto: false,
 
@@ -140,6 +140,7 @@ class TicketPurchase extends Component {
       heightAuto: false,
       showCancelButton: true,
       showLoaderOnConfirm: true,
+      confirmButtonColor: '#792FBA',
       preConfirm: () => {
         console.log(this.getRequestObject());
         return Axios.post('https://mac-cars.herokuapp.com/ticket/', this.getRequestObject())
@@ -170,6 +171,7 @@ class TicketPurchase extends Component {
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Confirm',
+      confirmButtonColor: '#792FBA',
       heightAuto: false,
 
     }).then(() => {
@@ -183,6 +185,7 @@ class TicketPurchase extends Component {
         title: 'No people added',
         html: 'Please add people you want to buy tickets for, by pressing the (+) button',
         confirmButtonText: 'Okay',
+        confirmButtonColor: '#792FBA',
         type: 'error',
         heightAuto: false,
       });
