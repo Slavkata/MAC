@@ -13,7 +13,8 @@ import Reviews from '../pages/Reviews';
 
 
 const Routes = (props) => {
-  let route = props.location.pathname.substr(1);
+  let route = props.location.pathname.substr(1).split('/')[0];
+  console.log(route);
   if (route === 'admin') {
     return (
       <Route path="/admin" component={Admin} />

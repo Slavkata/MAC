@@ -150,6 +150,13 @@
   transition: 1s;
 }
 
+.map-entry.reserved {
+  background: #ccc;
+  color: rgb(121, 121, 121);
+  font-weight: 200;
+  cursor: not-allowed;
+}
+
 .tent-type-box {
   display: flex;
   flex-direction: row;
