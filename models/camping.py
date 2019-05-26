@@ -38,6 +38,10 @@ class CampingSpots(db.Model):
         db.session.commit()
         return self.serialize()
 
+    @classmethod
+    def get_by_id(cls, id):
+        return cls.query.get(id)
+
     def serialize(self):
         return {
             'id': self.id,

@@ -17,3 +17,14 @@ def ticket_message(recipient, ticket_number):
 
     message.attach(filename=filename, content_type='application/pdf', data=data)
     mail.send(message)
+
+
+def camping_message(recipient, camping_spot):
+    message = Message(subject="MAC Camping Spots", recipients=[recipient], body=
+    '''Greetings,
+    you have been invited to this camping spot: {0} 
+    Best Regards,
+    MAC team'''.format(camping_spot)
+                      , sender='slavkirilov00@gmail.com')
+
+    mail.send(message)

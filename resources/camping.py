@@ -1,6 +1,10 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
+
+from Email import email_service
 from models.camping import CampingSpots
+from models.ticket import Ticket
+
 
 class CampingResource(Resource):
     parser = reqparse.RequestParser()
@@ -20,6 +24,20 @@ class CampingResource(Resource):
             return jsonify(CampingSpots.get_free_spots(self))
         except:
             return {"message": "error"}, 404
+
+    def put(self):
+        # inviting people to camp spot of ticket_number
+        self.parser.add_argument('id', type=int, required=True)
+        self.parser.add_argument('ticket_number', type=int, required=True, action='append')
+        data = self.parser.parse_args()
+
+        spot = CampingSpots.get_by_id(data.id)
+
+        for i in range(len(data.ticket_number)):
+            temp_ticket = Ticket.find_by_ticket_number(data.ticket_number[i])
+            temp_ticket.join_camping_spot(data.id)
+            # email with invite
+            email_service.camping_message(temp_ticket.email, camping_spot=spot.name)
 
 
 class CampingSpotResource(Resource):

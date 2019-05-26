@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from models.db_init import db
+
 
 class Ticket(db.Model):
     #
@@ -14,9 +16,10 @@ class Ticket(db.Model):
     age =  db.Column(db.Integer,nullable=False)
     status = db.Column(db.Boolean,nullable=False,default=False)
     price = db.Column(db.Float(precision=2),nullable=False)
+    camping_spot = db.Column(db.ForeignKey('campingspot.id'), nullable=True)
     created_at = db.Column(db.DateTime,default=datetime.utcnow())
 
-    def __init__(self,ticket_number,firstname,lastname,email,age,price):
+    def __init__(self, ticket_number, firstname, lastname, email, age, price):
         self.ticket_number = ticket_number
         self.firstname = firstname
         self.lastname = lastname
@@ -32,6 +35,10 @@ class Ticket(db.Model):
 
     def delete_from_db(self):
         db.session.delete(self)
+        db.session.commit()
+
+    def join_camping_spot(self, camping_spot):
+        self.camping_spot = camping_spot
         db.session.commit()
 
     @classmethod
@@ -57,7 +64,7 @@ class TicketCheckInHistory(db.Model):
     #Make sure to provide a default value when changing from nullable=False to nullable=True
     #
     __tablename__ = 'ticket_histories'
-
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     ticket_number = db.Column(db.ForeignKey('tickets.ticket_number'))
     prev_status = db.Column(db.Boolean,nullable=False,default=False)
