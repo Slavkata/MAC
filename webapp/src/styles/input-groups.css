@@ -40,6 +40,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
 }
 
 input[type=text], input[type=number], input[type=email], input[type=password], textarea, select {
@@ -56,7 +58,7 @@ input[type=text], input[type=number], input[type=email], input[type=password], t
 
 input[type=text]:hover, input[type=number]:hover, input[type=email]:hover, input[type=password]:hover, textarea:hover, select:hover {
   box-shadow: 0px 3px 5px #ccc;
-  top: -4px;
+  top: -2px;
 }
 
 input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus, textarea:focus, select:focus {
@@ -67,8 +69,8 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
 
 .round-but {
   border-radius: 100%;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   color: white;
   text-shadow: 1px 1px 0px #222;
   border: none;
@@ -78,10 +80,10 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
   box-shadow: 0px 1px 2px #999;
   margin-left: 2px;
   outline: none;
+  transition: 0.3s;
 }
 
 .round-but:hover:enabled {
-  transition: 0.3s;
   background-position: 30px;
   cursor: pointer;
   transform: scale(1.1);
@@ -102,7 +104,7 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
 }
 
 .btn {
-  background-image: linear-gradient(to right bottom, #5F2E8B 20%, #792FBA 50%);
+  background-image: linear-gradient(to right bottom, #5F2E8B 20%, rgb(165, 97, 224) 50%);
   background-size: 1px 200px;
   border: none;
   border-radius: 10px;
@@ -114,6 +116,8 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
   font-size: 12pt;
   box-shadow: 0px 1px 1px #999;
   outline: none;
+  text-decoration: none;
+  transition: 0.5s;
 }
 
 .btn.small {
@@ -124,7 +128,6 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
 
 .btn:hover {
   background-position: 200px;
-  transition: 0.5s;
   cursor: pointer;
 }
 

@@ -53,8 +53,8 @@ export default class PersonInput extends Component {
       <div className={`input-box slide-down col ${this.props.focused ? 'focused' : 'minimised'}`}>
         <div className="control-buttons">
           <div className="title">
-            {this.state.hideSetButton && <img src="https://img.icons8.com/flat_round/24/000000/checkmark.png" />}
-            {!this.state.hideSetButton && <img src="https://img.icons8.com/color/48/000000/high-priority.png" width="24px" />}
+            {this.state.hideSetButton && <img src="https://img.icons8.com/flat_round/24/000000/checkmark.png" alt="confirmed" />}
+            {!this.state.hideSetButton && <img src="https://img.icons8.com/color/48/000000/high-priority.png" width="24px" alt="not-saved" />}
             <div style={{ marginLeft: '1rem' }}>{`${this.state.firstname} ${this.state.lastname}`} </div>
           </div>
           <div>

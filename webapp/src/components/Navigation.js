@@ -39,6 +39,12 @@ class Navigation extends Component {
       case '/camping':
         activePage = 2;
         break;
+      case '/pre-camping':
+        activePage = 2;
+        break;
+      case '/add-camping':
+        activePage = 2;
+        break;
       case '/registration':
         activePage = 3;
         break;
@@ -105,7 +111,7 @@ class Navigation extends Component {
             </Link>
             </div>
             <div ref={this.links[2]}>
-              <Link to="/camping"
+              <Link to="/pre-camping"
                 onMouseEnter={this.handleHover(2)}
                 onMouseLeave={this.handleExitHover}
                 onClick={() => this.setActivePage(2)}
@@ -138,7 +144,7 @@ class Navigation extends Component {
           <div className="close-nav" onClick={this.closeMobileNav}></div>
           <Link to="/">Home</Link>
           <Link to="/tickets">Tickets</Link>
-          <Link to="/camping">Camping</Link>
+          <Link to="/pre-camping">Camping</Link>
           <Link to="/registration">My registration</Link>
           <Link to="/reviews">Reviews</Link>
         </nav>

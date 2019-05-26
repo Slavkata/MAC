@@ -10,10 +10,13 @@ import Information from '../pages/Information';
 import Navigation from '../components/Navigation';
 import Admin from '../pages/Admin';
 import Reviews from '../pages/Reviews';
+import CampingPrePage from '../components/CampingPrePage';
+import CampingAddPeople from '../components/CampingAddPeople';
 
 
 const Routes = (props) => {
-  let route = props.location.pathname.substr(1).split('/')[0];
+  let preRoute = props.location.pathname.substr(1).split('/')[0].split('-');
+  let route = preRoute[preRoute.length - 1];
   console.log(route);
   if (route === 'admin') {
     return (
@@ -28,6 +31,8 @@ const Routes = (props) => {
           <Route path="/registration/:ticketNr?" component={Registration} />
           <Route path="/tickets" component={Tickets} />
           <Route path="/camping/:ticketNr?" component={Camping} />
+          <Route path="/pre-camping" component={CampingPrePage} />
+          <Route path="/add-camping" component={CampingAddPeople} />
           <Route path="/reviews" component={Reviews} />
           <Route exact path="/" component={Information} />
           <div className="car-vector"></div>
