@@ -3,6 +3,10 @@ from flask_restful import Resource, reqparse
 
 from models.account import PaymentAccount
 from models.loan_item import LoanItem
+from models.loan_history import  LoanHistory
+
+
+from models.loan_history import LoanHistory
 
 
 class LoanItemsResource(Resource):
@@ -28,10 +32,10 @@ class LoanItemsResource(Resource):
         self.parser.add_argument('category', type=str)
         self.parser.add_argument('price', type=float)
         self.parser.add_argument('shop', type=int)
-        self.parser.add_argument('left', type=int)
+        self.parser.add_argument('quantity', type=int)
         data = self.parser.parse_args()
 
-        shop_item = LoanItem(data.name, data.category, data.price, data.shop, data.left)
+        shop_item = LoanItem(data.name, data.category, data.price, data.shop, data.quantity)
         shop_item.create()
         return jsonify(shop_item.serialize())
 
@@ -44,16 +48,22 @@ class LoanItemsResource(Resource):
         for i in range(len(data.id)):
             loan_item = LoanItem.get_by_id(data.id[i])
             client = PaymentAccount.find_by_ticket_number(data.ticket_number)
-            loan_item.loan(data.ticket_number)
+            loan_record = LoanHistory(data.ticket_number,data.id[i])
+            loan_record.create()
+            return loan_record.serialize();
+
+
+            loan_item.loan()
             client.deduce(loan_item.price)
+        return  {"message":"Just bring it back after"},201
 
     def delete(self):
         self.parser.add_argument('id', type=int, action='append')
-        self.parser.add_argument('ticket_number', type=int)
+        #self.parser.add_argument('ticket_number', type=int)
         data = self.parser.parse_args()
-
         for i in range(len(data.id)):
-            loan_item = LoanItem.get_by_id(data.id[i])
-            client = PaymentAccount.find_by_ticket_number(data.ticket_number)
-            loan_item.return_item()
+            loan_history = LoanHistory.get_by_id(data.id[i])
+            client = PaymentAccount.find_by_ticket_number(loan_history.get_ticket_number())
+            loan_item = LoanItem.get_by_id(loan_history.get_item_number())
+            loan_history.return_item(loan_history.get_item_number())
             client.return_money(loan_item.price)

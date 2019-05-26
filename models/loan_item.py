@@ -43,16 +43,9 @@ class LoanItem(db.Model):
     def get_by_shop(cls, shop):
         return cls.query.filter_by(shop=shop)
 
-    def loan(self, ticket_number):
-        self.ticket_number = ticket_number
-        self.left -= 1
+    def loan(self):
+        self.quantity -= 1
         db.session.commit()
-
-    def return_item(self):
-        self.ticket_number = None
-        self.left += 1
-        db.session.commit()
-
     def serialize(self):
         return {
             'id': self.id,
@@ -60,5 +53,4 @@ class LoanItem(db.Model):
             'category': self.category,
             'price': self.price,
             'quantity': self.quantity,
-            'ticket_number': self.ticket_number
         }
