@@ -4,6 +4,7 @@ export default class Registration extends Component {
   render() {
     return (
       <div>
+        <h1 style={{ width: '60%', margin: '0 auto' }}>Deposit money to your account</h1>
         <table style={{ width: '60%', margin: '0 auto' }}>
           <tbody>
             <tr>

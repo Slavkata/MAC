@@ -209,6 +209,12 @@ cite .rating-stars {
   margin-left: 20px;
 }
 
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 @keyframes slide-down {
   0% {
     opacity: 0;

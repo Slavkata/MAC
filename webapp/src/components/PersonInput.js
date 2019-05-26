@@ -13,6 +13,7 @@ export default class PersonInput extends Component {
 
   state = {
     errors: [],
+    hideSetButton: false,
     firstname: 'Person',
     lastname: 'Name',
     email: 'blank@gmail.com',
@@ -20,7 +21,7 @@ export default class PersonInput extends Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value, hideSetButton: false }, console.log(this.state));
   }
 
   updatePerson = () => {
@@ -40,9 +41,9 @@ export default class PersonInput extends Component {
     }
     if (errors.length === 0) {
       this.props.onUpdate(data);
-      this.setState({ errors: [], added: true });
+      this.setState({ errors: [], hideSetButton: true });
     } else {
-      this.setState({ errors: errors });
+      this.setState({ errors: errors, hideSetButton: false });
       console.log(data);
     }
   }
@@ -51,7 +52,11 @@ export default class PersonInput extends Component {
     return (
       <div className={`input-box slide-down col ${this.props.focused ? 'focused' : 'minimised'}`}>
         <div className="control-buttons">
-          <div className="title">{`${this.state.firstname} ${this.state.lastname}`}</div>
+          <div className="title">
+            {this.state.hideSetButton && <img src="https://img.icons8.com/flat_round/24/000000/checkmark.png" />}
+            {!this.state.hideSetButton && <img src="https://img.icons8.com/color/48/000000/high-priority.png" width="24px" />}
+            <div style={{ marginLeft: '1rem' }}>{`${this.state.firstname} ${this.state.lastname}`} </div>
+          </div>
           <div>
             <button className="round-but edit-but" onClick={this.props.onEdit} disabled={this.props.focused}> ✎ </button>
             <CloseButton onRemove={this.props.onRemove} allowRemove={true} />
@@ -66,7 +71,7 @@ export default class PersonInput extends Component {
             this.state.errors.map((err, i) => (<span className="error-msg" key={i}> {err} </span>))
           }
           <div className="button-group-right">
-            <button className="btn" onClick={this.updatePerson}> SET </button>
+            <button className="btn" onClick={this.updatePerson} style={{ display: this.state.hideSetButton ? 'none' : 'block' }}> SET </button>
           </div>
         </div>
       </div>

@@ -74,6 +74,8 @@ class TicketPurchase extends Component {
       <ul>
         ${data.map(p => `<li>${p.firstname} ${p.lastname} #${p.ticket_number}</li>`)}
       </ul>`,
+      heightAuto: false,
+
     })
       .then(() => {
         this.fireCampingSpotsMessage(data);
@@ -84,11 +86,14 @@ class TicketPurchase extends Component {
     MySwal.fire({
       title: 'Would you like to reserve camping spot for the event?',
       html: 'Having a camping spot will let you spend the night with us and skip all the check in and travelling to your place.',
+      type: 'question',
       confirmButtonText: 'Yes, I want a camping spot',
       cancelButtonText: 'No, thanks',
       cancelButtonColor: '#a50d0d',
       confirmButtonColor: '#659b26',
       showCancelButton: true,
+      heightAuto: false,
+
     })
       .then(campRes => {
         if (campRes.value) {
@@ -103,11 +108,14 @@ class TicketPurchase extends Component {
     MySwal.fire({
       title: 'Would you like to deposit money to your account?',
       html: 'We don\'t use cash on the event. If you want to purchase something you have to have it in your cashless balance. Deposit now?',
+      type: 'question',
       confirmButtonText: 'Yes, deposit',
       cancelButtonText: 'No, thanks',
       cancelButtonColor: '#a50d0d',
       confirmButtonColor: '#659b26',
       showCancelButton: true,
+      heightAuto: false,
+
     }).then(depRes => {
       if (depRes.value) {
         this.props.history.push(`/deposit/${data[0].ticket_number}`);
@@ -116,6 +124,16 @@ class TicketPurchase extends Component {
   }
 
   submit = () => {
+    if (this.state.people.length === 0) {
+      MySwal.fire({
+        title: 'No people added',
+        html: 'Please add people you want to buy tickets for, by pressing the (+) button',
+        confirmButtonText: 'Okay',
+        type: 'error',
+        heightAuto: false,
+      });
+      return;
+    }
     let peopleAsList = '';
     this.state.people.forEach(p => { peopleAsList += '<span>' + p.firstname + ' ' + p.lastname + '</span>' });
     let text = 'You will reserve tickets for the following <strong>' + this.state.people.length + '</strong> people <div class="dialog-list">' + peopleAsList + '</div>';
@@ -126,9 +144,11 @@ class TicketPurchase extends Component {
       inputAttributes: {
         autocapitalize: 'off'
       },
+      type: 'question',
       showCancelButton: true,
       confirmButtonText: 'Confirm',
       showLoaderOnConfirm: true,
+      heightAuto: false,
       preConfirm: (login) => {
         return Axios.post('https://mac-cars.herokuapp.com/ticket/', this.getRequestObject())
           .then(response => {
@@ -150,6 +170,8 @@ class TicketPurchase extends Component {
     return (
       <Fragment>
         <div className="button-group-right">
+          <h1 style={{ width: '80%', margin: '0 auto' }}>Purchase Tickets</h1>
+
           <span className="text-purple mr-1">Tickets: {this.state.people.length}</span>
           <button className="btn" onClick={this.addPerson} style={{ transform: 'scale(0.5)', padding: '20px', 'fontSize': '20pt' }}> + </button>
         </div>
