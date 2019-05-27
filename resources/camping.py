@@ -27,6 +27,7 @@ class CampingResource(Resource):
             return {"message": "error"}, 404
 
     def put(self):
+        #should return a resonable value
         # inviting people to camp spot of ticket_number
         self.parser.add_argument('id', type=int, required=True)
         self.parser.add_argument('ticket_number', type=int, required=True, action='append')
@@ -43,7 +44,6 @@ class CampingResource(Resource):
 
 class CampingSpotResource(Resource):
     parser = reqparse.RequestParser()
-
     def post(self):
         self.parser.add_argument('name', type=str, required=True, help='name cannot be blank')
         self.parser.add_argument('region', type=str, required=True, help='location cannot be blank')

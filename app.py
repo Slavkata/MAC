@@ -16,7 +16,7 @@ from resources.topup import TopupResource
 from resources.atm import AtmDepositResource
 app = Flask(__name__)
 api = Api(app)
-cors = CORS(app, methods=['POST'], resources=cors_resources)
+cors = CORS(app, methods=['POST', 'OPTIONS'], resources=cors_resources)
 
 app.secret_key = 'blablaabla'
 
@@ -36,7 +36,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = \
 api.add_resource(TicketResource, '/ticket/')
 
 #topup resources
-api.add_resource(TopupResource, '/account/')
+api.add_resource(TopupResource, '/topup/')
+api.add_resource(AccountResource, '/account/')
 
 #adding camping
 api.add_resource(CampingResource, '/camping/')
@@ -46,8 +47,6 @@ api.add_resource(ReviewsResource, '/review/')
 
 api.add_resource(ShopResource, '/shop/')
 api.add_resource(ShopItemsResource, '/shop-item/')
-
-api.add_resource(AccountResource, '/account/')
 
 api.add_resource(LoanItemsResource, '/loan/')
 api.add_resource(AtmDepositResource, '/atm/')

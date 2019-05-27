@@ -8,15 +8,14 @@ class LoanItem(db.Model):
     category = db.Column(db.String(20), nullable=False)
     price = db.Column(db.Float, nullable=False)
     shop = db.Column(db.ForeignKey('shops.id'), nullable=False)
-    left = db.Column(db.Integer, nullable=False)
-    ticket_number = db.Column(db.ForeignKey('tickets.ticket_number'), nullable=True)
+    quantity = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, name, category, price, shop, left):
+    def __init__(self, name, category, price, shop,quantity):
         self.name = name
         self.category = category
         self.price = price
         self.shop = shop
-        self.left = left
+        self.quantity = quantity
 
     def create(self):
         db.session.add(self)
@@ -44,22 +43,14 @@ class LoanItem(db.Model):
     def get_by_shop(cls, shop):
         return cls.query.filter_by(shop=shop)
 
-    def loan(self, ticket_number):
-        self.ticket_number = ticket_number
-        self.left -= 1
+    def loan(self):
+        self.quantity -= 1
         db.session.commit()
-
-    def return_item(self):
-        self.ticket_number = None
-        self.left += 1
-        db.session.commit()
-
     def serialize(self):
         return {
             'id': self.id,
             'name': self.name,
             'category': self.category,
             'price': self.price,
-            'left': self.left,
-            'ticket_number': self.ticket_number
+            'quantity': self.quantity,
         }
