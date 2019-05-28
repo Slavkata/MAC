@@ -60,7 +60,7 @@ class ShoppingCart extends React.Component {
                       />
                     </TableCell>
                     <TableCell>
-                      <IconButton color="secondary" aria-label="Remove from shopping cart">
+                      <IconButton color="secondary" aria-label="Remove from shopping cart" onClick={() => this.props.onRemove(item.id)}>
                         <CloseIcon />
                       </IconButton>
                     </TableCell>

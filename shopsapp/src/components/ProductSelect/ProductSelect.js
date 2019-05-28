@@ -50,6 +50,13 @@ class ProductSelect extends React.Component {
     this.setState({ inCart })
   }
 
+  removeFromCart = (itemId) => {
+    let { inCart } = this.state;
+    let index = inCart.findIndex(item => item.id === itemId);
+    inCart.splice(index, 1);
+    this.setState({ inCart });
+  }
+
   render() {
     return (
       <div className="container">
@@ -62,6 +69,7 @@ class ProductSelect extends React.Component {
           inCart={this.state.inCart}
           onIncreaseQuantity={this.increaseQuantity}
           onDecreaseQuantity={this.decreaseQuantity}
+          onRemove={this.removeFromCart}
           total={this.state.inCart.reduce((sum, curr) => sum += curr.price * curr.quantity, 0)}
         />
       </div>
