@@ -29,6 +29,11 @@ class ProductSelect extends React.Component {
 
   onItemAdd = (itemId) => {
     let { available, inCart } = this.state;
+    let inCartItem = inCart.find(item => item.id === itemId);
+    if (inCartItem !== null && inCartItem !== undefined) {
+      this.increaseQuantity(itemId);
+      return;
+    }
     let item = available.find(item => item.id === itemId);
     inCart.push({ ...item, quantity: 1 });
     this.setState({ inCart });
@@ -57,6 +62,15 @@ class ProductSelect extends React.Component {
     this.setState({ inCart });
   }
 
+  clearCart = () => {
+    this.setState({ inCart: [] })
+  }
+
+  submitOrder = () => {
+    alert('Submit');
+    console.log('submit');
+  }
+
   render() {
     return (
       <div className="container">
@@ -70,6 +84,8 @@ class ProductSelect extends React.Component {
           onIncreaseQuantity={this.increaseQuantity}
           onDecreaseQuantity={this.decreaseQuantity}
           onRemove={this.removeFromCart}
+          onClear={this.clearCart}
+          onSubmit={this.submitOrder}
           total={this.state.inCart.reduce((sum, curr) => sum += curr.price * curr.quantity, 0)}
         />
       </div>

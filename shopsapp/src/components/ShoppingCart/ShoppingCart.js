@@ -8,23 +8,6 @@ import QuantityInput from './QuantityInput';
 import CartFooter from './CartFooter';
 
 class ShoppingCart extends React.Component {
-
-
-  handleAdd = (item) => {
-    let { cart } = this.state;
-    let itemInCart = cart.find(i => i.name === item.name);
-    itemInCart.quantity++;
-    this.setState({ cart })
-  }
-
-  handleRemove = (item) => {
-    let { cart } = this.state;
-    let itemInCart = cart.find(i => i.name === item.name);
-    if (itemInCart.quantity <= 1) return;
-    itemInCart.quantity--;
-    this.setState({ cart })
-  }
-
   render() {
     let { inCart } = this.props;
     return (
@@ -72,8 +55,8 @@ class ShoppingCart extends React.Component {
         </div>
         <CartFooter
           total={this.props.total}
-          onClear={this.clearCart}
-          onSubmit={this.submit}
+          onClear={this.props.onClear}
+          onSubmit={this.props.onSubmit}
         />
       </div>
     )
