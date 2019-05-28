@@ -1,20 +1,32 @@
 import React from 'react'
 import QRReader from '../QRReader/QRReader';
-import { Table, TableBody, TableRow, TableCell, AppBar, Toolbar, Typography, IconButton, Button, TableHead } from '@material-ui/core';
+import { Table, TableBody, TableRow, TableCell, AppBar, Toolbar, Typography, IconButton, TableHead } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CheckIcon from '@material-ui/icons/CheckCircle';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+
+
+import QuantityInput from './QuantityInput';
+import CartFooter from './CartFooter';
 
 class ShoppingCart extends React.Component {
-  state = {
-    cart: [
-      { name: 'Coca Cola', price: 2.99 }
-    ]
+
+
+  handleAdd = (item) => {
+    let { cart } = this.state;
+    let itemInCart = cart.find(i => i.name === item.name);
+    itemInCart.quantity++;
+    this.setState({ cart })
+  }
+
+  handleRemove = (item) => {
+    let { cart } = this.state;
+    let itemInCart = cart.find(i => i.name === item.name);
+    if (itemInCart.quantity <= 1) return;
+    itemInCart.quantity--;
+    this.setState({ cart })
   }
 
   render() {
+    let { inCart } = this.props;
     return (
       <div className="container-cart">
         <AppBar position="static" color="secondary">
@@ -34,46 +46,35 @@ class ShoppingCart extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell>Coca cola</TableCell>
-                <TableCell>2.99$</TableCell>
-                <TableCell>
-                  <div class="flex-row-center">
-                    <input type="text" className="quantity" value={1} />
-                    <div className="quantity-buttons">
-                      <IconButton aria-label="Delete" size="small">
-                        <AddIcon fontSize="inherit" />
+              {
+                inCart.map(item => (
+                  <TableRow key={item.id}>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.price}$</TableCell>
+                    <TableCell>
+                      <QuantityInput
+                        quantity={item.quantity}
+                        onAdd={this.props.onIncreaseQuantity}
+                        onRemove={this.props.onDecreaseQuantity}
+                        item={item}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <IconButton color="secondary" aria-label="Remove from shopping cart">
+                        <CloseIcon />
                       </IconButton>
-                      <IconButton aria-label="Delete" size="small">
-                        <RemoveIcon fontSize="inherit" />
-                      </IconButton>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <IconButton color="secondary" aria-label="Remove from shopping cart">
-                    <CloseIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
+                    </TableCell>
+                  </TableRow>
+                ))
+              }
             </TableBody>
           </Table>
         </div>
-        <div>
-          <div className="cart-sum">
-            <div>Total: <b>2.99$</b></div>
-          </div>
-          <div className="flex-row-center cart-buttons">
-            <Button variant="contained" color="secondary">
-              <DeleteIcon />
-              Clear Cart
-            </Button>
-            <Button variant="contained" color="primary">
-              <CheckIcon />
-              Proceed to payment
-            </Button>
-          </div>
-        </div>
+        <CartFooter
+          total={this.props.total}
+          onClear={this.clearCart}
+          onSubmit={this.submit}
+        />
       </div>
     )
   }

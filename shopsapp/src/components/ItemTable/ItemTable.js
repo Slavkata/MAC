@@ -11,29 +11,17 @@ import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 class ItemTable extends React.Component {
-  state = {
-    items: [
-      { name: 'Coca Cola', price: '2.99$' },
-      { name: 'Chio Chips', price: '6.99$' },
-      { name: 'French Fries', price: '8.99$' },
-    ],
-    filtered: [],
-  }
-
-  componentDidMount() {
-    this.setState({ filtered: this.state.items });
-  }
 
 
-  filter = (e) => {
-    const cleaned = (string) => {
-      return string.toLowerCase().split(' ').join('');
-    }
 
-    let { value } = e.target;
-    this.setState({ filtered: this.state.items.filter(item => cleaned(item.name).includes(cleaned(value))) });
+
+
+
+  addToCart = (item) => {
+    ShoppingCart.addToCart(item);
   }
 
   render() {
@@ -46,7 +34,7 @@ class ItemTable extends React.Component {
             </Typography>
             <div className="filter-box">
               <SearchIcon />
-              <input type="text" className="filter-products" placeholder="Product name..." onChange={this.filter} />
+              <input type="text" className="filter-products" placeholder="Product name..." onChange={this.props.onFilterChange} />
             </div>
           </Toolbar>
         </AppBar>
@@ -59,14 +47,14 @@ class ItemTable extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.state.filtered.map(row => (
-              <TableRow key={row.name}>
+            {this.props.filtered.map(item => (
+              <TableRow key={item.name}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {item.name}
                 </TableCell>
-                <TableCell align="right">{row.price}</TableCell>
+                <TableCell align="right">{item.price}</TableCell>
                 <TableCell align="right">
-                  <IconButton color="primary" aria-label="Add to shopping cart">
+                  <IconButton color="primary" aria-label="Add to shopping cart" onClick={() => this.props.onItemAdd(item.id)}>
                     <AddShoppingCartIcon />
                   </IconButton>
                 </TableCell>
