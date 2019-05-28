@@ -59,15 +59,20 @@ class ShoppingCart extends React.Component {
             </TableBody>
           </Table>
         </div>
-        <div class="flex-row-center">
-          <Button variant="contained" color="secondary">
-            <DeleteIcon />
-            Clear Cart
-        </Button>
-          <Button variant="contained" color="primary">
-            <CheckIcon />
-            Proceed to payment
-        </Button>
+        <div>
+          <div className="cart-sum">
+            <div>Total: <b>2.99$</b></div>
+          </div>
+          <div className="flex-row-center cart-buttons">
+            <Button variant="contained" color="secondary">
+              <DeleteIcon />
+              Clear Cart
+            </Button>
+            <Button variant="contained" color="primary">
+              <CheckIcon />
+              Proceed to payment
+            </Button>
+          </div>
         </div>
       </div>
     )
