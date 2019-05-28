@@ -1,30 +1,15 @@
-
 from models.deposit import AccountDeposit
 
 
-
-def main():
-	f = open("/Users/aimet/Desktop/deposit.txt", "r")
-	t = f.read()
-	f.close()
-	name = t.split('\n')
+def deposit(file):
+    print(file)
+    name = file.splitlines()
+    print(name)
 	ticket_number = name[4:]
-	dticket = ""
-	damount = ""
-	i = 0
-	while i < len(ticket_number):
-		new = ticket_number[i].split(' ')
-		dticket = new[0]
-		damount = new[1]
-		AccountDeposit(dticket, damount)
-		i += 1
+    print(ticket_number)
 
-
-'''
-def deposit():
-    filename = './Atmlogs' + ticket_number.__str__() + '.txt'
-
-    for f in range(len(filename)):
-        name = 
-
-'''
+    for i in range(int(name[3])):
+        new = ticket_number[i].split(b' ')
+        dticket = new[0].strip()
+        damount = new[1].strip()
+        AccountDeposit(int(dticket), float(damount)).save_to_db()

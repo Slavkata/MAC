@@ -6,6 +6,7 @@ from Email.email_service import mail
 from cors_resources import cors_resources
 from models.db_init import db
 from resources.account import AccountResource
+from resources.atm import AtmDepositResource
 from resources.camping import CampingResource, CampingSpotResource
 from resources.loan_item import LoanItemsResource
 from resources.reviews import ReviewsResource
@@ -13,7 +14,7 @@ from resources.shop import ShopResource
 from resources.shop_items import ShopItemsResource
 from resources.ticket import TicketResource
 from resources.topup import TopupResource
-from resources.atm import AtmDepositResource
+
 app = Flask(__name__)
 api = Api(app)
 cors = CORS(app, methods=['POST', 'OPTIONS'], resources=cors_resources)
@@ -50,8 +51,6 @@ api.add_resource(ShopItemsResource, '/shop-item/')
 
 api.add_resource(LoanItemsResource, '/loan/')
 api.add_resource(AtmDepositResource, '/atm/')
-
-
 
 
 db.init_app(app)
