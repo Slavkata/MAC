@@ -28,8 +28,12 @@ class ItemTable extends React.Component {
 
 
   filter = (e) => {
+    const cleaned = (string) => {
+      return string.toLowerCase().split(' ').join('');
+    }
+
     let { value } = e.target;
-    this.setState({ filtered: this.state.items.filter(item => item.name.includes(value)) });
+    this.setState({ filtered: this.state.items.filter(item => cleaned(item.name).includes(cleaned(value))) });
   }
 
   render() {

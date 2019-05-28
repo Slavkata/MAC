@@ -1,9 +1,11 @@
 import React from 'react'
 import QRReader from '../QRReader/QRReader';
-import { Table, TableBody, TableRow, TableCell, AppBar, Toolbar, Typography, IconButton, Button } from '@material-ui/core';
+import { Table, TableBody, TableRow, TableCell, AppBar, Toolbar, Typography, IconButton, Button, TableHead } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/CheckCircle';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 class ShoppingCart extends React.Component {
   state = {
@@ -23,10 +25,31 @@ class ShoppingCart extends React.Component {
         </AppBar>
         <div className="cart-list">
           <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Product</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell>Quantity</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
             <TableBody>
               <TableRow>
                 <TableCell>Coca cola</TableCell>
                 <TableCell>2.99$</TableCell>
+                <TableCell>
+                  <div class="flex-row-center">
+                    <input type="text" className="quantity" value={1} />
+                    <div className="quantity-buttons">
+                      <IconButton aria-label="Delete" size="small">
+                        <AddIcon fontSize="inherit" />
+                      </IconButton>
+                      <IconButton aria-label="Delete" size="small">
+                        <RemoveIcon fontSize="inherit" />
+                      </IconButton>
+                    </div>
+                  </div>
+                </TableCell>
                 <TableCell>
                   <IconButton color="secondary" aria-label="Remove from shopping cart">
                     <CloseIcon />
@@ -37,13 +60,13 @@ class ShoppingCart extends React.Component {
           </Table>
         </div>
         <div class="flex-row-center">
-        <Button variant="contained" color="secondary">
-          <DeleteIcon />
-          Clear Cart
+          <Button variant="contained" color="secondary">
+            <DeleteIcon />
+            Clear Cart
         </Button>
-        <Button variant="contained" color="primary">
-          <CheckIcon />
-          Proceed to payment
+          <Button variant="contained" color="primary">
+            <CheckIcon />
+            Proceed to payment
         </Button>
         </div>
       </div>
