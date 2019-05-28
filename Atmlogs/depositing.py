@@ -5,7 +5,7 @@ def deposit(file):
     print(file)
     name = file.splitlines()
     print(name)
-	ticket_number = name[4:]
+    ticket_number = name[4:]
     print(ticket_number)
 
     for i in range(int(name[3])):
