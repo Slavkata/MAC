@@ -4,8 +4,11 @@
   "private": true,
   "main": "Main.js",
   "dependencies": {
+    "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-qr-reader": "^2.2.1",
     "react-scripts": "3.0.1"
   },
   "scripts": {

@@ -1,24 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import QRReader from './components/QRReader/QRReader';
+import ShopNumberInput from './components/ShopNumberInput/ShopNumberInput';
+import ItemTable from './components/ItemTable/ItemTable';
+import ShoppingCart from './components/ShoppingCart/ShoppingCart';
+
+import './index.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ShopNumberInput />
+      <div className="container">
+        <ItemTable />
+        <ShoppingCart />
+      </div>
     </div>
   );
 }
