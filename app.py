@@ -6,6 +6,7 @@ from Email.email_service import mail
 from cors_resources import cors_resources
 from models.db_init import db
 from resources.account import AccountResource
+from resources.atm import AtmDepositResource
 from resources.camping import CampingResource, CampingSpotResource
 from resources.loan_item import LoanItemsResource
 from resources.reviews import ReviewsResource
@@ -49,6 +50,8 @@ api.add_resource(ShopResource, '/shop/')
 api.add_resource(ShopItemsResource, '/shop-item/')
 
 api.add_resource(LoanItemsResource, '/loan/')
+api.add_resource(AtmDepositResource, '/atm/')
+
 
 db.init_app(app)
 mail.init_app(app)

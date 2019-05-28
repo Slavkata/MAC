@@ -26,5 +26,3 @@ class AccountDeposit(db.Model):
             'amount': self.amount
         }
 
-    def Atm_deposit(self):
-        pass
