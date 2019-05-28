@@ -1,8 +1,14 @@
+html, #root, .App {
+  height: 1000px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 1000px;
+  overflow: hidden;
 }
 
 code {
@@ -13,16 +19,26 @@ code {
   display: flex;
   flex-direction: row;
   width: 1300px;
+  height: 910px;
 }
 
 .container-cart {
   width: 500px;
+  border-left: 2px solid #222;
+  height: 810px;
+  padding-bottom: 100px;
 }
 
 .filter-box {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.cart-list {
+  width: 450px;
+  height: 780px;
+  overflow: auto;
 }
 
 .qr-reader {
@@ -38,6 +54,13 @@ code {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 

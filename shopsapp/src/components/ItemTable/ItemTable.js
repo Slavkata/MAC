@@ -42,7 +42,7 @@ class ItemTable extends React.Component {
             </Typography>
             <div className="filter-box">
               <SearchIcon />
-              <input type="text" class="filter-products" placeholder="Product name..." onChange={this.filter} />
+              <input type="text" className="filter-products" placeholder="Product name..." onChange={this.filter} />
             </div>
           </Toolbar>
         </AppBar>
