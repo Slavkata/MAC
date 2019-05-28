@@ -22,7 +22,6 @@ class ProductSelect extends React.Component {
     const cleaned = (string) => {
       return string.toLowerCase().split(' ').join('');
     }
-
     let { value } = e.target;
     this.setState({ filtered: this.state.items.filter(item => cleaned(item.name).includes(cleaned(value))) });
   }

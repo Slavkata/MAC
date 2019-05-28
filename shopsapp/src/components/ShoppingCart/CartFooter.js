@@ -13,7 +13,7 @@ export default (props) => (
         <DeleteIcon />
         Clear Cart
       </Button>
-      <Button variant="contained" color="primary" onClick={props.onConfirm}>
+      <Button variant="contained" color="primary" onClick={props.onSubmit}>
         <CheckIcon />
         Proceed to payment
       </Button>
