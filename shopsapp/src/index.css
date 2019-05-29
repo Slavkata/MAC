@@ -64,13 +64,20 @@ code {
   align-items: center;
 }
 
+.shop-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 input.shop-number {
-  width: 100%;
+  width: 70%;
   height: 30px;
   padding: 20px;
   border: none;
   outline: none;
   font-size: 2em;
+  margin-right: 10px;
 }
 
 input.filter-products {
