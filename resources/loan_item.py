@@ -51,7 +51,7 @@ class LoanItemsResource(Resource):
             loan_record = LoanHistory(data.ticket_number, data.id[i])
             loan_record.loan_item(loan_item, data.ticket_number)
 
-        return {"message":"Just bring it back after"},201
+        return {"message" : "Just bring it back after"}, 200
 
     def delete(self):
         self.parser.add_argument('id', type=int, action='append')
