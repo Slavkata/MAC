@@ -24,7 +24,6 @@ code {
 
 .container-cart {
   width: 500px;
-  border-left: 2px solid #222;
   height: 810px;
   padding-bottom: 100px;
 }
@@ -48,6 +47,7 @@ code {
 
 .table {
   width: 1000px;
+  border-right: 2px solid #222;
 }
 
 .table .title-bar {
@@ -71,10 +71,11 @@ code {
 }
 
 input.shop-number {
-  width: 70%;
+  width: 810px;
   height: 30px;
   padding: 20px;
   border: none;
+  border-right: 2px dashed rgb(218, 218, 218);
   outline: none;
   font-size: 2em;
   margin-right: 10px;

@@ -62,19 +62,21 @@ class ProductSelect extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.fetchItems(nextProps.shopId);
+    this.fetchItems(nextProps.shopId, nextProps.isLoan);
   }
 
   componentDidMount() {
     this.fetchItems();
   }
 
-  fetchItems = (shopId = this.props.shopId) => {
+  fetchItems = (shopId = this.props.shopId, isLoan = this.props.isLoan) => {
     const copyAvailableToFiltered = () => {
       this.setState({ filtered: this.state.available });
     }
+    let endpoint = isLoan ? 'loan' : 'shop-item';
+    let url = `https://mac-cars.herokuapp.com/${endpoint}`;
 
-    Axios.get('https://mac-cars.herokuapp.com/shop-item', { params: { shop: shopId } })
+    Axios.get(url, { params: { shop: shopId } })
       .then(res => {
         const { data } = res;
         this.setState({ available: data }, copyAvailableToFiltered);

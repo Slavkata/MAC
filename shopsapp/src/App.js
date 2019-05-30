@@ -13,6 +13,7 @@ class App extends React.Component {
   state = {
     id: -1,
     name: '-',
+    isLoan: false,
   }
 
   componentDidMount() {
@@ -26,8 +27,8 @@ class App extends React.Component {
     const url = '/shop';
     Axios.get(url, { params: { id: value } })
       .then(res => {
-        const { id, name } = res.data;
-        this.setState({ id, name });
+        const { id, name, isLoan } = res.data;
+        this.setState({ id, name, isLoan });
         localStorage.setItem("shopId", id);
       })
       .catch(err => {
@@ -47,7 +48,7 @@ class App extends React.Component {
     return (
       <div className="App" >
         <ShopNumberInput onInput={this.getShopInfo} shopId={this.state.id} shopName={this.state.name} />
-        {this.state.id !== -1 && <ProductSelect shopId={this.state.id} />}
+        {this.state.id !== -1 && <ProductSelect shopId={this.state.id} isLoan={this.state.isLoan} />}
         {this.state.id === -1 && <span>Please input shop number first</span>}
       </div>
     );

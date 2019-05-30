@@ -7,7 +7,7 @@ class ShopNumberInput extends React.Component {
       <div className="shop-box">
         <input type="text" name="shop-number" className="shop-number" placeholder="Shop number..." onKeyDown={this.props.onInput} />
         <Typography variant="h5">
-          Shop: {this.props.shopName} ({this.props.shopId})
+          <b>Shop:</b> {this.props.shopName} ( id: <i>{this.props.shopId}</i> )
         </Typography>
       </div>
     );
