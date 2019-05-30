@@ -25,10 +25,10 @@ class ShopItemsResource(Resource):
         self.parser.add_argument('category', type=str)
         self.parser.add_argument('price', type=float)
         self.parser.add_argument('shop', type=int)
-        self.parser.add_argument('left', type=int)
+        self.parser.add_argument('quantity', type=int)
         data = self.parser.parse_args()
 
-        shop_item = ShopItem(data.name, data.category, data.price, data.shop, data.left)
+        shop_item = ShopItem(data.name, data.category, data.price, data.shop, data.quantity)
         shop_item.create()
         return jsonify(shop_item.serialize())
 

@@ -9,7 +9,7 @@ class ShopResource(Resource):
         self.parser.add_argument('name', type=str, required=True, help='specify shop name')
         self.parser.add_argument('location', type=str, required=True, help='specify shop location')
         self.parser.add_argument('category', type=str, required=True, help='specify shop category')
-        self.parser.add_argument('isLoan', type=bool, required=True, help='specify shop type')
+        self.parser.add_argument('isLoan', type=int, required=True, help='specify shop type')
         data = self.parser.parse_args()
 
         shop = Shop(data.name, data.location, data.category, data.isLoan)
