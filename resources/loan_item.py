@@ -49,7 +49,7 @@ class LoanItemsResource(Resource):
             client = PaymentAccount.find_by_ticket_number(data.ticket_number)
             client.deduce(loan_item.price)
             loan_record = LoanHistory(data.ticket_number, data.id[i])
-            loan_record.loan_item(loan_record, data.ticket_number)
+            loan_record.loan_item(loan_item, data.ticket_number)
 
         return {"message":"Just bring it back after"},201
 
