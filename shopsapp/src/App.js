@@ -15,20 +15,31 @@ class App extends React.Component {
     name: '-',
   }
 
+  componentDidMount() {
+    const savedShopId = localStorage.getItem("shopId");
+    if (!isNaN(savedShopId)) {
+      this.sendRequest(savedShopId)
+    }
+  }
+
+  sendRequest = (value) => {
+    const url = '/shop';
+    Axios.get(url, { params: { id: value } })
+      .then(res => {
+        const { id, name } = res.data;
+        this.setState({ id, name });
+        localStorage.setItem("shopId", id);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   getShopInfo = (e) => {
     if (e.key !== 'Enter') return;
     let { value } = e.target;
     if (!isNaN(value)) {
-      const url = '/shop';
-      Axios.get(url, { params: { id: value } })
-        .then(res => {
-          const { id, name } = res.data;
-          this.setState({ id, name });
-          console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.sendRequest(value);
     }
   }
 
