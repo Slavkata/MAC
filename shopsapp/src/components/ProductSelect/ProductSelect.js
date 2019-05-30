@@ -23,11 +23,11 @@ class ProductSelect extends React.Component {
   }
 
   showSwal = {
-    qrScan: () => {
+    qrScan: (callback) => {
       MySwal.fire({
         title: 'Scan QR Code',
         type: 'warning',
-        html: <QRReader onScan={this.sendPayRequest} />,
+        html: <QRReader onScan={callback} />,
         showConfirmButton: false,
         showCancelButton: true,
       });
@@ -67,6 +67,18 @@ class ProductSelect extends React.Component {
 
   componentDidMount() {
     this.fetchItems();
+  }
+
+  getRequestData = (ticketNumber) => {
+    return {
+      ticket_number: ticketNumber.code,
+      id: this.state.inCart.reduce((arr, item) => {
+        for (let i = 0; i < item.quantity; i++) {
+          arr.push(item.id);
+        }
+        return arr;
+      }, [])
+    }
   }
 
   fetchItems = (shopId = this.props.shopId, isLoan = this.props.isLoan) => {
@@ -148,20 +160,18 @@ class ProductSelect extends React.Component {
     MySwal.showLoading();
 
 
-    const data = {
-      ticket_number: ticketNumber.code,
-      id: this.state.inCart.reduce((arr, item) => {
-        for (let i = 0; i < item.quantity; i++) {
-          arr.push(item.id);
-        }
-        return arr;
-      }, [])
-    }
+    const data = this.getRequestData(ticketNumber);
 
-    Axios.put('https://mac-cars.herokuapp.com/shop-item/', data)
+    const endpoint = this.props.isLoan ? 'loan' : 'shop-item'
+    const url = `https://mac-cars.herokuapp.com/${endpoint}/`;
+
+    console.log(url);
+    console.log(data);
+
+    Axios.put(url, data)
       .then(res => {
         MySwal.close();
-        if (res.data === null)
+        if (res.status === 200)
           this.showSwal.purchaseComplete();
         else
           this.showSwal.error();
@@ -173,8 +183,37 @@ class ProductSelect extends React.Component {
       })
   }
 
+  sendReturnRequest = (ticketNumber) => {
+    MySwal.close();
+    this.showSwal.scanComplete();
+    MySwal.showLoading();
+
+    const data = this.getRequestData(ticketNumber);
+
+    const url = 'https://mac-cars.herokuapp.com/loan/';
+    console.log(data);
+
+    Axios.request({ url, data, method: 'delete', headers: { 'Content-Type': 'application/json' } })
+      .then(res => {
+        MySwal.close();
+        if (res.status === 200)
+          this.showSwal.purchaseComplete();
+        else
+          this.showSwal.error();
+      })
+      .catch(e => {
+        console.error(e);
+        MySwal.close();
+        this.showSwal.error();
+      });
+  }
+
   submitOrder = () => {
-    this.showSwal.qrScan();
+    this.showSwal.qrScan(this.sendPayRequest);
+  }
+
+  returnItems = () => {
+    this.showSwal.qrScan(this.sendReturnRequest);
   }
 
   render() {
@@ -194,6 +233,7 @@ class ProductSelect extends React.Component {
           onRemove={this.removeFromCart}
           onClear={this.clearCart}
           onSubmit={this.submitOrder}
+          onReturnItems={this.returnItems}
           total={this.state.inCart.reduce((sum, curr) => sum += curr.price * curr.quantity, 0)}
         />
       </div>

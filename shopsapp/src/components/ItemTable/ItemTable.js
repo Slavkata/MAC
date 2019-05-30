@@ -34,8 +34,8 @@ class ItemTable extends React.Component {
           {item.name}
         </TableCell>
         <TableCell align="right">
-          {item.left < 20 && this.showStockWarning(item.left)}
-          {item.left >= 20 && item.left}
+          {item.quantity < 20 && this.showStockWarning(item.quantity)}
+          {item.quantity >= 20 && item.quantity}
         </TableCell>
         <TableCell align="right">{item.category}</TableCell>
         <TableCell align="right">{item.price}€</TableCell>

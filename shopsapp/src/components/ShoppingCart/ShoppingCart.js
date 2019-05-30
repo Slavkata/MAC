@@ -1,6 +1,5 @@
 import React from 'react'
-import QRReader from '../QRReader/QRReader';
-import { Table, TableBody, TableRow, TableCell, AppBar, Toolbar, Typography, IconButton, TableHead } from '@material-ui/core';
+import { Table, TableBody, TableRow, TableCell, AppBar, Toolbar, Typography, IconButton, TableHead, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 
@@ -14,9 +13,14 @@ class ShoppingCart extends React.Component {
       <div className="container-cart">
         <AppBar position="static" color="secondary">
           <Toolbar >
-            <Typography variant="h6" color="inherit"></Typography>
-            Shopping Cart
-            </Toolbar>
+            <Typography variant="h6" color="inherit">
+              Shopping Cart
+            </Typography>
+            <Button variant="contained" color="default" style={{ marginLeft: '20px' }} onClick={this.props.onReturnItems}>
+              Return Items
+            </Button>
+
+          </Toolbar>
         </AppBar>
         <div className="cart-list">
           <Table>
