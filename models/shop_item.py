@@ -24,7 +24,11 @@ class ShopItem(db.Model):
 
     @classmethod
     def find_by_category(cls, category):
-        return cls.query.filter_by(category=category)
+        result = []
+        shop_items = cls.query.filter_by(category=category).all()
+        for s in shop_items:
+            result.append(s.serialize())
+        return result
 
     @classmethod
     def get_by_id(cls, id):
@@ -32,7 +36,11 @@ class ShopItem(db.Model):
 
     @classmethod
     def get_by_shop(cls, shop):
-        return cls.query.filter_by(shop=shop)
+        result = []
+        shop_items = cls.query.filter_by(shop=shop).all()
+        for s in shop_items:
+            result.append(s.serialize())
+        return result
 
     def sell(self):
         self.left -= 1
