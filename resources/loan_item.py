@@ -21,7 +21,7 @@ class LoanItemsResource(Resource):
             return jsonify(LoanItem.find_by_category(data.category).serialize())
         elif data.id is not None:
             return jsonify(LoanItem.get_by_id(data.id).serialize())
-        elif data.category is not None:
+        elif data.shop is not None:
             return jsonify(LoanItem.get_by_shop(data.shop).serialize())
         else:
             return jsonify(LoanItem.get_all())
