@@ -7,31 +7,19 @@ class Shop(db.Model):
     name = db.Column(db.String(100), nullable=False)
     location = db.Column(db.String(100), nullable=False)
     category = db.Column(db.String(20), nullable=False)
-    items_sold = db.Column(db.Integer, nullable=False)
+    isLoan = db.Column(db.Boolean, nullable=False)
 
-    # profit need to be removed
-    profit = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, name, location, category):
+    def __init__(self, name, location, category, isLoan):
         self.name = name
         self.location = location
         self.category = category
-        self.items_sold = 0
-        self.profit = 0
+        self.isLoan = isLoan
 
     def create(self):
         db.session.add(self)
         db.session.commit()
         return self.serialize()
-    #related to profits need to be removed
-    def update_sold_items(self, items_sold):
-        self.items_sold += items_sold
-        db.session.commit()
 
-    def update_profit(self, profit):
-        self.profit += profit
-        db.session.commit()
-    ###
     @classmethod
     def find_by_category(cls, category):
         result = []

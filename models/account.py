@@ -22,8 +22,11 @@ class PaymentAccount(db.Model):
         db.session.commit()
 
     def deduce(self, amount):
-        self.balance -= amount
-        db.session.commit()
+        if self.balance >= amount:
+            self.balance -= amount
+            db.session.commit()
+        else:
+            raise Exception()
 
     def return_money(self, amount):
         self.balance += amount

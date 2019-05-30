@@ -41,5 +41,10 @@ class ShopItemsResource(Resource):
         for i in range(len(data.id)):
             shop_item = ShopItem.get_by_id(data.id[i])
             client = PaymentAccount.find_by_ticket_number(data.ticket_number)
-            shop_item.sell()
-            client.deduce(shop_item.price)
+            try:
+                client.deduce(shop_item.price)
+                shop_item.sell()
+            except:
+                return {'message' : 'unsuccessful'}, 500
+
+        return {'message' : 'success'}, 200
