@@ -15,9 +15,8 @@ class ShopItemsResource(Resource):
         if data.category is not None:
             return jsonify(ShopItem.find_by_category(data.category))
         elif data.id is not None:
-            return jsonify(ShopItem.get_by_id(data.id))
-        elif data.shop\
-                is not None:
+            return jsonify(ShopItem.get_by_id(data.id).serialize())
+        elif data.shop is not None:
             return jsonify(ShopItem.get_by_shop(data.shop))
 
 

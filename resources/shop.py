@@ -11,6 +11,7 @@ class ShopResource(Resource):
         self.parser.add_argument('name', type=str, required=True, help='specify shop name')
         self.parser.add_argument('location', type=str, required=True, help='specify shop location')
         self.parser.add_argument('category', type=str, required=True, help='specify shop category')
+        #self.parser.add_argument('isLoan', type=bool, required=True, help='specify shop type')
         data = self.parser.parse_args()
 
         shop = Shop(data.name, data.location, data.category)
@@ -19,13 +20,15 @@ class ShopResource(Resource):
         return jsonify(shop.serialize())
 
     def get(self):
+        self.parser.remove_argument('name')
         self.parser.add_argument('id', type=int, location='args')
         self.parser.add_argument('category', type=str, location='args')
         data = self.parser.parse_args()
         if data.id is not None:
             return jsonify(Shop.get_by_id(data.id).serialize())
-        else:
-            return jsonify(shop.serialize() for shop in Shop.find_by_category(data.category))
+        elif data.category is not None:
+            return jsonify(Shop.find_by_category(data.category))
+
 
     def put(self):
         self.parser.remove_argument('name')

@@ -34,7 +34,11 @@ class Shop(db.Model):
     ###
     @classmethod
     def find_by_category(cls, category):
-        return cls.query.filter_by(category=category)
+        result = []
+        shops = cls.query.filter_by(category=category)
+        for s in shops:
+            result.append(s.serialize())
+        return result
 
     @classmethod
     def get_by_id(cls, id):
