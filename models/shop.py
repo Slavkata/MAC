@@ -1,6 +1,5 @@
 from models.db_init import db
 
-
 class Shop(db.Model):
     __tablename__ = "shops"
     id = db.Column(db.Integer, primary_key=True)
@@ -37,6 +36,6 @@ class Shop(db.Model):
             'id': self.id,
             'name': self.name,
             'location': self.location,
-            'items_sold': self.items_sold,
-            'profit': self.profit
+            'category': self.category,
+            'isLoan': self.isLoan
         }

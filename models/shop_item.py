@@ -8,14 +8,14 @@ class ShopItem(db.Model):
     category = db.Column(db.String(20), nullable=False)
     price = db.Column(db.Float, nullable=False)
     shop = db.Column(db.ForeignKey('shops.id'), nullable=False)
-    left = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, name, category, price, shop, left):
+    def __init__(self, name, category, price, shop, quantity):
         self.name = name
         self.category = category
         self.price = price
         self.shop = shop
-        self.left = left
+        self.quantity = quantity
 
     def create(self):
         db.session.add(self)
@@ -52,5 +52,5 @@ class ShopItem(db.Model):
             'name': self.name,
             'category': self.category,
             'price': self.price,
-            'left': self.left
+            'quantity': self.quantity
         }

@@ -5,7 +5,6 @@ from models.account import PaymentAccount
 from models.loan_item import LoanItem
 from models.loan_history import  LoanHistory
 
-
 from models.loan_history import LoanHistory
 
 

@@ -1,8 +1,6 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
-
 from models.shop import Shop
-
 
 class ShopResource(Resource):
     parser = reqparse.RequestParser()

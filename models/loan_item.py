@@ -10,7 +10,7 @@ class LoanItem(db.Model):
     shop = db.Column(db.ForeignKey('shops.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, name, category, price, shop,quantity):
+    def __init__(self, name, category, price, shop, quantity):
         self.name = name
         self.category = category
         self.price = price
