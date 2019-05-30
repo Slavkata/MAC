@@ -49,12 +49,10 @@ class LoanItemsResource(Resource):
             client = PaymentAccount.find_by_ticket_number(data.ticket_number)
             loan_record = LoanHistory(data.ticket_number,data.id[i])
             loan_record.create()
-            return loan_record.serialize();
-
-
             loan_item.loan()
             client.deduce(loan_item.price)
-        return  {"message":"Just bring it back after"},201
+
+        return {"message":"Just bring it back after"},201
 
     def delete(self):
         self.parser.add_argument('id', type=int, action='append')
