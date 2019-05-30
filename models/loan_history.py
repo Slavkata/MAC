@@ -13,6 +13,7 @@ class LoanHistory(db.Model):
     def __init__(self,ticket_number,item_number):
         self.ticket_number = ticket_number
         self.item_number = item_number
+
     def create(self):
         db.session.add(self)
         db.session.commit()
@@ -26,9 +27,17 @@ class LoanHistory(db.Model):
             result.append(l.serialize())
         return result
 
-    def return_item(self, loan_item):
+    def loan_item(self, loan_item, ticket_number):
+        loan_item.quantity -= 1
+        self.ticket_number = ticket_number
+        self.returned = False
+        db.session.add(self)
+        db.session.commit()
+
+    def return_item(self, loan_item, ticket_number):
+        his = LoanHistory.query.filter_by(ticket_number=ticket_number, item_number=loan_item.id, returned=False).first()
         loan_item.quantity += 1
-        self.returned = True
+        his.returned = True
         db.session.commit()
 
     @classmethod

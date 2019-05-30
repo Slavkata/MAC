@@ -47,19 +47,18 @@ class LoanItemsResource(Resource):
         for i in range(len(data.id)):
             loan_item = LoanItem.get_by_id(data.id[i])
             client = PaymentAccount.find_by_ticket_number(data.ticket_number)
-            loan_record = LoanHistory(data.ticket_number,data.id[i])
-            loan_record.create()
-            loan_item.loan()
             client.deduce(loan_item.price)
+            loan_record = LoanHistory(data.ticket_number, data.id[i])
+            loan_record.loan_item(loan_record, data.ticket_number)
 
         return {"message":"Just bring it back after"},201
 
     def delete(self):
         self.parser.add_argument('id', type=int, action='append')
-        #self.parser.add_argument('ticket_number', type=int)
+        self.parser.add_argument('ticket_number', type=int)
         data = self.parser.parse_args()
         for i in range(len(data.id)):
-            client = PaymentAccount.find_by_ticket_number(data.id)
+            client = PaymentAccount.find_by_ticket_number(data.ticket_number)
             loan_item = LoanItem.get_by_id(data.id)
-            LoanHistory.return_item(self, loan_item)
+            LoanHistory.return_item(self, loan_item, ticket_number=data.ticket_number)
             client.return_money(loan_item.price)
