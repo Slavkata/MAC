@@ -17,7 +17,7 @@ from resources.topup import TopupResource
 
 app = Flask(__name__)
 api = Api(app)
-CORS(app)
+CORS(app, supports_credentials=True)
 
 app.secret_key = 'blablaabla'
 
