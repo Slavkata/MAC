@@ -227,6 +227,7 @@ class ProductSelect extends React.Component {
           sortedByCategory={this.state.sortByCategory}
         />
         <ShoppingCart
+          isLoan={this.props.isLoan}
           inCart={this.state.inCart}
           onIncreaseQuantity={this.increaseQuantity}
           onDecreaseQuantity={this.decreaseQuantity}

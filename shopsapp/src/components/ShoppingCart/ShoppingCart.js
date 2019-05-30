@@ -16,9 +16,10 @@ class ShoppingCart extends React.Component {
             <Typography variant="h6" color="inherit">
               Shopping Cart
             </Typography>
-            <Button variant="contained" color="default" style={{ marginLeft: '20px' }} onClick={this.props.onReturnItems}>
+            {this.props.isLoan && <Button variant="contained" color="default" style={{ marginLeft: '20px' }} onClick={this.props.onReturnItems}>
               Return Items
-            </Button>
+              </Button>
+            }
 
           </Toolbar>
         </AppBar>
