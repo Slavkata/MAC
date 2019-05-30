@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Axios from 'axios';
+import Swal from 'sweetalert2'
 
 export default class Registration extends Component {
 
@@ -35,20 +36,24 @@ export default class Registration extends Component {
   submit = () => {
     let { ticket_number, amount } = this.state;
     let data = { ticket_number, amount };
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Accept': '* / *',
-      }
-    }
+
     if (!isNaN(ticket_number) && ticket_number.length === 6 && !isNaN(amount)) {
-      Axios.post('https://mac-cars.herokuapp.com/topup', data, config)
+      Axios.post('https://mac-cars.herokuapp.com/topup/', data)
         .then(result => {
-          console.log(result);
+          Swal.fire({
+            title: 'Money deposited',
+            html: `You successfully deposited <b>${amount}€</b> to your account`,
+            type: 'success',
+            heightAuto: false,
+          })
         })
         .catch(e => {
-          console.log('error', e);
+          Swal.fire({
+            title: 'Something went wrong',
+            html: `Please double check if <b>${ticket_number}</b> is the correct number of your ticket`,
+            type: 'error',
+            heightAuto: false,
+          })
         })
     }
   }
