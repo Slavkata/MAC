@@ -113,7 +113,6 @@ class ProductSelect extends React.Component {
   }
 
   increaseQuantity = (itemId) => {
-    console.log(itemId);
     let { inCart } = this.state;
     let item = inCart.find(item => item.id === itemId);
     item.quantity++;
