@@ -33,7 +33,12 @@ class LoanItem(db.Model):
 
     @classmethod
     def find_by_category(cls, category):
-        return cls.query.filter_by(category=category)
+        result = []
+        loan_items = cls.query.filter_by(category=category)
+        for l in loan_items:
+            result.append(l.serialize())
+
+        return result
 
     @classmethod
     def get_by_id(cls, id):
@@ -41,11 +46,12 @@ class LoanItem(db.Model):
 
     @classmethod
     def get_by_shop(cls, shop):
-        return cls.query.filter_by(shop=shop)
+        result = []
+        loan_items = cls.query.filter_by(shop=shop)
+        for l in loan_items:
+            result.append(l.serialize())
 
-    def loan(self):
-        self.quantity -= 1
-        db.session.commit()
+        return result
 
     def serialize(self):
         return {
