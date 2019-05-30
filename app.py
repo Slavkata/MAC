@@ -17,7 +17,7 @@ from resources.topup import TopupResource
 
 app = Flask(__name__)
 api = Api(app)
-CORS(app, expose_headers: ['Access-Control-Allow-Origin: *',
+CORS(app, expose_headers= ['Access-Control-Allow-Origin: *',
 'Access-Control-Allow-Methods: GET, POST, PUT, DELETE',
 'Access-Control-Allow-Headers: Authorization'])
 
