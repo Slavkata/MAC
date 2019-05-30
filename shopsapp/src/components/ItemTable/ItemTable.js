@@ -7,7 +7,6 @@ import TableRow from '@material-ui/core/TableRow';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Icon from '@material-ui/core/Icon';
 import WarningIcon from '@material-ui/icons/Warning'
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
@@ -39,7 +38,7 @@ class ItemTable extends React.Component {
           {item.left >= 20 && item.left}
         </TableCell>
         <TableCell align="right">{item.category}</TableCell>
-        <TableCell align="right">{item.price}</TableCell>
+        <TableCell align="right">{item.price}€</TableCell>
         <TableCell align="right">
           <IconButton color="primary" aria-label="Add to shopping cart" onClick={() => this.props.onItemAdd(item.id)}>
             <AddShoppingCartIcon />

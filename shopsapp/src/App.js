@@ -47,7 +47,7 @@ class App extends React.Component {
     return (
       <div className="App" >
         <ShopNumberInput onInput={this.getShopInfo} shopId={this.state.id} shopName={this.state.name} />
-        {this.state.id !== -1 && <ProductSelect />}
+        {this.state.id !== -1 && <ProductSelect shopId={this.state.id} />}
         {this.state.id === -1 && <span>Please input shop number first</span>}
       </div>
     );

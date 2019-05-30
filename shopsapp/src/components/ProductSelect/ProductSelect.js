@@ -1,6 +1,7 @@
 import React from 'react'
 import ItemTable from '../ItemTable/ItemTable';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import Axios from 'axios';
 
 class ProductSelect extends React.Component {
 
@@ -17,7 +18,16 @@ class ProductSelect extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ filtered: this.state.available });
+    const copyAvailableToFiltered = () => {
+      this.setState({ filtered: this.state.available });
+    }
+
+    Axios.get('https://mac-cars.herokuapp.com/shop-item', { params: { shop: this.props.shopId } })
+      .then(res => {
+        const { data } = res;
+        this.setState({ available: data }, copyAvailableToFiltered);
+      });
+
   }
 
   filter = (e) => {
