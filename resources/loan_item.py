@@ -3,8 +3,6 @@ from flask_restful import Resource, reqparse
 
 from models.account import PaymentAccount
 from models.loan_item import LoanItem
-from models.loan_history import  LoanHistory
-
 from models.loan_history import LoanHistory
 
 
@@ -57,6 +55,8 @@ class LoanItemsResource(Resource):
         self.parser.add_argument('id', type=int, action='append')
         self.parser.add_argument('ticket_number', type=int)
         data = self.parser.parse_args()
+
+        print(data)
 
         client = PaymentAccount.find_by_ticket_number(data.ticket_number)
         for i in range(len(data.id)):
