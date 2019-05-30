@@ -5,10 +5,12 @@ import ShoppingCart from '../ShoppingCart/ShoppingCart';
 class ProductSelect extends React.Component {
 
   state = {
+    sortByCategory: false,
     available: [
-      { id: 1, name: 'Coca Cola', price: 2.99 },
-      { id: 2, name: 'Chio Chips', price: 6.99 },
-      { id: 3, name: 'French Fries', price: 8.99 },
+      { id: 1, name: 'Coca Cola', price: 2.99, category: "Alchohol", left: 233 },
+      { id: 2, name: 'Chio Chips', price: 6.99, category: "Food", left: 5 },
+      { id: 3, name: 'French Fries', price: 8.99, category: "Food", left: 444 },
+      { id: 3, name: 'Vodka', price: 7.99, category: "Alchohol", left: 17 },
     ],
     filtered: [],
     inCart: [],
@@ -24,6 +26,17 @@ class ProductSelect extends React.Component {
     }
     let { value } = e.target;
     this.setState({ filtered: this.state.available.filter(item => cleaned(item.name).includes(cleaned(value))) });
+  }
+
+  sortByCategory = () => {
+    let { sortByCategory, filtered } = this.state;
+    sortByCategory = !sortByCategory;
+    if (sortByCategory) {
+      filtered.sort((a, b) => a.category > b.category ? 1 : -1)
+    } else {
+      filtered.sort((a, b) => a.id > b.id ? 1 : -1)
+    }
+    this.setState({ sortByCategory, filtered });
   }
 
   onItemAdd = (itemId) => {
@@ -77,6 +90,8 @@ class ProductSelect extends React.Component {
           filtered={this.state.filtered}
           onItemAdd={this.onItemAdd}
           onFilterChange={this.filter}
+          onCategorySort={this.sortByCategory}
+          sortedByCategory={this.state.sortByCategory}
         />
         <ShoppingCart
           inCart={this.state.inCart}
