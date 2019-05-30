@@ -10,7 +10,9 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-qr-reader": "^2.2.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "sweetalert2": "^8.11.6",
+    "sweetalert2-react-content": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

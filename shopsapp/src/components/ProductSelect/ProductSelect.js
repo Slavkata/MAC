@@ -2,22 +2,70 @@ import React from 'react'
 import ItemTable from '../ItemTable/ItemTable';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import Axios from 'axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
+import QRReader from '../QRReader/QRReader';
+
+const MySwal = withReactContent(Swal);
 
 class ProductSelect extends React.Component {
 
   state = {
     sortByCategory: false,
     available: [
-      { id: 1, name: 'Coca Cola', price: 2.99, category: "Alchohol", left: 233 },
-      { id: 2, name: 'Chio Chips', price: 6.99, category: "Food", left: 5 },
-      { id: 3, name: 'French Fries', price: 8.99, category: "Food", left: 444 },
-      { id: 3, name: 'Vodka', price: 7.99, category: "Alchohol", left: 17 },
+      // { id: 1, name: 'Coca Cola', price: 2.99, category: "Alchohol", left: 233 },
+      // { id: 2, name: 'Chio Chips', price: 6.99, category: "Food", left: 5 },
+      // { id: 3, name: 'French Fries', price: 8.99, category: "Food", left: 444 },
+      // { id: 3, name: 'Vodka', price: 7.99, category: "Alchohol", left: 17 },
     ],
     filtered: [],
     inCart: [],
   }
 
+  showSwal = {
+    qrScan: () => {
+      MySwal.fire({
+        title: 'Scan QR Code',
+        type: 'warning',
+        html: <QRReader onScan={this.sendPayRequest} />,
+        showConfirmButton: false,
+        showCancelButton: true,
+      });
+    },
+    scanComplete: () => {
+      MySwal.fire({
+        title: 'Scan complete',
+        type: 'success',
+        html: 'Payment request is being sent to the server...',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+      });
+    },
+    error: () => {
+      MySwal.fire({
+        title: 'Error occurred',
+        type: 'error',
+        showConfirmButton: true,
+        confirmButtonText: 'Okay'
+      })
+    },
+    purchaseComplete: () => {
+      MySwal.fire({
+        title: 'Purchase complete',
+        type: 'success',
+        showConfirmButton: true,
+        confirmButtonText: 'Clear Cart'
+      })
+        .then(this.clearCart)
+        .then(this.fetchItems);
+    }
+  }
+
   componentDidMount() {
+    this.fetchItems();
+  }
+
+  fetchItems = () => {
     const copyAvailableToFiltered = () => {
       this.setState({ filtered: this.state.available });
     }
@@ -27,7 +75,6 @@ class ProductSelect extends React.Component {
         const { data } = res;
         this.setState({ available: data }, copyAvailableToFiltered);
       });
-
   }
 
   filter = (e) => {
@@ -88,9 +135,41 @@ class ProductSelect extends React.Component {
     this.setState({ inCart: [] })
   }
 
+  sendPayRequest = (ticketNumber) => {
+    // Close qrScan swal
+    MySwal.close();
+
+    this.showSwal.scanComplete();
+    MySwal.showLoading();
+
+
+    const data = {
+      ticket_number: ticketNumber.code,
+      id: this.state.inCart.reduce((arr, item) => {
+        for (let i = 0; i < item.quantity; i++) {
+          arr.push(item.id);
+        }
+        return arr;
+      }, [])
+    }
+
+    Axios.put('https://mac-cars.herokuapp.com/shop-item/', data)
+      .then(res => {
+        MySwal.close();
+        if (res.data === null)
+          this.showSwal.purchaseComplete();
+        else
+          this.showSwal.error();
+      })
+      .catch(e => {
+        console.error(e);
+        MySwal.close();
+        this.showSwal.error();
+      })
+  }
+
   submitOrder = () => {
-    alert('Submit');
-    console.log('submit');
+    this.showSwal.qrScan();
   }
 
   render() {

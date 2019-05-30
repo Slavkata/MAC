@@ -3,29 +3,36 @@ import QrReader from 'react-qr-reader'
 
 class QRReader extends Component {
   state = {
-    result: 'No result'
+    qr: {
+      scanned: false,
+      code: '',
+    }
   }
 
   handleScan = data => {
     if (data) {
       this.setState({
-        result: data
-      })
+        qr: { scanned: true, code: data }
+      }, () => this.props.onScan(this.state.qr));
+      console.log(data);
     }
   }
+
   handleError = err => {
     console.error(err)
   }
   render() {
     return (
-      <div>
-        <QrReader
-          delay={300}
-          onError={this.handleError}
-          onScan={this.handleScan}
-          className="qr-reader"
-        />
-        <p>{this.state.result}</p>
+      < div >
+        {
+          !this.state.qr.scanned &&
+          <QrReader
+            delay={300}
+            onError={this.handleError}
+            onScan={this.handleScan}
+            className="qr-reader"
+          />
+        }
       </div>
     )
   }

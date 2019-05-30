@@ -33,7 +33,7 @@ class ShoppingCart extends React.Component {
                 inCart.map(item => (
                   <TableRow key={item.id}>
                     <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.price}$</TableCell>
+                    <TableCell>{item.price}€</TableCell>
                     <TableCell>
                       <QuantityInput
                         quantity={item.quantity}
@@ -57,6 +57,7 @@ class ShoppingCart extends React.Component {
           total={this.props.total}
           onClear={this.props.onClear}
           onSubmit={this.props.onSubmit}
+          disableConfirm={this.props.inCart.length === 0}
         />
       </div>
     )

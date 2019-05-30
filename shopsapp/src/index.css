@@ -43,7 +43,7 @@ code {
 
 .qr-reader {
   width: 300px;
-  height: 150px;
+  margin: 50px auto;
 }
 
 .table {
