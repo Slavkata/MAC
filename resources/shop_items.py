@@ -41,10 +41,9 @@ class ShopItemsResource(Resource):
         for i in range(len(data.id)):
             shop_item = ShopItem.get_by_id(data.id[i])
             client = PaymentAccount.find_by_ticket_number(data.ticket_number)
-            try:
-                client.deduce(shop_item.price)
+            if client.deduce(shop_item.price) == "ok":
                 shop_item.sell()
-            except:
-                return {'message' : 'unsuccessful'}, 500
+                return {'message': 'success'}, 200
+            else:
+                return {'message': 'notok'}, 500
 
-        return {'message' : 'success'}, 200

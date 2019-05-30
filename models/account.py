@@ -25,8 +25,9 @@ class PaymentAccount(db.Model):
         if self.balance >= amount:
             self.balance -= amount
             db.session.commit()
+            return "ok"
         else:
-            raise Exception()
+            return "notok"
 
     def return_money(self, amount):
         self.balance += amount
