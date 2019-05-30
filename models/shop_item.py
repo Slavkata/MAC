@@ -43,7 +43,7 @@ class ShopItem(db.Model):
         return result
 
     def sell(self):
-        self.left -= 1
+        self.quantity -= 1
         db.session.commit()
 
     def serialize(self):
