@@ -19,6 +19,9 @@ class ShopResource(Resource):
 
     def get(self):
         self.parser.remove_argument('name')
+        self.parser.remove_argument('location')
+        self.parser.remove_argument('category')
+        self.parser.remove_argument('isLoan')
         self.parser.add_argument('id', type=int, location='args')
         self.parser.add_argument('category', type=str, location='args')
         data = self.parser.parse_args()
