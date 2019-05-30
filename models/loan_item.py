@@ -46,6 +46,7 @@ class LoanItem(db.Model):
     def loan(self):
         self.quantity -= 1
         db.session.commit()
+
     def serialize(self):
         return {
             'id': self.id,

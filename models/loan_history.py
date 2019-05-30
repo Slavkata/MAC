@@ -26,10 +26,9 @@ class LoanHistory(db.Model):
             result.append(l.serialize())
         return result
 
-    def return_item(self,item_id):
-        item = LoanItem.get_by_id(item_id)
-        item.quantity += 1
-        self.returned =  True
+    def return_item(self, loan_item):
+        loan_item.quantity += 1
+        self.returned = True
         db.session.commit()
 
     @classmethod
@@ -38,6 +37,7 @@ class LoanHistory(db.Model):
 
     def get_ticket_number(self):
         return self.ticket_number
+
     def get_item_number(self):
         return self.item_number
 

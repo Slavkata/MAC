@@ -59,8 +59,7 @@ class LoanItemsResource(Resource):
         #self.parser.add_argument('ticket_number', type=int)
         data = self.parser.parse_args()
         for i in range(len(data.id)):
-            loan_history = LoanHistory.get_by_id(data.id[i])
-            client = PaymentAccount.find_by_ticket_number(loan_history.get_ticket_number())
-            loan_item = LoanItem.get_by_id(loan_history.get_item_number())
-            loan_history.return_item(loan_history.get_item_number())
+            client = PaymentAccount.find_by_ticket_number(data.id)
+            loan_item = LoanItem.get_by_id(data.id)
+            LoanHistory.return_item(self, loan_item)
             client.return_money(loan_item.price)
