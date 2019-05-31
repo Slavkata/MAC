@@ -37,6 +37,11 @@ code {
   border-right: 2px solid #222;
 }
 
+.table-body {
+  height: 85%;
+  overflow: auto;
+}
+
 .filter-box {
   display: flex;
   flex-direction: row;
@@ -133,10 +138,23 @@ input.quantity {
   height: 50px;
   font-size: 2em;
   text-align: center;
-  background: rgb(245, 245, 245);
+  background: rgb(255, 240, 240);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+.total-text {
+  color: rgb(141, 78, 78)
+}
+
+.total-num {
+  background: #fff;
+  height: 50px;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .cart-buttons {

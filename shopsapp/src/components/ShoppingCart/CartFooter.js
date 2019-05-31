@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 export default (props) => (
   <div class="cart-footer">
     <div className="cart-sum">
-      <div>Total: <b>{Math.round(props.total * 100) / 100}€</b></div>
+      <div className="total-text">Total</div><div className="total-num"> <b>{Math.round(props.total * 100) / 100}€</b></div>
     </div>
     <div className="flex-row-center cart-buttons">
       <Button variant="contained" color="secondary" onClick={props.onClear}>

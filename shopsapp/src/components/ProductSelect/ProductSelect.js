@@ -16,7 +16,6 @@ class ProductSelect extends React.Component {
       // { id: 1, name: 'Coca Cola', price: 2.99, category: "Alchohol", left: 233 },
       // { id: 2, name: 'Chio Chips', price: 6.99, category: "Food", left: 5 },
       // { id: 3, name: 'French Fries', price: 8.99, category: "Food", left: 444 },
-      // { id: 3, name: 'Vodka', price: 7.99, category: "Alchohol", left: 17 },
     ],
     filtered: [],
     inCart: [],
@@ -30,6 +29,7 @@ class ProductSelect extends React.Component {
         html: <QRReader onScan={callback} />,
         showConfirmButton: false,
         showCancelButton: true,
+        heightAuto: false,
       });
     },
     scanComplete: () => {
@@ -39,6 +39,7 @@ class ProductSelect extends React.Component {
         html: 'Payment request is being sent to the server...',
         showConfirmButton: false,
         allowOutsideClick: false,
+        heightAuto: false,
       });
     },
     error: () => {
@@ -46,7 +47,8 @@ class ProductSelect extends React.Component {
         title: 'Error occurred',
         type: 'error',
         showConfirmButton: true,
-        confirmButtonText: 'Okay'
+        confirmButtonText: 'Okay',
+        heightAuto: false,
       })
     },
     purchaseComplete: () => {
@@ -54,7 +56,8 @@ class ProductSelect extends React.Component {
         title: 'Purchase complete',
         type: 'success',
         showConfirmButton: true,
-        confirmButtonText: 'Clear Cart'
+        confirmButtonText: 'Clear Cart',
+        heightAuto: false,
       })
         .then(this.clearCart)
         .then(this.fetchItems);
