@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import QRReader from '../components/QRReader/QRReader';
 import Swal from 'sweetalert2';
 import Axios from 'axios';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
 
 class CampingApp extends React.Component {
 
@@ -69,7 +69,9 @@ class CampingApp extends React.Component {
             <Typography variant="h6" color="inherit">Camping Booth</Typography><Link to="/">Home</Link>
           </Toolbar>
         </AppBar>
-        {this.state.hideScan && <Button variant="contained" color="secondary" onClick={() => { this.setState({ hideScan: false }) }}>Scan now</Button>}
+        <div style={{width: '300px', margin: '0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '2rem'}}>
+          {this.state.hideScan && <Button variant="contained" color="secondary" onClick={() => { this.setState({ hideScan: false }) }}>Scan now</Button>}
+        </div>
         <QRReader onScan={this.handleScan} hideOnScan={this.state.hideScan} />
       </div>
     )
