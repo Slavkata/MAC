@@ -25,7 +25,7 @@ class QRReader extends Component {
     return (
       < div >
         {
-          !this.state.qr.scanned &&
+          !(this.state.qr.scanned && this.props.hideOnScan) &&
           <QrReader
             delay={300}
             onError={this.handleError}

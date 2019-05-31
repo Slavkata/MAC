@@ -26,7 +26,7 @@ class ProductSelect extends React.Component {
       MySwal.fire({
         title: 'Scan QR Code',
         type: 'warning',
-        html: <QRReader onScan={callback} />,
+        html: <QRReader onScan={callback} hideOnScan={true} />,
         showConfirmButton: false,
         showCancelButton: true,
         heightAuto: false,

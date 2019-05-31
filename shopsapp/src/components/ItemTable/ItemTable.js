@@ -13,6 +13,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 class ItemTable extends React.Component {
 
@@ -56,6 +57,7 @@ class ItemTable extends React.Component {
             <Typography variant="h6" color="inherit">
               Products
             </Typography>
+            <Link to="/">Home</Link>
             <div className="filter-box">
               <SearchIcon />
               <input type="text" className="filter-products" placeholder="Product name..." onChange={this.props.onFilterChange} />
