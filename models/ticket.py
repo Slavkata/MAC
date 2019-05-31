@@ -56,4 +56,5 @@ class Ticket(db.Model):
             'email' : self.email,
             'age' :self.age,
             'price': self.price,
+            'campingSpot': self.camping_spot
         }

@@ -16,6 +16,7 @@ from resources.ticket import TicketResource
 from resources.topup import TopupResource
 from resources.check_in import CheckInResource
 from resources.visitors import VisitorResource
+from resources.camping_check import CampingCheckIn
 
 app = Flask(__name__)
 api = Api(app)
@@ -46,6 +47,7 @@ api.add_resource(LoanItemsResource, '/loan/')
 api.add_resource(AtmDepositResource, '/atm/')
 api.add_resource(CheckInResource, '/check-in/')
 api.add_resource(VisitorResource, '/visitors/')
+api.add_resource(CampingCheckIn, '/camp-check/')
 
 db.init_app(app)
 mail.init_app(app)

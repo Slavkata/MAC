@@ -9,17 +9,6 @@ from models.ticket import Ticket
 class CampingResource(Resource):
     parser = reqparse.RequestParser()
 
-    def post(self):
-        self.parser.add_argument('id', type=int, required=True, help='camping spot id cannot be blank')
-        data = self.parser.parse_args()
-
-        try:
-            spot = CampingSpots.reserve(self, data.id)
-            # change campin_spot on ticket
-            return spot.serialize()
-        except:
-            return {'message': 'error register '}, 500
-
     def get(self):
         try:
             return jsonify(CampingSpots.get_free_spots(self))
@@ -34,6 +23,7 @@ class CampingResource(Resource):
         data = self.parser.parse_args()
 
         spot = CampingSpots.get_by_id(data.id)
+        spot.reserve(self, data.id)
 
         for i in range(len(data.ticket_number)):
             temp_ticket = Ticket.find_by_ticket_number(data.ticket_number[i])
