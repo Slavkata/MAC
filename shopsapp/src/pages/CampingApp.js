@@ -7,7 +7,12 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 class CampingApp extends React.Component {
 
+  state = {
+    hideScan: false,
+  }
+
   handleScan = ({ code }) => {
+    this.setState({ hideScan: true });
     Swal.fire({
       title: `Ticket Scanned <b>${code}</b>`,
       html: 'Checking ticket status...',
@@ -64,7 +69,8 @@ class CampingApp extends React.Component {
             <Typography variant="h6" color="inherit">Camping Booth</Typography><Link to="/">Home</Link>
           </Toolbar>
         </AppBar>
-        <QRReader onScan={this.handleScan} hideOnScan={false} />
+        {this.state.hideScan && <Button variant="contained" color="secondary" onClick={() => { this.setState({ hideScan: false }) }}>Scan now</Button>}
+        <QRReader onScan={this.handleScan} hideOnScan={this.state.hideScan} />
       </div>
     )
   }
