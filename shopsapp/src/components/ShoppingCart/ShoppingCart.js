@@ -11,7 +11,7 @@ class ShoppingCart extends React.Component {
     let { inCart } = this.props;
     return (
       <div className="container-cart">
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" color="secondary" className="cart-header">
           <Toolbar >
             <Typography variant="h6" color="inherit">
               Shopping Cart
@@ -20,7 +20,6 @@ class ShoppingCart extends React.Component {
               Return Items
               </Button>
             }
-
           </Toolbar>
         </AppBar>
         <div className="cart-list">

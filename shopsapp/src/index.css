@@ -1,5 +1,5 @@
 html, #root, .App {
-  height: 1000px;
+  height: 100%;
 }
 
 body {
@@ -7,8 +7,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 1000px;
-  overflow: hidden;
+  height: 100%;
 }
 
 code {
@@ -18,14 +17,24 @@ code {
 .container {
   display: flex;
   flex-direction: row;
-  width: 1300px;
-  height: 910px;
+  width: 100%;
+  height: 95%;
 }
 
 .container-cart {
-  width: 500px;
-  height: 810px;
-  padding-bottom: 100px;
+  width: 30%;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.cart-header {
+  flex: 0 1 auto;
+}
+
+.table {
+  width: 70%;
+  border-right: 2px solid #222;
 }
 
 .filter-box {
@@ -35,19 +44,20 @@ code {
 }
 
 .cart-list {
-  width: 450px;
-  height: 730px;
+  width: 100%;
+  height: 100%;
   overflow: auto;
+  flex: 1 1 auto;
+}
+
+.cart-footer {
+  flex: 0 1 10%;
+  padding-bottom: 1rem;
 }
 
 .qr-reader {
   width: 300px;
   margin: 50px auto;
-}
-
-.table {
-  width: 1000px;
-  border-right: 2px solid #222;
 }
 
 .table .title-bar {
@@ -68,21 +78,21 @@ code {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  height: 5%
 }
 
 input.shop-number {
-  width: 810px;
+  width: 66%;
   height: 30px;
-  padding: 20px;
+  padding: 1% 2%;
   border: none;
-  border-right: 2px dashed rgb(218, 218, 218);
   outline: none;
   font-size: 2em;
-  margin-right: 10px;
 }
 
 input.filter-products {
-  width: 300px;
+  width: 100%;
   height: 3rem;
   border: none;
   outline: none;
