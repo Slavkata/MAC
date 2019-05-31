@@ -21,18 +21,18 @@ class CampingApp extends React.Component {
       showConfirmButton: false,
     });
     Swal.showLoading();
-    const url = `https://mac-cars.herokuapp.com/check-in`;
+    const url = `https://mac-cars.herokuapp.com/camp-check/`;
     Axios.request({
       url,
       data: { ticket_number: code },
-      method: this.state.isCheckIn ? 'POST' : 'DELETE'
+      method: 'POST'
     })
       .then(res => {
         Swal.close();
-        if (res.code === 200) {
+        if (res.status === 200) {
           Swal.fire({
             title: 'Ticket validated',
-            html: 'This person is eligable to be checked in/out',
+            html: `Send this person to spot <b>${res.data.name}</b>`,
             type: 'success',
             showConfirmButton: true,
             showCancelButton: false,
@@ -69,7 +69,7 @@ class CampingApp extends React.Component {
             <Typography variant="h6" color="inherit">Camping Booth</Typography><Link to="/">Home</Link>
           </Toolbar>
         </AppBar>
-        <div style={{width: '300px', margin: '0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '2rem'}}>
+        <div style={{ width: '300px', margin: '0 auto', display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '2rem' }}>
           {this.state.hideScan && <Button variant="contained" color="secondary" onClick={() => { this.setState({ hideScan: false }) }}>Scan now</Button>}
         </div>
         <QRReader onScan={this.handleScan} hideOnScan={this.state.hideScan} />
