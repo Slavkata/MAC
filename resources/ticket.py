@@ -11,10 +11,13 @@ class TicketResource(Resource):
     parser = reqparse.RequestParser()
 
     def get(self):
-        self.parser.add_argument('ticket_number', type=str, location='args', required=True,
-                                 help="ticket_number can't be left blank")
+        self.parser.add_argument('ticket_number', type=str, location='args')
         data = self.parser.parse_args()
-        return Ticket.find_by_ticket_number(data.ticket_number).serialize()
+
+        if data.ticket_number is None:
+            return {'total_tickets': len(Ticket.query.all())}
+
+        return jsonify(Ticket.find_by_ticket_number(data.ticket_number).serialize())
 
     def post(self):
         self.parser.add_argument('firstname', type=str, required=True, action='append')

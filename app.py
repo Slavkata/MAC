@@ -17,6 +17,10 @@ from resources.topup import TopupResource
 from resources.check_in import CheckInResource
 from resources.visitors import VisitorResource
 from resources.camping_check import CampingCheckIn
+from resources.spending_history import SpendingHistoryResource
+from resources.loaning_history import LoanHistoryResource
+from resources.depositing_history import DepositingHistoryResource
+from resources.shops_profit import ShopsProfit
 
 app = Flask(__name__)
 api = Api(app)
@@ -48,6 +52,10 @@ api.add_resource(AtmDepositResource, '/atm/')
 api.add_resource(CheckInResource, '/check-in/')
 api.add_resource(VisitorResource, '/visitors/')
 api.add_resource(CampingCheckIn, '/camp-check/')
+api.add_resource(SpendingHistoryResource, '/spending/')
+api.add_resource(LoanHistoryResource, '/loaning/')
+api.add_resource(DepositingHistoryResource, '/depositing/')
+api.add_resource(ShopsProfit, '/profits/')
 
 db.init_app(app)
 mail.init_app(app)

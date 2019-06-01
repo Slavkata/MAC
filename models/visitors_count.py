@@ -5,11 +5,12 @@ class VisitorsCount(db.Model):
 
     __tablename__ = 'visitors_count'
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, default=datetime.datetime.now())
+    created_at = db.Column(db.DateTime)
     is_check_in = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, is_check_in):
         self.is_check_in = is_check_in
+        self.created_at = datetime.datetime.utcnow()
 
     def create(self):
         db.session.add(self)

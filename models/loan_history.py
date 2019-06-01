@@ -44,11 +44,13 @@ class LoanHistory(db.Model):
     def get_by_id(cls, id):
         return cls.query.get(id)
 
-    def get_ticket_number(self):
-        return self.ticket_number
-
-    def get_item_number(self):
-        return self.item_number
+    @classmethod
+    def get_by_ticket_number(cls, ticket_number):
+        result = []
+        item = LoanHistory.query.fileter_by(ticket_number=ticket_number).first()
+        for i in item:
+            result.append(i.serialize())
+        return result
 
     def serialize(self):
         return {

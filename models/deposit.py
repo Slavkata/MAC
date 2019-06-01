@@ -19,6 +19,22 @@ class AccountDeposit(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    @classmethod
+    def get_by_ticket_number(cls, ticket_number):
+        result = []
+        deposits = cls.query.filter_by(ticket_number=ticket_number).all()
+        for d in deposits:
+            result.append(d.serialize())
+        return result
+
+    @classmethod
+    def get_all_deposited_money(cls):
+        result = 0
+        deposits = cls.query.all()
+        for d in deposits:
+            result += d.amount
+        return result
+
     def serialize(self):
         return {
             'deposit_number': self.deposit_number,

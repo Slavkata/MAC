@@ -11,10 +11,11 @@ class TicketCheckInHistory(db.Model):
     ticket_number = db.Column(db.ForeignKey('tickets.ticket_number'))
     prev_status = db.Column(db.Boolean, nullable=False, default=False)
     current_status = db.Column(db.Boolean, nullable=False, default=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow())
+    created_at = db.Column(db.DateTime)
 
     def __init__(self, ticket_number):
         self.ticket_number = ticket_number
+        self.created_at = datetime.utcnow()
 
     def save_to_db(self):
         db.session.add(self)

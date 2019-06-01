@@ -9,6 +9,7 @@ class ShopItem(db.Model):
     price = db.Column(db.Float, nullable=False)
     shop = db.Column(db.ForeignKey('shops.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    initial_quantity = db.Column(db.Integer, nullable=False)
 
     def __init__(self, name, category, price, shop, quantity):
         self.name = name
@@ -16,6 +17,7 @@ class ShopItem(db.Model):
         self.price = price
         self.shop = shop
         self.quantity = quantity
+        self.initial_quantity = quantity
 
     def create(self):
         db.session.add(self)
@@ -42,6 +44,15 @@ class ShopItem(db.Model):
             result.append(s.serialize())
         return result
 
+    @classmethod
+    def get_sold_by_shop(cls, shop):
+        result = 0
+        shop_items = cls.query.filter_by(shop=shop).all()
+        for s in shop_items:
+            result += s.price * (s.initial_quantity - s.quantity)
+        return result
+
+
     def sell(self):
         self.quantity -= 1
         db.session.commit()
@@ -52,5 +63,6 @@ class ShopItem(db.Model):
             'name': self.name,
             'category': self.category,
             'price': self.price,
-            'quantity': self.quantity
+            'quantity': self.quantity,
+            'initial_quantity': self.initial_quantity
         }
