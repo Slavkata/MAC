@@ -9,7 +9,7 @@ class LoanHistoryResource(Resource):
         self.parser.add_argument('ticket_number', type=int, required=True, location='args')
         ticket_number = self.parser.parse_args().ticket_number
 
-        loaning = LoanHistory.get_ticket_number(ticket_number)
+        loaning = LoanHistory.get_by_ticket_number(ticket_number)
 
         if loaning is None:
             return {'message': 'no loan history'}, 201
