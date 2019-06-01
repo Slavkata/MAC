@@ -17,12 +17,11 @@ class CampingSpots(db.Model):
         self.price = price
         self.reserved = False
 
-    def get_free_spots(self):
+    def get_all_spots(self):
         list = []
-        spots = CampingSpots.query.filter_by(reserved=False).all()
+        spots = CampingSpots.query.all()
         for s in spots:
             list.append(s.serialize())
-
         return list
 
     def reserve(self, id):
