@@ -47,7 +47,7 @@ class LoanHistory(db.Model):
     @classmethod
     def get_by_ticket_number(cls, ticket_number):
         result = []
-        item = LoanHistory.query.filter_by(ticket_number=ticket_number).first()
+        item = LoanHistory.query.filter_by(ticket_number=ticket_number).all()
         for i in item:
             result.append(i.serialize())
         return result
