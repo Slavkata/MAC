@@ -11,7 +11,7 @@ class CampingResource(Resource):
 
     def get(self):
         try:
-            return jsonify(CampingSpots.get_free_spots(self))
+            return jsonify(CampingSpots.get_all_spots(self))
         except:
             return {"message": "error"}, 404
 
