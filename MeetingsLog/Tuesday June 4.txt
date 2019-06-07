@@ -1,0 +1,18 @@
+Meeting Tuesday June 4 2019
+
+****Critics***
+ . Statistics based on the shops
+ .Update tickets on camping spots(CRUD)
+***Recommendations***
+ .Quality code
+ .To make a video demo for the working app (for safety)
+ .State the advanatege of the technology used over other technology
+	*Points*
+	 .Scalability
+         .Programming Approach
+	 .Speed
+***Conclusion***
+ .Work on the provided critics
+ .Review the documents
+ .Write a document abaout the advantages and disadvantages of the technologies used
+                
