@@ -21,6 +21,18 @@ class PaymentAccount(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def deduce(self, amount):
+        if self.balance >= amount:
+            self.balance -= amount
+            db.session.commit()
+            return "ok"
+        else:
+            return "notok"
+
+    def return_money(self, amount):
+        self.balance += amount
+        db.session.commit()
+
     @classmethod
     def find_by_ticket_number(cls, ticket_number):
         return cls.query.filter_by(ticket_number=ticket_number).first()

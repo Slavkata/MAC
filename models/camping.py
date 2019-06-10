@@ -4,27 +4,24 @@ class CampingSpots(db.Model):
 
     __tablename__ = "campingspot"
     id = db.Column(db.Integer, primary_key=True)
-    ticket_number = db.Column(db.ForeignKey('tickets.ticket_number'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
-    location = db.Column(db.String(100), nullable=False)
-    capacity = db.Column(db.Integer, nullable=False)
+    region = db.Column(db.String(1), nullable=False)
+    number = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     reserved = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, ticket_nubmer, name, location, capacity, price):
+    def __init__(self, name, region, number, price):
         self.name = name
-        self.location = location
-        self.capacity = capacity
+        self.region = region
+        self.number = number
         self.price = price
         self.reserved = False
-        self.ticket_number = ticket_nubmer
 
-    def get_free_spots(self):
+    def get_all_spots(self):
         list = []
-        spots = CampingSpots.query.filter_by(reserved=False).all()
+        spots = CampingSpots.query.all()
         for s in spots:
             list.append(s.serialize())
-
         return list
 
     def reserve(self, id):
@@ -38,12 +35,16 @@ class CampingSpots(db.Model):
         db.session.commit()
         return self.serialize()
 
+    @classmethod
+    def get_by_id(cls, id):
+        return cls.query.get(id)
+
     def serialize(self):
         return {
             'id': self.id,
             'name': self.name,
-            'location': self.location,
-            'capacity': self.capacity,
+            'region': self.region,
+            'number': self.number,
             'price': self.price,
             'reserved': self.reserved
         }

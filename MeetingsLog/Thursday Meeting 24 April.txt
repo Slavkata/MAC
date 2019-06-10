@@ -1,0 +1,10 @@
+Meeting on Thursday April 4 2019
+
+***Critics***
+.Go and NoGo chart 
+.make sure tasks for overlaping
+.make it a real flowcharts for decision
+
+***Conclusion***
+.Improve the documents according to the provided docs
+.Discuss about the UI Framework to use
