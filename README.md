@@ -7,7 +7,8 @@ The web application for our Cars exhibition event.
 - [Project specifications(Set-up Document)](https://docs.google.com/document/d/10CVxsU1qPqAs7e8cIuJF5d7Vr24_Xm04xRPO0IsRdZQ/edit?usp=sharing)
 - [Website demo](https://thawing-depths-88596.herokuapp.com/)
 - [Database Diagram](https://github.com/Slavkata/MAC/blob/master/Database%20MAC.pdf)
-- [ShopsApp](https://bit.ly/2WBvoLy)
+- [ShopsApp - Windows](https://drive.google.com/open?id=1hxLPqBQf-iQfkSnuR-M5vMm1hgkU4ggs)
+- [ShopsApp - macOS](https://drive.google.com/open?id=1lsu9Zn2QBb6OWZL6tTT6cC48AqGk6drg)
 
 ## Project applications
 - A website that informs people about the event and allows reservation of tickets and camping spots (*can be found in folder* **/webapp**)
