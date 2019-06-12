@@ -22,4 +22,3 @@ The web application for our Cars exhibition event.
 - Slav Kirilov - Technology stream
 - Christian Nshuti - Technology stream
 - Aime Thierry - Technology stream
-
