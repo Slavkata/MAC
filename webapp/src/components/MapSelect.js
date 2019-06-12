@@ -19,7 +19,12 @@ export default class MapSelect extends Component {
   mapEntry = (plot, i) => {
     let classList = ["map-entry"]
     if (this.props.selected === `${plot.region}${plot.number}`) classList.push('selected');
-    if (plot.reserved) classList.push('reserved');
+    if (plot.reserved && !this.props.revertedSpots) {
+      classList.push('reserved');
+    }
+    if (!plot.reserved && this.props.revertedSpots) {
+      classList.push('reserved');
+    }
     let classListString = classList.join(' ');
     return (
       <div

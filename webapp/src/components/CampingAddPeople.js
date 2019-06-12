@@ -1,13 +1,16 @@
 import React from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import MapSelect from './MapSelect';
 
 
 class CampingAddPeople extends React.Component {
     state = {
-        campingSpot: null,
+        region: 'A1',
+        id: 1,
         person1: null,
         person2: null,
+        erros: [],
     }
 
     handleChange = e => {
@@ -15,9 +18,12 @@ class CampingAddPeople extends React.Component {
     }
 
     submit = () => {
+        Swal.fire('Sending request', 'Please wait');
+        Swal.showLoading();
         const data = {
-            id: this.state.campingSpot,
-            ticket_number: []
+            id: this.state.id,
+            ticket_number: [],
+            owner: this.state.owner,
         }
         if (!isNaN(this.state.person1) && this.state.person1 !== null) {
             data.ticket_number.push(this.state.person1)
@@ -29,7 +35,13 @@ class CampingAddPeople extends React.Component {
         Axios.put('https://mac-cars.herokuapp.com/camping/', data)
             .then(res => {
                 if (res.status === 200) {
-                    Swal.fire('People added', `People who will camp on ${data.id} spot have been added`, 'success');
+                    Swal.close();
+                    Swal.fire({
+                        title: 'People added',
+                        html: `People who will camp on ${data.id} spot have been added`,
+                        type: 'success',
+                        heightAuto: false
+                    });
                 }
             })
             .catch(e => {
@@ -37,11 +49,17 @@ class CampingAddPeople extends React.Component {
             })
     }
 
+    selectRegion = (region, id) => {
+        this.setState({ region: region, id, errors: [] });
+    }
+
     render() {
         return (
             <div style={{ width: '80%', margin: '0 auto' }}>
-                <h1>Camping Spot #</h1>
-                <input type="text" name="campingSpot" placeholder="Camping spot number" onChange={this.handleChange} />
+                <h1>Select your spot</h1>
+                <MapSelect selected={this.state.region} onRegionChange={this.selectRegion} revertedSpots={true} />
+                <h1>Invitor ticket number</h1>
+                <input type="text" name="owner" placeholder="Inviting person ticket number" onChange={this.handleChange} />
                 <h1>Bonus Guests</h1>
                 <input type="text" name="person1" placeholder="Person 1 Ticket number" onChange={this.handleChange} />
                 <input type="text" name="person2" placeholder="Person 2 Ticket number" style={{ marginLeft: '1rem' }} onChange={this.handleChange} />

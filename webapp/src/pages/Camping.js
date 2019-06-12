@@ -99,7 +99,6 @@ class Camping extends Component {
   }
 
   selectRegion = (region, id) => {
-    console.log(`change region to ${region} - id ${id}`)
     this.setState({ region: region, id, errors: [] });
   }
 
@@ -170,9 +169,9 @@ class Camping extends Component {
       showLoaderOnConfirm: true,
       confirmButtonColor: '#792FBA',
       preConfirm: () => {
-        return Axios.post('https://mac-cars.herokuapp.com/camping/', { id: this.state.id })
+        let data = { id: this.state.id, ticket_number: this.state.people };
+        return Axios.put('https://mac-cars.herokuapp.com/camping/', data)
           .then(response => {
-            console.log('response', response);
             return response
           });
       },
@@ -218,7 +217,7 @@ class Camping extends Component {
         {/* <Navigation /> */}
         <div className="container">
           <h1>Select Spot</h1>
-          <MapSelect selected={this.state.region} onRegionChange={this.selectRegion} />
+          <MapSelect selected={this.state.region} onRegionChange={this.selectRegion} revertedSpots={false} />
           <h1>Who is going to use the space?</h1>
           <TicketNumberInput
             onAdd={this.addPerson}
