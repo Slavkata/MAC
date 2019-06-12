@@ -21,3 +21,6 @@ The web application for our Cars exhibition event.
 - Christian Nshuti - Technology stream
 - Aime Thierry - Technology stream
 
+## Shops Application Installation
+Check MAC/shopapp
+
