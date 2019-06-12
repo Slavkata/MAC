@@ -6,7 +6,7 @@ The web application for our Cars exhibition event.
 - [Project plan](https://docs.google.com/document/d/1XhjYBlt6JnqJdXRzrma25c7pxNJoXv2DMj1eFfG6P38/edit#)
 - [Project specifications(Set-up Document)](https://docs.google.com/document/d/10CVxsU1qPqAs7e8cIuJF5d7Vr24_Xm04xRPO0IsRdZQ/edit?usp=sharing)
 - [Website demo](https://thawing-depths-88596.herokuapp.com/)
-- [Database Diagram](https://github.com/Slavkata/MAC/blob/master/mac1.html)
+- [Database Diagram](https://github.com/Slavkata/MAC/blob/master/Database%20MAC.pdf)
 - [ShopsApp](https://bit.ly/2WBvoLy)
 
 ## Project applications
