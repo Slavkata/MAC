@@ -20,10 +20,16 @@ class CampingResource(Resource):
         # inviting people to camp spot of ticket_number
         self.parser.add_argument('id', type=int, required=True)
         self.parser.add_argument('ticket_number', type=int, required=True, action='append')
+        self.parser.add_argument('owner', type=int)
         data = self.parser.parse_args()
 
+        if data.owner is not None:
+            ticket = Ticket.find_by_ticket_number(data.owner)
+            if ticket.camping_spot is not data.id:
+                return {'message': 'not matching ticket number'}, 400
+
         spot = CampingSpots.get_by_id(data.id)
-        spot.reserve(self, data.id)
+        spot.reserve()
 
         for i in range(len(data.ticket_number)):
             temp_ticket = Ticket.find_by_ticket_number(data.ticket_number[i])

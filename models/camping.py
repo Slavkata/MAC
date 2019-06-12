@@ -24,11 +24,10 @@ class CampingSpots(db.Model):
             list.append(s.serialize())
         return list
 
-    def reserve(self, id):
-        spot = CampingSpots.query.get(id)
-        spot.reserved = True
+    def reserve(self):
+        self.reserved = True
         db.session.commit()
-        return spot
+        return self
 
     def create(self):
         db.session.add(self)
