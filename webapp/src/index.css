@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #fafafa;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+nav {
+  width: 60%;
+  height: 40px;
+  background: #6D326D;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin: 10px auto;
+}
+
+nav a {
+  color: #fafafa;
+  text-decoration: none;
+  padding: 10px 20px;
+  /* border-radius: 5px; */
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: #6D326D;
+  background: #fafafa;
+  /* box-shadow: inset 0px 0px 3px #999; */
+  transform: scale(1.2);
+}

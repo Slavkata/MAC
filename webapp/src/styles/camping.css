@@ -1,0 +1,256 @@
+.map {
+  background: url(/images/map2.png);
+  width: 700px;
+  height: 500px;
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+}
+
+.map-region-a {
+  position: absolute;
+  width: 55px;
+  height: 308px;
+  left: 42px;
+  top: 6px;
+}
+
+.map-region-b {
+  position: absolute;
+  width: 55px;
+  height: 308px;
+  top: 6px;
+  left: 107px;
+}
+
+.map-region-c {
+  position: absolute;
+  width: 55px;
+  height: 308px;
+  top: 6px;
+  left: 354px;
+}
+
+.map-region-d {
+  position: absolute;
+  width: 55px;
+  height: 308px;
+  top: 6px;
+  left: 418px;
+}
+
+.map-region-e {
+  position: absolute;
+  width: 428px;
+  height: 40px;
+  top: 327px;
+  left: 99px;
+  display: flex;
+  flex-direction: row;
+}
+.map-region-f {
+  position: absolute;
+  width: 428px;
+  height: 40px;
+  top: 390px;
+  left: 99px;
+  display: flex;
+  flex-direction: row;
+}
+.map-region-g {
+  position: absolute;
+  width: 428px;
+  height: 40px;
+  top: 455px;
+  left: 99px;
+  display: flex;
+  flex-direction: row;
+}
+
+.map-region-h {
+  position: absolute;
+  width: 184px;
+  height: 40px;
+  top: 263px;
+  left: 168px;
+  display: flex;
+  flex-direction: row;
+}
+
+.map-region-i {
+  position: absolute;
+  width: 40px;
+  height: 125px;
+  top: 133px;
+  right: 143px;
+}
+
+.map-region-j {
+  position: absolute;
+  width: 40px;
+  height: 125px;
+  top: 133px;
+  right: 79px;
+}
+
+.map-region-k {
+  position: absolute;
+  width: 40px;
+  height: 125px;
+  top: 268px;
+  right: 79px;
+}
+
+.map-region-l {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 263px;
+  right: 168px;
+}
+
+
+
+.map-region-a .map-entry, .map-region-b .map-entry, .map-region-c .map-entry, .map-region-d .map-entry, .map-region-k .map-entry {
+  margin-bottom: 19px;
+}
+
+.map-region-e .map-entry,.map-region-f .map-entry,.map-region-g .map-entry,.map-region-h .map-entry {
+  margin-right: 21px;
+}
+
+.map-region-i .map-entry, .map-region-j .map-entry {
+  margin-bottom: 22px
+}
+
+.map-entry {
+  width: 40px;
+  height: 40px;
+  background: url('/images/white_bg_map@2x.png');
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.11);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  transition: 0.3s;
+}
+
+.map-entry:hover {
+  background: url('/images/purple_bg_map@2x.png');
+  background-size: cover;
+  color: white;
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+.map-entry.selected {
+  background: url('/images/purple_bg_map@2x.png');
+  color: white;
+  font-weight: 500;
+  transition: 1s;
+}
+
+.map-entry.reserved {
+  background: #ccc;
+  color: rgb(121, 121, 121);
+  font-weight: 200;
+  cursor: not-allowed;
+}
+
+.tent-type-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.tent-select {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-image: url('/images/white_bg_map@2x.png');
+  background-color: #FFFFFF;
+  background-size: cover;
+  border-radius: 5px;
+  padding: 5px 10px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.11);
+  margin-left: 10px;
+  height: 50px;
+  transition: 0.5s;
+}
+
+.tent-select:hover {
+  cursor: pointer;
+  background-image: none;
+  transform: scale(1.05);
+}
+
+.tent-image {
+  width: 40px;
+  height: 40px;
+  margin: 0px 5px;
+}
+
+.selected-line {
+  background: linear-gradient(to bottom, #5F2E8B, #792FBA);
+  width: 6px;
+  height: 90%;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.tent-info-box {
+  background: #FFFCED;
+  color: #5F2E8B;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.tent-info-box .info {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background: #FFFFFF;
+  font-weight: 500;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.ticket-number {
+  background: url('/images/white_bg_map@2x.png');
+  background-size: cover;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.11);
+  padding: 7px 5px 7px 5px;
+  color: #5F2E8B;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 15%;
+  flex-wrap: wrap;
+}
+
+.text-purple {
+  color: #5F2E8B;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.errors {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
